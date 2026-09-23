@@ -317,14 +317,14 @@ body > p {
         <p>
             <strong>SPDT</strong> ဆိုတာ <strong>Single Pole Double Throw</strong>
             ရဲ့ အတိုကောက်ဖြစ်ပြီး Relay တွေမှာ အသုံးများတဲ့
-            Switch Contact အမျိုးအစားတစ်ခု ဖြစ်ပါတယ်။
+            Switch Contact အမျိုးအစားတစ်ခု ဖြစ်သည်။
         </p>
 
         <h3>Single Pole (SP)</h3>
 
         <p>
             ထိန်းချုပ်မည့် Common Terminal တစ်ခုတည်း
-            (<strong>COM</strong>) ပါဝင်တာကို ဆိုလိုပါတယ်။
+            (<strong>COM</strong>) ပါဝင်တာကို ဆိုလိုသည်။
         </p>
 
         <h3>Double Throw (DT)</h3>
@@ -332,7 +332,7 @@ body > p {
         <p>
             COM မှ ထွက်လာသော လမ်းကြောင်းကို
             <strong>NO</strong> သို့မဟုတ် <strong>NC</strong>
-            ဘက်နှစ်ခုအနက် တစ်ခုသို့ ပြောင်းချိတ်ဆက်ပေးနိုင်တာကို ဆိုလိုပါတယ်။
+            ဘက်နှစ်ခုအနက် တစ်ခုသို့ ပြောင်းချိတ်ဆက်ပေးနိုင်တာကို ဖော်ပြခြင်းဖြစ်သည်။
         </p>
 
         <h3>SPDT Switch အလုပ်လုပ်ပုံ</h3>
@@ -341,7 +341,7 @@ body > p {
             <li>
                 <strong>Normally Closed (NC) အခြေအနေ</strong><br>
                 Relay Coil ကို မမောင်းထားချိန်တွင်
-                COM သည် NC နှင့် ဆက်နေပါတယ်။
+                COM သည် NC နှင့် ဆက်နေမည်ဖြစ်သည်။(ဥပမာ - Relay မီးပိတ်ထားသော်လည်း NC တွင် ချိတ်ထားသော မီးလုံးသည် လင်းနေမည် ဖြစ်ပါတယ်)
             </li>
 
             <li>
@@ -365,7 +365,7 @@ body > p {
         <p>
             Optocoupler က Microcontroller ဘက်ခြမ်းနှင့်
             Relay ဘက်ခြမ်းကို Electrical Isolation ပြုလုပ်ပေးတဲ့
-            အစိတ်အပိုင်း ဖြစ်ပါတယ်။
+            အစိတ်အပိုင်း ဖြစ်သည်။
         </p>
 
         <h3>1. Electrical Isolation</h3>
@@ -374,7 +374,13 @@ body > p {
             Optocoupler အတွင်းမှာ Input ဘက်နှင့် Output ဘက်ကို
             တိုက်ရိုက် Electrical Connection မလုပ်ထားဘဲ
             Isolation Barrier တစ်ခုဖြင့် ခွဲထားပါတယ်။
-        </p>
+            •	တိုက်ရိုက် ကြိုးဆက်မထားပါ: Optocoupler (PC817) Chip လေးရဲ့ အတွင်းထဲမှာ Microcontroller (Arduino) နဲ့ ချိတ်ဆက်ထားတဲ့ 
+            လမ်းကြောင်း နဲ့ Relay ဘက်ကို ချိတ်ဆက်ထားတဲ့ လမ်းကြောင်း ၂ ခုဟာ 
+            လျှပ်ကူးပစ္စည်း (ကြိုး/သတ္တု) တစ်ခုမျှ တိုက်ရိုက် ထိစပ်မနေပါဘူး။
+            Physical Air Gap (ရူပဗေဒအရ လေဟာနယ်ခြားထားခြင်းဖြစ်သည်) 
+            Chip အတွင်းထဲမှာ ကြားခံအဖြစ် အလင်းဖြတ်သန်းနိုင်တဲ့ လျှပ်စစ်ဓာတ်မကူးစက်နိုင်သော Insulation ပစ္စည်း 
+            (Silicon/Plastic) ကိုသာ ခြားထားတာ ဖြစ်ပါတယ်။ 
+        </p> 
 
         <h3>2. အလင်းဖြင့် Signal ပို့ခြင်း</h3>
 
@@ -385,12 +391,12 @@ body > p {
 
         <p>
             အဲဒီအလင်းကို တစ်ဖက်ရှိ <strong>Phototransistor</strong> က
-            လက်ခံပြီး Output ဘက်မှာ Signal ဖြစ်ပေါ်စေပါတယ်။
+            လက်ခံပြီး Output ဘက်မှာ Signal ဖြစ်ပေါ်စေသည်။
         </p>
 
         <p>
             ဒါကြောင့် Electrical Signal ကို တိုက်ရိုက် ကြိုးဖြင့် မပို့ဘဲ
-            <strong>အလင်း</strong> ဖြင့် Signal ကူးပြောင်းပေးတာ ဖြစ်ပါတယ်။
+            <strong>အလင်း</strong> ဖြင့် Signal ကူးပြောင်းပေးတာ ဖြစ်တယ်။
         </p>
 
         <h3>Back-EMF / Electrical Surge ဖြစ်လာသောအခါ</h3>
@@ -410,7 +416,7 @@ body > p {
                 Optocoupler ရဲ့ Isolation ကြောင့်
                 Relay ဘက်ရှိ Electrical Voltage ကို
                 Microcontroller ဘက်သို့ တိုက်ရိုက် မကူးစက်စေရန်
-                အထောက်အကူပြုပါတယ်။
+                အကာကွယ်ပေးသည်။
             </li>
         </ol>
 
