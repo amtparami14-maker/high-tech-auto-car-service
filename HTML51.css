@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+    background-color: white;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: #063b73;
+    color: white;
+    width: 100%;
+    min-height: 120px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 15px 20px;
+    box-sizing: border-box;
+}
+
+.header .logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-right: 15px;
+}
+
+.header-content {
+    flex: 1;
+}
+
+.header h1 {
+    color: white;
+    margin: 0 0 8px 0;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.header p {
+    color: white;
+    margin: 3px 0;
+    font-size: 15px;
+}
+
+.main-images {
+    margin: 20px;
+}
+
+.main-images img {
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.thank-you {
+    margin: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+a {
+    margin: 20px;
+}
