@@ -8,10 +8,36 @@
 
 body {
     margin: 0;
-    background-color: white;
+    min-height: 100vh;
+
+    background-color: #9cddff;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            transparent 96%,
+            rgba(0, 120, 190, 0.18) 97%,
+            transparent 98%
+        ),
+        linear-gradient(
+            0deg,
+            transparent 96%,
+            rgba(0, 120, 190, 0.18) 97%,
+            transparent 98%
+        ),
+        radial-gradient(
+            circle,
+            rgba(0, 110, 180, 0.35) 2px,
+            transparent 3px
+        );
+
+    background-size:
+        80px 40px,
+        40px 80px,
+        80px 80px;
+
     font-family: Arial, sans-serif;
 }
-
 .header {
     background-color: #063b73;
     color: white;
