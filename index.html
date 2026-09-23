@@ -147,7 +147,378 @@ body > p {
         <li>ADAS / Advanced Diagnostics</li>
     </ol>
 
+</div> 
+    <div class="note-section">
+
+    <button onclick="toggleNote()" id="noteButton">READ NOTE</button>
+
+    <div id="myNote" style="display: none; margin-top: 20px;">
+
+        <h2>1 CHANNEL RELAY MODULE</h2>
+
+        <p>
+            <a href="https://www.cestore-mm.com/product/1-channel-relay-module-5v10a/" target="_blank">
+                1 Channel Relay Module
+            </a>
+            တစ်ခုမှာ ပါဝင်တဲ့ အဓိက အစိတ်အပိုင်းများနဲ့ ၎င်းတို့ရဲ့ လုပ်ဆောင်ချက်များမှာ အောက်ပါအတိုင်း ဖြစ်ပါတယ်။
+        </p>
+
+        <h3>အဓိက အစိတ်အပိုင်းများ</h3>
+
+        <ol>
+            <li>
+                <strong>Relay (အပြာရောင် Box)</strong><br>
+                လျှပ်စစ်သံလိုက်စနစ်ကို အသုံးပြုပြီး High Voltage / Current
+                ဝါယာလမ်းကြောင်းများကို အဖွင့်အပိတ် ပြုလုပ်ပေးသည့်
+                အဓိကအစိတ်အပိုင်း ဖြစ်ပါတယ်။
+            </li>
+
+            <li>
+                <strong>Terminal Connector (3-Pin Screw Block)</strong><br>
+                Mains လျှပ်စစ်ကြိုးများကို ချိတ်ဆက်ရန် အသုံးပြုပါတယ်။
+                <strong>NO (Normally Open), COM (Common), NC (Normally Closed)</strong>
+                ဆိုပြီး Terminal သုံးခု ပါဝင်ပါတယ်။
+            </li>
+
+            <li>
+                <strong>Transistor (Q1)</strong><br>
+                Microcontroller မှလာတဲ့ နည်းပါးတဲ့ Current Signal ကို အသုံးပြုပြီး
+                Relay Coil ကို မောင်းနှင်ပေးပါတယ်။
+            </li>
+
+            <li>
+                <strong>Flyback Diode (D2)</strong><br>
+                Relay Coil ကို ပိတ်လိုက်ချိန်မှာ ဖြစ်ပေါ်လာနိုင်တဲ့
+                High Voltage Back-EMF Spike များကြောင့်
+                Transistor နှင့် အခြား Circuit အစိတ်အပိုင်းများ မပျက်စီးအောင်
+                ကာကွယ်ပေးပါတယ်။
+            </li>
+
+            <li>
+                <strong>LED Indicators</strong><br>
+                <strong>Power LED (D1)</strong> သည် Module သို့ Power ရောက်ရှိနေကြောင်း
+                ပြသပေးပါတယ်။<br>
+                <strong>Status LED</strong> သည် Relay အလုပ်လုပ်နေချိန်တွင်
+                လင်းပြပေးပါတယ်။
+            </li>
+
+            <li>
+                <strong>Resistors (R1, R2)</strong><br>
+                Circuit အတွင်း Current ကို ထိန်းညှိပေးပြီး
+                LED နှင့် Transistor ကို ကာကွယ်ပေးပါတယ်။
+            </li>
+
+            <li>
+                <strong>Input Pins (Male Headers)</strong><br>
+                Microcontroller နှင့် ချိတ်ဆက်ရန် အသုံးပြုပါတယ်။<br>
+                <strong>VCC:</strong> Power Supply (5V)<br>
+                <strong>GND:</strong> Ground (0V)<br>
+                <strong>IN:</strong> Relay ကို ထိန်းချုပ်မည့် Trigger Input Signal
+            </li>
+        </ol>
+
+        <hr>
+
+        <h2>CIRCUIT DIAGRAM အလုပ်လုပ်ပုံ</h2>
+
+        <h3>1. Input & Power Section</h3>
+
+        <p>
+            <strong>VCC & GND:</strong><br>
+            Module ကို အလုပ်လုပ်စေရန် Power နှင့် Ground ပေးသွင်းသည့် Pin များ ဖြစ်ပါတယ်။
+            Power ရောက်ရှိပါက <strong>D1 Power LED</strong> လင်းနေမည် ဖြစ်ပါတယ်။
+        </p>
+
+        <p>
+            <strong>IN (Input Pin):</strong><br>
+            Microcontroller (Arduino, ESP32 စသည်) မှ Trigger Signal ပေးပို့ရာ Pin ဖြစ်ပါတယ်။
+        </p>
+
+        <p>
+            <strong>Optocoupler (PC817):</strong><br>
+            Microcontroller ဘက်ခြမ်းနှင့် Relay ဘက်ခြမ်းကို
+            Optical Isolation နည်းလမ်းဖြင့် ခွဲထုတ်ပေးပြီး
+            Relay ဘက်မှ ဖြစ်လာနိုင်သည့် Electrical Disturbance များ
+            Microcontroller ဘက်သို့ တိုက်ရိုက် မကူးစက်စေရန် ကူညီပေးပါတယ်။
+        </p>
+
+        <h3>2. Driver & Protection Section</h3>
+
+        <p>
+            <strong>Transistor (Q1):</strong><br>
+            Optocoupler မှ Signal ရရှိသောအခါ Transistor အလုပ်လုပ်ပြီး
+            Relay Coil အတွင်း Current စီးဆင်းစေကာ
+            Electromagnetic Field ဖြစ်ပေါ်စေပါတယ်။
+        </p>
+
+        <p>
+            <strong>Status LED:</strong><br>
+            Relay အလုပ်လုပ်နေကြောင်း ပြသပေးပါတယ်။
+        </p>
+
+        <p>
+            <strong>Flyback Diode (D2):</strong><br>
+            Relay Coil ကို ပိတ်လိုက်ချိန်တွင် ဖြစ်ပေါ်လာနိုင်သည့်
+            Back-EMF Voltage Spike ကို လမ်းကြောင်းလွှဲပေးပြီး
+            Transistor ကို ကာကွယ်ပေးပါတယ်။
+        </p>
+
+        <h3>3. Output Section</h3>
+
+        <p>
+            Relay Coil မှ Magnetic Field ဖြစ်ပေါ်လာသောအခါ
+            Mechanical Contact အနေအထား ပြောင်းလဲသွားပြီး
+            COM သည် NC မှ NO ဘက်သို့ ပြောင်းချိတ်ဆက်နိုင်ပါတယ်။
+        </p>
+
+        <p>
+            <strong>COM (Common):</strong><br>
+            Common Terminal ဖြစ်ပါတယ်။
+        </p>
+
+        <p>
+            <strong>NC (Normally Closed):</strong><br>
+            Relay မအလုပ်လုပ်နေချိန်တွင် COM နှင့် ဆက်နေသော Terminal ဖြစ်ပါတယ်။
+        </p>
+
+        <p>
+            <strong>NO (Normally Open):</strong><br>
+            Relay မအလုပ်လုပ်နေချိန်တွင် COM နှင့် မဆက်ထားဘဲ
+            Relay အလုပ်လုပ်သောအခါ COM နှင့် ဆက်သွားသော Terminal ဖြစ်ပါတယ်။
+        </p>
+
+        <hr>
+
+        <h2>1 CHANNEL RELAY MODULE — အဓိက လမ်းကြောင်း</h2>
+
+        <p>
+            <strong>Input Section:</strong><br>
+            Microcontroller မှ IN Pin သို့ Trigger Signal ပေးလိုက်သောအခါ
+            Optocoupler (PC817) အလုပ်လုပ်ပါတယ်။
+        </p>
+
+        <p>
+            <strong>Driver Section:</strong><br>
+            Optocoupler မှတစ်ဆင့် Transistor (Q1) အလုပ်လုပ်ပြီး
+            Relay Coil အတွင်း Current စီးဆင်းစေပါတယ်။
+            Flyback Diode (D2) က Back-EMF Spike ကို ကာကွယ်ပေးပါတယ်။
+        </p>
+
+        <p>
+            <strong>Output Section:</strong><br>
+            Relay Coil ရဲ့ Magnetic Field ကြောင့် Contact ပြောင်းလဲသွားပြီး
+            COM သည် NO ဘက်သို့ ဆက်သွားနိုင်ပါတယ်။
+        </p>
+
+        <hr>
+
+        <h2>SPDT (Single Pole Double Throw)</h2>
+
+        <p>
+            <strong>SPDT</strong> ဆိုတာ <strong>Single Pole Double Throw</strong>
+            ရဲ့ အတိုကောက်ဖြစ်ပြီး Relay တွေမှာ အသုံးများတဲ့
+            Switch Contact အမျိုးအစားတစ်ခု ဖြစ်ပါတယ်။
+        </p>
+
+        <h3>Single Pole (SP)</h3>
+
+        <p>
+            ထိန်းချုပ်မည့် Common Terminal တစ်ခုတည်း
+            (<strong>COM</strong>) ပါဝင်တာကို ဆိုလိုပါတယ်။
+        </p>
+
+        <h3>Double Throw (DT)</h3>
+
+        <p>
+            COM မှ ထွက်လာသော လမ်းကြောင်းကို
+            <strong>NO</strong> သို့မဟုတ် <strong>NC</strong>
+            ဘက်နှစ်ခုအနက် တစ်ခုသို့ ပြောင်းချိတ်ဆက်ပေးနိုင်တာကို ဆိုလိုပါတယ်။
+        </p>
+
+        <h3>SPDT Switch အလုပ်လုပ်ပုံ</h3>
+
+        <ol>
+            <li>
+                <strong>Normally Closed (NC) အခြေအနေ</strong><br>
+                Relay Coil ကို မမောင်းထားချိန်တွင်
+                COM သည် NC နှင့် ဆက်နေပါတယ်။
+            </li>
+
+            <li>
+                <strong>Normally Open (NO) အခြေအနေ</strong><br>
+                Relay Coil ကို မောင်းလိုက်သောအခါ
+                Contact သည် COM မှ NO ဘက်သို့ ပြောင်းချိတ်ဆက်သွားပါတယ်။
+            </li>
+        </ol>
+
+        <p>
+            <strong>အနှစ်ချုပ်:</strong><br>
+            SPDT Relay ဆိုသည်မှာ Input Common Line တစ်ခုဖြစ်သော COM ကို
+            Output Contact နှစ်ခုဖြစ်သည့် NO နှင့် NC အနက်
+            တစ်ခုသို့ အခြေအနေအလိုက် ပြောင်းချိတ်ဆက်ပေးနိုင်သည့် Switch အမျိုးအစား ဖြစ်ပါတယ်။
+        </p>
+
+        <hr>
+
+        <h2>OPTOCOUPLER</h2>
+
+        <p>
+            Optocoupler က Microcontroller ဘက်ခြမ်းနှင့်
+            Relay ဘက်ခြမ်းကို Electrical Isolation ပြုလုပ်ပေးတဲ့
+            အစိတ်အပိုင်း ဖြစ်ပါတယ်။
+        </p>
+
+        <h3>1. Electrical Isolation</h3>
+
+        <p>
+            Optocoupler အတွင်းမှာ Input ဘက်နှင့် Output ဘက်ကို
+            တိုက်ရိုက် Electrical Connection မလုပ်ထားဘဲ
+            Isolation Barrier တစ်ခုဖြင့် ခွဲထားပါတယ်။
+        </p>
+
+        <h3>2. အလင်းဖြင့် Signal ပို့ခြင်း</h3>
+
+        <p>
+            Microcontroller ဘက်မှာ Signal ပေးလိုက်သောအခါ
+            အတွင်းရှိ <strong>IR LED</strong> လင်းလာပါတယ်။
+        </p>
+
+        <p>
+            အဲဒီအလင်းကို တစ်ဖက်ရှိ <strong>Phototransistor</strong> က
+            လက်ခံပြီး Output ဘက်မှာ Signal ဖြစ်ပေါ်စေပါတယ်။
+        </p>
+
+        <p>
+            ဒါကြောင့် Electrical Signal ကို တိုက်ရိုက် ကြိုးဖြင့် မပို့ဘဲ
+            <strong>အလင်း</strong> ဖြင့် Signal ကူးပြောင်းပေးတာ ဖြစ်ပါတယ်။
+        </p>
+
+        <h3>Back-EMF / Electrical Surge ဖြစ်လာသောအခါ</h3>
+
+        <ol>
+            <li>
+                Relay Coil ကို ပိတ်လိုက်ချိန်တွင်
+                Back-EMF Voltage Spike ဖြစ်ပေါ်နိုင်ပါတယ်။
+            </li>
+
+            <li>
+                Relay ဘက်ခြမ်းရှိ Circuit အစိတ်အပိုင်းများက
+                အဲဒီ Surge ကို ခံရနိုင်ပါတယ်။
+            </li>
+
+            <li>
+                Optocoupler ရဲ့ Isolation ကြောင့်
+                Relay ဘက်ရှိ Electrical Voltage ကို
+                Microcontroller ဘက်သို့ တိုက်ရိုက် မကူးစက်စေရန်
+                အထောက်အကူပြုပါတယ်။
+            </li>
+        </ol>
+
+        <p>
+            <strong>အနှစ်ချုပ်:</strong><br>
+            Optocoupler ဆိုတာ Microcontroller နဲ့ Relay Circuit ကြားမှာ
+            <strong>အလင်းကို အသုံးပြုပြီး Electrical Isolation ပေးထားတဲ့
+            Optical Barrier</strong> တစ်ခု ဖြစ်ပါတယ်။
+        </p>
+
+        <hr>
+
+        <h2>FLYBACK DIODE (D2)</h2>
+
+        <h3>1. Back-EMF ဆိုတာ ဘာလဲ</h3>
+
+        <p>
+            Relay ရဲ့အတွင်းမှာ လျှပ်စစ်သံလိုက်စက်ကွင်း ဖြစ်ပေါ်စေတဲ့
+            <strong>Coil</strong> ပါဝင်ပါတယ်။
+        </p>
+
+        <p>
+            Coil အတွင်း Current စီးနေချိန်မှာ
+            Magnetic Field အဖြစ် Energy သိုလှောင်ထားပါတယ်။
+        </p>
+
+        <p>
+            Relay ကို ပိတ်လိုက်ချိန်မှာ Magnetic Field က
+            ရုတ်တရက် Collapse ဖြစ်ပြီး
+            Coil အတွင်းမှာ Voltage Spike ဖြစ်ပေါ်နိုင်ပါတယ်။
+        </p>
+
+        <h3>2. Flyback Diode တပ်ဆင်ပုံ</h3>
+
+        <p>
+            Flyback Diode ကို Relay Coil နှင့်
+            <strong>Parallel</strong> ချိတ်ဆက်ထားပါတယ်။
+        </p>
+
+        <p>
+            Relay ပုံမှန်အလုပ်လုပ်နေချိန်မှာ Diode က
+            <strong>Reverse Bias</strong> ဖြစ်နေတဲ့အတွက်
+            ပုံမှန် Current မစီးပါဘူး။
+        </p>
+
+        <h3>3. Back-EMF ကို ကာကွယ်ပေးပုံ</h3>
+
+        <ol>
+            <li>
+                <strong>Voltage Spike ပေါ်လာခြင်း:</strong><br>
+                Relay Coil ကို ပိတ်လိုက်သောအခါ
+                Coil ရဲ့ Current ကို ရုတ်တရက် မဖြတ်နိုင်တာကြောင့်
+                Reverse Voltage ဖြစ်ပေါ်လာနိုင်ပါတယ်။
+            </li>
+
+            <li>
+                <strong>Diode Conduct ဖြစ်ခြင်း:</strong><br>
+                Voltage အခြေအနေ ပြောင်းလဲသောအခါ
+                Flyback Diode သည် Forward Bias ဖြစ်လာပြီး
+                Current စီးနိုင်အောင် လမ်းဖွင့်ပေးပါတယ်။
+            </li>
+
+            <li>
+                <strong>Freewheeling Loop:</strong><br>
+                Coil ထဲမှာ သိုလှောင်ထားတဲ့ Energy ကို
+                Coil နှင့် Diode အကြားမှာ Current Loop အဖြစ်
+                လှည့်ပတ်စီးဆင်းစေပြီး Voltage Spike ကို လျော့ချစေပါတယ်။
+            </li>
+        </ol>
+
+        <p>
+            <strong>အနှစ်ချုပ်:</strong><br>
+            Flyback Diode သည် Relay Coil ကို ပိတ်လိုက်ချိန်မှာ
+            ဖြစ်ပေါ်လာနိုင်သည့် Back-EMF Voltage Spike ကို
+            လမ်းကြောင်းလွှဲပေးပြီး Transistor နှင့်
+            အခြား Circuit အစိတ်အပိုင်းများကို ကာကွယ်ပေးသည့်
+            <strong>Protection Device</strong> တစ်ခု ဖြစ်ပါတယ်။
+        </p>
+
+        <hr>
+
+        <p>
+            <strong>Note:</strong><br>
+            Circuit Diagram ပုံများကို နောက်ပိုင်းတွင် ထည့်သွင်းနိုင်ပါသည်။
+        </p>
+
+    </div>
+
 </div>
+
+<script>
+
+function toggleNote() {
+
+    var note = document.getElementById("myNote");
+    var button = document.getElementById("noteButton");
+
+    if (note.style.display === "none") {
+        note.style.display = "block";
+        button.innerHTML = "CLOSE NOTE";
+    } else {
+        note.style.display = "none";
+        button.innerHTML = "READ NOTE";
+    }
+
+}
+
+</script>
 <div class="about-us">
 
     <h2>ABOUT US</h2>
