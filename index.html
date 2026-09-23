@@ -38,49 +38,55 @@ body {
 
     font-family: Arial, sans-serif;
 }
+
+/* --- အသစ်ပြင်ဆင်ထားသော Modern Tech Header --- */
 .header {
-    background-color: #9cddff;
-    color: white;
     width: 100%;
     min-height: 200px;
     display: flex;
     align-items: center;
-    padding: 15px 20px;
+    justify-content: space-between;
+    padding: 20px 40px;
     box-sizing: border-box;
 
-    /* Circuit Trace & Logo Matrix Lines SVG Background */
+    /* Deep Tech Blue Gradient + Modern SVG Circuit Line Pattern */
+    background-color: #0b2545;
     background-image: 
-        /* Glow Effect Gradient overlay */
-        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.25) 0%, transparent 70%),
-        /* High-tech circuit path lines SVG pattern */
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%230070bb' stroke-width='1.5' stroke-opacity='0.3'%3E%3C!-- Circuit Line Paths --%3E%3Cpath d='M10 20 h40 l20 20 h30 l10 -10 v-30' /%3E%3Cpath d='M0 80 h30 l15 -15 h50 l15 15 h50' /%3E%3Cpath d='M20 160 v-30 l20 -20 h40' /%3E%3Cpath d='M120 160 v-20 l-15 -15 h-30' /%3E%3Cpath d='M140 0 v40 l-20 20' /%3E%3C!-- Microchip / Logo Node Connections --%3E%3Ccircle cx='70' cy='40' r='3' fill='%23005599' fill-opacity='0.4' /%3E%3Ccircle cx='45' cy='65' r='3.5' fill='%23005599' fill-opacity='0.4' /%3E%3Ccircle cx='110' cy='65' r='3.5' fill='%23005599' fill-opacity='0.4' /%3E%3Ccircle cx='100' cy='125' r='3' fill='%23005599' fill-opacity='0.4' /%3E%3C!-- Abstract Car/Logo Geometric Accents --%3E%3Cpath d='M65 80 l15 -12 l15 12 l-5 10 h-20 z' stroke='%23005599' stroke-opacity='0.25' stroke-width='1' /%3E%3C/g%3E%3C/svg%3E");
+        radial-gradient(circle at 50% 30%, rgba(0, 191, 255, 0.25) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%2300bfff' stroke-width='1.8' stroke-opacity='0.4'%3E%3Cpath d='M10 20 h40 l20 20 h30 l10 -10 v-30' /%3E%3Cpath d='M0 80 h30 l15 -15 h50 l15 15 h50' /%3E%3Cpath d='M20 160 v-30 l20 -20 h40' /%3E%3Cpath d='M120 160 v-20 l-15 -15 h-30' /%3E%3Cpath d='M140 0 v40 l-20 20' /%3E%3Ccircle cx='70' cy='40' r='3.5' fill='%2300ffff' fill-opacity='0.6' /%3E%3Ccircle cx='45' cy='65' r='4' fill='%2300ffff' fill-opacity='0.6' /%3E%3Ccircle cx='110' cy='65' r='4' fill='%2300ffff' fill-opacity='0.6' /%3E%3Ccircle cx='100' cy='125' r='3.5' fill='%2300ffff' fill-opacity='0.6' /%3E%3Cpath d='M65 80 l15 -12 l15 12 l-5 10 h-20 z' stroke='%2300ffff' stroke-opacity='0.4' stroke-width='1.2' /%3E%3C/g%3E%3C/svg%3E"),
+        linear-gradient(135deg, #051329 0%, #0d3b66 50%, #0056b3 100%);
 
-    background-size: 100% 100%, 160px 160px;
-    background-repeat: no-repeat, repeat;
+    background-repeat: no-repeat, repeat, no-repeat;
+    background-position: center, center, center;
+    background-size: cover, 160px 160px, cover;
+
+    border-bottom: 3px solid #00bfff;
+    box-shadow: 0 5px 20px rgba(0, 191, 255, 0.3);
 }
-   
 
 .header .logo {
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
     object-fit: contain;
-    margin-right: 15px;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.6));
 }
 
 .header-content {
     flex: 1;
+    text-align: center;
 }
 
 .header h1 {
-    color: white;
+    color: #ffffff;
     margin: 0 0 8px 0;
-    font-size: 30px;
+    font-size: 32px;
     font-weight: bold;
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
 }
 
 .header p {
-    color: white;
-    margin: 3px 0;
+    color: #d1ecf1;
+    margin: 4px 0;
     font-size: 15px;
 }
 
@@ -114,7 +120,8 @@ body {
 a {
     margin: 20px;
 } 
-    .main-images,
+
+.main-images,
 .services,
 .about-us,
 .contact,
@@ -126,11 +133,14 @@ a {
 a {
     margin-left: 40px;
 }
+
 body > h1,
 body > p {
     margin-left: 40px;
     margin-right: 40px;
-} .note-section {
+}
+
+.note-section {
     margin: 30px 40px;
     font-family: Arial, sans-serif;
     color: #222;
@@ -193,36 +203,27 @@ body > p {
 <body>
 
 <div class="header">
-
     <img src="11.png" alt="High Tech Auto Logo" class="logo">
 
     <div class="header-content">
-
-        <h1>High Tech Auto Car Service</h1> <br><br>
-
+        <h1>High Tech Auto Car Service</h1>
         <p>
-            No. A-40. Taw Win Residence. Taw Win Street.
-            U Wisara Road. (41) Block (Extend).
-            Dagon (North)
+            No. A-40, Taw Win Residence, Taw Win Street, U Wisara Road, (41) Block (Extend), Dagon (North)
         </p>
-
         <p>
             Phone No: 09941060666
         </p>
-
     </div>
 
     <img src="15.png" alt="High Tech Auto Logo" class="logo">
-
 </div>
 
 <div class="main-images">
-
     <img src="19.png" width="600" height="170">
-
     <img src="16.png" width="200" height="170">
-
 </div>
+
+
 
 <div class="services">
 
