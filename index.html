@@ -1,823 +1,721 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>High Tech Auto Car Service</title>
 
+<link rel="icon" type="image/png" href="11.png">
+
 <style>
 
-/* =========================
-   BODY
-========================= */
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
-    min-height: 100vh;
-
-    background-color: #9cddff;
-
-    background-image:
-        linear-gradient(
-            90deg,
-            transparent 96%,
-            rgba(0, 120, 190, 0.18) 97%,
-            transparent 98%
-        ),
-        linear-gradient(
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        linear-gradient(rgba(156,221,255,0.92), rgba(156,221,255,0.92)),
+        repeating-linear-gradient(
             0deg,
-            transparent 96%,
-            rgba(0, 120, 190, 0.18) 97%,
-            transparent 98%
+            transparent,
+            transparent 24px,
+            rgba(0,100,180,0.08) 25px
         ),
-        radial-gradient(
-            circle,
-            rgba(0, 110, 180, 0.35) 2px,
-            transparent 3px
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 24px,
+            rgba(0,100,180,0.08) 25px
         );
-
-    background-size:
-        80px 40px,
-        40px 80px,
-        80px 80px;
-
-    font-family: Arial, sans-serif;
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-.header {
-    width: 100%;
-    min-height: 220px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 20px 40px;
-    box-sizing: border-box;
-
-    background-color: #0b2545;
-
-    background-image:
-        radial-gradient(
-            circle at 50% 30%,
-            rgba(0, 191, 255, 0.25) 0%,
-            transparent 70%
-        ),
-
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%2300bfff' stroke-width='1.8' stroke-opacity='0.4'%3E%3Cpath d='M10 20 h40 l20 20 h30 l10 -10 v-30' /%3E%3Cpath d='M0 80 h30 l15 -15 h50 l15 15 h50' /%3E%3Cpath d='M20 160 v-30 l20 -20 h40' /%3E%3Cpath d='M120 160 v-20 l-15 -15 h-30' /%3E%3Cpath d='M140 0 v40 l-20 20' /%3E%3Ccircle cx='70' cy='40' r='3.5' fill='%2300ffff' fill-opacity='0.6' /%3E%3Ccircle cx='45' cy='65' r='4' fill='%2300ffff' fill-opacity='0.6' /%3E%3Ccircle cx='110' cy='65' r='4' fill='%2300ffff' fill-opacity='0.6' /%3E%3Ccircle cx='100' cy='125' r='3.5' fill='%2300ffff' fill-opacity='0.6' /%3E%3Cpath d='M65 80 l15 -12 l15 12 l-5 10 h-20 z' stroke='%2300ffff' stroke-opacity='0.4' stroke-width='1.2' /%3E%3C/g%3E%3C/svg%3E"),
-
-        linear-gradient(
-            135deg,
-            #051329 0%,
-            #0d3b66 50%,
-            #0056b3 100%
-        );
-
-    background-repeat:
-        no-repeat,
-        repeat,
-        no-repeat;
-
-    background-position:
-        center,
-        center,
-        center;
-
-    background-size:
-        cover,
-        160px 160px,
-        cover;
-
-    border-bottom: 3px solid #00bfff;
-
-    box-shadow:
-        0 5px 20px rgba(0, 191, 255, 0.3);
-}
-
-
-/* =========================
-   HEADER LOGOS
-========================= */
-
-.header .logo {
-    width: 90px;
-    height: 90px;
-
-    object-fit: contain;
-
-    background-color: #ffffff;
-
-    padding: 6px;
-
-    border-radius: 12px;
-
-    border: 2px solid #00bfff;
-
-    box-shadow:
-        0 0 12px rgba(0, 191, 255, 0.8);
-
-    margin: 0;
-
-    flex-shrink: 0;
-}
-
-
-/* =========================
-   HEADER CONTENT
-========================= */
-
-.header-content {
-    flex: 1;
-
-    text-align: center;
-
-    padding: 0 25px;
-}
-
-
-/* =========================
-   COMPANY NAME
-========================= */
-
-.header h1 {
-    color: #ffffff;
-
-    margin: 0 0 8px 0;
-
-    font-size: 39px;
-
-    font-weight: bold;
-
-    text-shadow:
-        0 0 10px rgba(0, 191, 255, 0.6);
-}
-
-
-/* =========================
-   ADDRESS & PHONE
-========================= */
-
-.header p {
-    color: #d1ecf1;
-
-    margin: 4px 0;
-
-    font-size: 15px;
-}
-
-
-/* ==================================================
-   CUSTOMER / VEHICLE TAG
-================================================== */
-
-.customer-tag {
-    margin: 25px 40px 0 40px;
-
-    background: linear-gradient(
-        135deg,
-        #063b66,
-        #008acb
-    );
-
-    border: 2px solid #00bfff;
-
-    border-radius: 15px;
-
-    box-shadow:
-        0 4px 15px rgba(0,0,0,0.20);
-
-    text-align: center;
-
-    cursor: pointer;
-
-    overflow: hidden;
-}
-
-
-/* =========================
-   TAG LOGO
-========================= */
-
-.customer-tag-logo {
-    display: block;
-
-    width: 70px;
-    height: 70px;
-
-    object-fit: contain;
-
-    margin: 15px auto 5px auto;
-
-    padding: 5px;
-
-    background-color: white;
-
-    border-radius: 12px;
-
-    border: 2px solid #00bfff;
-
-    box-shadow:
-        0 0 12px rgba(0, 191, 255, 0.8);
-}
-
-
-/* =========================
-   TAG TITLE
-========================= */
-
-.customer-tag-title {
-    color: white;
-
-    font-size: 22px;
-
-    font-weight: bold;
-
-    letter-spacing: 1px;
-
-    padding: 12px 10px 15px 10px;
-}
-
-
-/* =========================
-   TAG ARROW
-========================= */
-
-.customer-tag-arrow {
-    display: inline-block;
-
-    margin-left: 8px;
-
-    transition: transform 0.3s ease;
-}
-
-
-/* =========================
-   CUSTOMER FORM
-========================= */
-
-.customer-section {
-    margin: 0 40px 30px 40px;
-
-    padding: 25px;
-
-    background-color: rgba(255,255,255,0.85);
-
-    border-radius: 0 0 15px 15px;
-
-    border: 2px solid #008acb;
-
-    border-top: none;
-
-    box-shadow:
-        0 4px 15px rgba(0,0,0,0.15);
-
-    display: none;
-}
-
-
-/* =========================
-   CUSTOMER FORM TITLE
-========================= */
-
-.customer-section h2 {
-    margin-top: 0;
-
-    color: #063b66;
-
-    font-size: 27px;
-}
-
-
-/* =========================
-   CUSTOMER LABEL
-========================= */
-
-.customer-section label {
-    display: block;
-
-    margin-top: 12px;
-
-    margin-bottom: 5px;
-
-    font-weight: bold;
-
     color: #123;
 }
 
+/* ==================================================
+   HEADER
+================================================== */
 
-/* =========================
-   CUSTOMER INPUT
-========================= */
+.header {
+    min-height: 220px;
+    padding: 25px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    background:
+        linear-gradient(
+            rgba(5,25,55,0.90),
+            rgba(8,55,95,0.90)
+        ),
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 20px,
+            rgba(0,220,255,0.12) 21px,
+            transparent 22px
+        );
+
+    border-bottom: 4px solid #00d9ff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.35);
+}
+
+.logo {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+}
+
+.header-center {
+    text-align: center;
+    flex: 1;
+}
+
+.header h1 {
+    margin: 0 0 15px;
+    color: white;
+    font-size: 39px;
+    letter-spacing: 1px;
+}
+
+.address,
+.phone {
+    color: white;
+    font-size: 17px;
+    margin: 6px 0;
+}
+
+/* ==================================================
+   CUSTOMER TAG
+================================================== */
+
+.customer-tag {
+    margin: 25px 40px;
+    padding: 15px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    background: linear-gradient(135deg, #004d80, #008dcc);
+    color: white;
+
+    border-radius: 12px;
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.customer-tag img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+.customer-tag h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.arrow {
+    font-size: 25px;
+}
+
+/* ==================================================
+   CUSTOMER FORM
+================================================== */
+
+.customer-section {
+    display: none;
+    margin: 20px 40px;
+    padding: 25px;
+
+    background: rgba(255,255,255,0.95);
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.customer-section h2 {
+    text-align: center;
+    color: #004d80;
+}
+
+.customer-section form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
 
 .customer-section input {
     width: 100%;
+    padding: 12px;
 
-    padding: 10px;
-
-    box-sizing: border-box;
-
-    border: 1px solid #999;
-
-    border-radius: 6px;
+    border: 1px solid #aaa;
+    border-radius: 7px;
 
     font-size: 16px;
 }
 
+.save-button {
+    grid-column: 1 / -1;
 
-/* =========================
-   SAVE BUTTON
-========================= */
-
-.customer-section button {
-    margin-top: 20px;
-
-    padding: 12px 25px;
+    padding: 13px;
 
     border: none;
-
     border-radius: 8px;
 
-    background-color: #006db6;
-
+    background: #006bb3;
     color: white;
 
-    font-size: 16px;
-
+    font-size: 17px;
     font-weight: bold;
 
     cursor: pointer;
 }
 
-
-.customer-section button:hover {
-    background-color: #004f86;
+.save-button:hover {
+    background: #004d80;
 }
 
-
-/* =========================
+/* ==================================================
    MAIN IMAGES
-========================= */
+================================================== */
 
 .main-images {
-    margin: 20px 40px;
+    margin: 25px 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+.main-images img {
+    max-width: 100%;
+    height: auto;
+
+    border-radius: 10px;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* ==================================================
+   SERVICES
+================================================== */
+
+.services {
+    margin: 30px 40px;
+    padding: 25px;
+
+    background: rgba(255,255,255,0.95);
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.services h2 {
+    text-align: center;
+    color: #004d80;
+}
+
+.services ul {
+    max-width: 700px;
+    margin: auto;
+    padding-left: 25px;
+}
+
+.services li {
+    padding: 8px;
+    font-size: 18px;
+}
+
+/* ==================================================
+   GENERAL SECTION
+================================================== */
+
+.section-card {
+    margin: 30px 40px;
+    padding: 25px;
+
+    background: rgba(255,255,255,0.96);
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.section-title {
+    text-align: center;
+    color: #004d80;
+    margin-top: 0;
+}
+
+/* ==================================================
+   WORKSHOP GALLERY
+================================================== */
+
+.gallery-frame {
+    position: relative;
+
+    max-width: 850px;
+    margin: 20px auto;
+
+    background: #071f35;
+
+    padding: 15px;
+
+    border-radius: 12px;
 
     text-align: center;
 }
 
+.gallery-image {
+    width: 100%;
+    max-height: 430px;
 
-.main-images img {
-    vertical-align: middle;
-
-    margin-right: 10px;
+    object-fit: contain;
 
     border-radius: 8px;
+
+    display: block;
+    margin: auto;
 }
 
+.gallery-arrow {
+    position: absolute;
 
-/* =========================
-   SERVICES
-========================= */
+    top: 50%;
+    transform: translateY(-50%);
 
-.services {
-    margin: 20px 40px;
-
-    padding: 20px;
-
-    background-color: rgba(255,255,255,0.75);
-
-    border-radius: 12px;
-}
-
-
-.services h2 {
-    font-size: 24px;
-}
-
-
-.services li {
-    margin-bottom: 8px;
-}
-
-
-/* =========================
-   NOTE SECTION
-========================= */
-
-.note-section {
-    margin: 30px 40px;
-
-    font-family: Arial, sans-serif;
-
-    color: #222;
-}
-
-
-.note-section button {
-    padding: 12px 24px;
-
-    font-size: 17px;
-
-    font-weight: bold;
-
-    letter-spacing: 1px;
+    width: 50px;
+    height: 50px;
 
     border: none;
+    border-radius: 50%;
 
-    border-radius: 8px;
+    background: rgba(0,0,0,0.65);
+    color: white;
+
+    font-size: 25px;
+    font-weight: bold;
 
     cursor: pointer;
 }
 
+.gallery-arrow:hover {
+    background: rgba(0,110,180,0.9);
+}
 
-.note-section #myNote {
+.gallery-left {
+    left: 25px;
+}
+
+.gallery-right {
+    right: 25px;
+}
+
+.gallery-caption {
+    color: white;
+    font-size: 17px;
+    margin: 12px 0 3px;
+}
+
+.gallery-dots {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.gallery-dot {
+    display: inline-block;
+
+    margin: 0 5px;
+
+    font-size: 18px;
+
+    color: #777;
+}
+
+.gallery-dot.active {
+    color: #006bb3;
+}
+
+/* ==================================================
+   TRAINING ARTICLES
+================================================== */
+
+.article-select-box {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.article-select-box label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: bold;
+    color: #004d80;
+}
+
+.article-select {
+    width: 100%;
+
+    padding: 13px;
+
+    border: 2px solid #008dcc;
+    border-radius: 8px;
+
+    background: white;
+
+    font-size: 17px;
+
+    cursor: pointer;
+}
+
+.article-hint {
+    text-align: center;
+    color: #555;
+    margin-top: 12px;
+}
+
+.article-content {
+    display: none;
+
+    max-width: 900px;
+
+    margin: 25px auto 5px;
+
+    padding: 25px;
+
+    background: #f8fcff;
+
+    border-left: 5px solid #008dcc;
+
+    border-radius: 8px;
+
+    line-height: 1.7;
+}
+
+.article-content h2 {
+    margin-top: 0;
+    color: #004d80;
+}
+
+.article-content h3 {
+    color: #006bb3;
+}
+
+.article-content ul,
+.article-content ol {
+    padding-left: 25px;
+}
+
+.article-content li {
+    margin-bottom: 7px;
+}
+
+.key-box {
     margin-top: 20px;
 
-    padding: 25px 30px;
+    padding: 15px;
 
-    background-color: #f7f9fc;
+    background: #e3f5ff;
 
-    border: 1px solid #d6dce5;
-
-    border-radius: 12px;
-
-    line-height: 1.8;
-
-    font-size: 16px;
-
-    letter-spacing: 0.3px;
-
-    box-sizing: border-box;
+    border-radius: 8px;
 }
 
+/* ==================================================
+   RELAY NOTE
+================================================== */
 
-.note-section h2 {
-    margin-top: 10px;
-
-    margin-bottom: 15px;
-
-    font-size: 28px;
-
-    font-weight: bold;
-
-    letter-spacing: 1px;
-}
-
-
-.note-section h3 {
-    margin-top: 22px;
-
-    margin-bottom: 10px;
-
-    font-size: 20px;
-
-    font-weight: bold;
-}
-
-
-.note-section p {
-    margin-bottom: 14px;
-}
-
-
-.note-section li {
-    margin-bottom: 10px;
-}
-
-
-.note-section hr {
-    margin: 30px 0;
-
-    border: 0;
-
-    border-top: 1px solid #d6dce5;
-}
-
-
-/* =========================
-   ABOUT US
-========================= */
-
-.about-us {
+.note-section {
     margin: 30px 40px;
-
     padding: 25px;
 
-    background-color: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.96);
 
     border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
+.note-button {
+    display: block;
 
-.about-us h2 {
-    color: #063b66;
+    margin: auto;
+
+    padding: 13px 25px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #006bb3;
+    color: white;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
 }
 
+.note-button:hover {
+    background: #004d80;
+}
 
-/* =========================
-   CONTACT
-========================= */
+.my-note {
+    display: none;
 
+    margin-top: 25px;
+
+    line-height: 1.7;
+}
+
+.note-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+    margin: 20px 0;
+}
+
+.note-images img {
+    max-width: 100%;
+    height: auto;
+
+    border-radius: 8px;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* ==================================================
+   ABOUT / CONTACT
+================================================== */
+
+.about-us,
 .contact {
     margin: 30px 40px;
-
     padding: 25px;
 
-    background-color: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.96);
 
     border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
-
+.about-us h2,
 .contact h2 {
-    color: #063b66;
+    color: #004d80;
+    text-align: center;
 }
 
+/* ==================================================
+   THANK YOU
+================================================== */
 
-.contact a {
-    margin: 0;
+.thank-you {
+    margin: 30px 40px 50px;
 
-    color: #0056b3;
+    padding: 30px;
 
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #004d80,
+            #008dcc
+        );
+
+    color: white;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+}
+
+.thank-you h2 {
+    margin-top: 0;
+}
+
+/* ==================================================
+   LINKS
+================================================== */
+
+a {
+    color: #006bb3;
     font-weight: bold;
 }
 
-
-/* =========================
-   THANK YOU
-========================= */
-
-.thank-you {
-    margin: 20px 40px;
-
-    padding: 20px;
-
-    font-size: 16px;
-
-    line-height: 1.6;
-
-    background-color: rgba(255,255,255,0.65);
-
-    border-radius: 12px;
+a:hover {
+    color: #004d80;
 }
 
-
-/* =========================
-   LINKS
-========================= */
-
-a {
-    margin-left: 40px;
-    margin-right: 40px;
-}
-
-
-/* =========================
+/* ==================================================
    MOBILE
-========================= */
+================================================== */
 
 @media (max-width: 800px) {
 
     .header {
+        padding: 20px;
         flex-direction: column;
-
-        text-align: center;
-
-        padding: 25px 20px;
     }
-
-
-    .header .logo {
-        margin: 10px;
-    }
-
-
-    .header-content {
-        padding: 15px 5px;
-    }
-
 
     .header h1 {
         font-size: 28px;
     }
 
-
-    .header p {
-        font-size: 13px;
+    .logo {
+        width: 75px;
+        height: 75px;
     }
 
-
-    .customer-tag {
-        margin-left: 20px;
-        margin-right: 20px;
+    .address,
+    .phone {
+        font-size: 14px;
     }
 
-
-    .customer-section {
-        margin-left: 20px;
-        margin-right: 20px;
+    .customer-tag,
+    .customer-section,
+    .main-images,
+    .services,
+    .section-card,
+    .note-section,
+    .about-us,
+    .contact,
+    .thank-you {
+        margin-left: 15px;
+        margin-right: 15px;
     }
 
-
-    .main-images img {
-        max-width: 100%;
-
-        height: auto;
-
-        margin: 5px;
+    .customer-section form {
+        grid-template-columns: 1fr;
     }
 
+    .gallery-arrow {
+        width: 42px;
+        height: 42px;
+        font-size: 20px;
+    }
+
+    .gallery-left {
+        left: 10px;
+    }
+
+    .gallery-right {
+        right: 10px;
+    }
+
+    .article-content {
+        padding: 18px;
+    }
 }
 
 </style>
-
 </head>
 
 
 <body>
 
-
 <!-- ==================================================
      HEADER
 ================================================== -->
 
-<div class="header">
+<header class="header">
 
-    <!-- LEFT LOGO -->
+    <img src="11.png" class="logo" alt="High Tech Auto Logo">
 
-    <img
-        src="11.png"
-        alt="High Tech Auto Logo"
-        class="logo"
-    >
+    <div class="header-center">
 
+        <h1>High Tech Auto Car Service</h1>
 
-    <!-- COMPANY INFORMATION -->
-
-    <div class="header-content">
-
-        <h1>
-            High Tech Auto Car Service
-        </h1>
-
-        <p>
+        <div class="address">
             No. A-40, Taw Win Residence, Taw Win Street,
             U Wisara Road, (41) Block (Extend), Dagon (North)
-        </p>
+        </div>
 
-        <p>
-            Phone No: 09941060666, 09 459907461, 09 794918438.
-        </p>
+        <div class="phone">
+            📞 09941060666 &nbsp; | &nbsp;
+            09 459907461 &nbsp; | &nbsp;
+            09 794918438
+        </div>
 
     </div>
 
+    <img src="15.png" class="logo" alt="High Tech Auto Logo">
 
-    <!-- RIGHT LOGO -->
+</header>
 
-    <img
-        src="15.png"
-        alt="High Tech Auto Logo"
-        class="logo"
-    >
+
+<!-- ==================================================
+     CUSTOMER / VEHICLE
+================================================== -->
+
+<div class="customer-tag" onclick="toggleCustomer()">
+
+    <img src="11.png" alt="Customer">
+
+    <h2>CUSTOMER / VEHICLE</h2>
+
+    <span class="arrow" id="customerArrow">▼</span>
 
 </div>
 
 
-<!-- ==================================================
-     CUSTOMER / VEHICLE TAG
-================================================== -->
+<section class="customer-section" id="customerSection">
 
-<div
-    class="customer-tag"
-    onclick="toggleCustomer()"
->
+    <h2>Customer & Vehicle Information</h2>
 
-    <!-- TAG LOGO -->
+    <form id="customerForm" onsubmit="saveCustomer(); return false;">
 
-    <img
-        src="11.png"
-        alt="High Tech Auto Logo"
-        class="customer-tag-logo"
-    >
+        <input id="customerName"
+               type="text"
+               placeholder="Customer Name">
 
+        <input id="customerPhone"
+               type="text"
+               placeholder="Phone">
 
-    <!-- TAG TITLE -->
+        <input id="carBrand"
+               type="text"
+               placeholder="Car Brand">
 
-    <div class="customer-tag-title">
+        <input id="carModel"
+               type="text"
+               placeholder="Model">
 
-        CUSTOMER / VEHICLE
+        <input id="carYear"
+               type="text"
+               placeholder="Year">
 
-        <span
-            id="customerArrow"
-            class="customer-tag-arrow"
-        >
-            ▼
-        </span>
+        <input id="licenseNo"
+               type="text"
+               placeholder="License No.">
 
-    </div>
+        <input id="mileage"
+               type="text"
+               placeholder="Mileage">
 
-</div>
-
-
-<!-- ==================================================
-     CUSTOMER / VEHICLE FORM
-================================================== -->
-
-<div
-    class="customer-section"
-    id="customerSection"
->
-
-    <h2>
-        CUSTOMER / VEHICLE
-    </h2>
-
-
-    <form
-        onsubmit="return false;"
-    >
-
-        <label>
-            Customer Name
-        </label>
-
-        <input
-            type="text"
-            placeholder="Enter customer name"
-        >
-
-
-        <label>
-            Phone
-        </label>
-
-        <input
-            type="text"
-            placeholder="Enter phone number"
-        >
-
-
-        <label>
-            Car Brand
-        </label>
-
-        <input
-            type="text"
-            placeholder="Toyota / Honda / Nissan..."
-        >
-
-
-        <label>
-            Model
-        </label>
-
-        <input
-            type="text"
-            placeholder="Enter car model"
-        >
-
-
-        <label>
-            Year
-        </label>
-
-        <input
-            type="number"
-            placeholder="Enter year"
-        >
-
-
-        <label>
-            License No.
-        </label>
-
-        <input
-            type="text"
-            placeholder="Enter license number"
-        >
-
-
-        <label>
-            Mileage
-        </label>
-
-        <input
-            type="number"
-            placeholder="Enter mileage"
-        >
-
-
-        <button type="submit">
+        <button class="save-button" type="submit" id="saveButton">
             SAVE CUSTOMER
         </button>
 
     </form>
 
-</div>
+</section>
 
 
 <!-- ==================================================
@@ -826,26 +724,11 @@ a {
 
 <div class="main-images">
 
-    <img
-        src="19.png"
-        width="500"
-        height="170"
-        alt="High Tech Auto"
-    >
+    <img src="19.png" alt="High Tech Auto">
 
-    <img
-        src="16.png"
-        width="200"
-        height="170"
-        alt="High Tech Auto"
-    >
+    <img src="16.png" alt="High Tech Auto">
 
-    <img
-        src="20.jpg"
-        width="500"
-        height="170"
-        alt="High Tech Auto"
-    >
+    <img src="20.jpg" alt="High Tech Auto">
 
 </div>
 
@@ -854,13 +737,11 @@ a {
      SERVICES
 ================================================== -->
 
-<div class="services">
+<section class="services">
 
-    <h2>
-        OUR SERVICES
-    </h2>
+    <h2>OUR SERVICES</h2>
 
-    <ol>
+    <ul>
 
         <li>Computer Diagnostic</li>
 
@@ -878,846 +759,1681 @@ a {
 
         <li>ADAS / Advanced Diagnostics</li>
 
-    </ol>
+    </ul>
 
-</div>
+</section>
+
+
+<!-- ==================================================
+     WORKSHOP GALLERY
+================================================== -->
+
+<section class="section-card">
+
+    <h2 class="section-title">
+        WORKSHOP GALLERY
+    </h2>
+
+    <div class="gallery-frame">
+
+        <button
+            type="button"
+            class="gallery-arrow gallery-left"
+            onclick="previousGallery()"
+            aria-label="Previous photo">
+            ◀
+        </button>
+
+        <img
+            id="galleryImage"
+            class="gallery-image"
+            src="19.png"
+            alt="Workshop Gallery">
+
+        <button
+            type="button"
+            class="gallery-arrow gallery-right"
+            onclick="nextGallery()"
+            aria-label="Next photo">
+            ▶
+        </button>
+
+        <div
+            id="galleryCaption"
+            class="gallery-caption">
+            Gallery Image 1
+        </div>
+
+    </div>
+
+    <div
+        id="galleryDots"
+        class="gallery-dots">
+    </div>
+
+    <p style="text-align:center;">
+        Use the ◀ and ▶ buttons to view workshop photos.
+    </p>
+
+</section>
+
+
+<!-- ==================================================
+     TRAINING ARTICLES
+================================================== -->
+
+<section class="section-card">
+
+    <h2 class="section-title">
+        AUTOMOTIVE TRAINING NOTES
+    </h2>
+
+    <div class="article-select-box">
+
+        <label for="articleSelect">
+            Select an article to read:
+        </label>
+
+        <select
+            id="articleSelect"
+            class="article-select"
+            onchange="showArticle()">
+
+            <option value="">
+                -- Select Article --
+            </option>
+
+            <option value="0">
+                1. Automotive Repair Basics
+            </option>
+
+            <option value="1">
+                2. How an Engine Works
+            </option>
+
+            <option value="2">
+                3. Automotive Electrical Systems
+            </option>
+
+            <option value="3">
+                4. Battery, Alternator & Starter
+            </option>
+
+            <option value="4">
+                5. Relays and Fuses
+            </option>
+
+            <option value="5">
+                6. Automotive Sensors
+            </option>
+
+            <option value="6">
+                7. OBD-II & Diagnostic Scanners
+            </option>
+
+            <option value="7">
+                8. P0171 Fuel Trim Diagnostics
+            </option>
+
+            <option value="8">
+                9. Automatic Transmission & CVT
+            </option>
+
+            <option value="9">
+                10. Automotive Air Conditioning
+            </option>
+
+            <option value="10">
+                11. Brake & Suspension Systems
+            </option>
+
+            <option value="11">
+                12. ADAS (Advanced Driver Assistance Systems)
+            </option>
+
+            <option value="12">
+                13. Radar vs LiDAR
+            </option>
+
+            <option value="13">
+                14. AI & Autonomous Driving
+            </option>
+
+            <option value="14">
+                15. Automotive Diagnostic Process
+            </option>
+
+        </select>
+
+    </div>
+
+    <p class="article-hint">
+        Select a topic from the list above.
+        The full lesson will appear here.
+    </p>
+
+    <div
+        id="articleContent"
+        class="article-content">
+    </div>
+
+</section>
 
 
 <!-- ==================================================
      RELAY NOTE
 ================================================== -->
 
-<div class="note-section">
+<section class="note-section">
 
     <button
-        onclick="toggleNote()"
+        type="button"
+        class="note-button"
         id="noteButton"
-    >
+        onclick="toggleNote()">
+
         READ NOTE
+
     </button>
 
 
     <div
-        id="myNote"
-        style="display: none;"
-    >
+        class="my-note"
+        id="myNote">
 
-        <h2>
-            1 CHANNEL RELAY MODULE
-        </h2>
+        <h2>1 Channel Relay Module 5V / 10A</h2>
+
+        <p>
+            A relay is an electrically operated switch.
+            It allows a low-power control circuit to switch
+            another electrical load.
+        </p>
+
+        <h3>Relay Module Pins</h3>
+
+        <ul>
+
+            <li><strong>VCC</strong> – Power supply</li>
+
+            <li><strong>GND</strong> – Ground</li>
+
+            <li><strong>IN</strong> – Control input</li>
+
+            <li><strong>COM</strong> – Common contact</li>
+
+            <li><strong>NO</strong> – Normally Open</li>
+
+            <li><strong>NC</strong> – Normally Closed</li>
+
+        </ul>
+
+
+        <div class="note-images">
+
+            <img src="25.png" alt="Relay Module">
+
+            <img src="23.png" alt="Relay Module">
+
+            <img src="24.png" alt="Relay Module">
+
+        </div>
+
+
+        <h3>How It Works</h3>
+
+        <p>
+            When the control input activates the relay,
+            the internal electromagnetic mechanism changes
+            the contact position.
+        </p>
+
+        <p>
+            COM can connect to NO when the relay is activated,
+            while NC is connected to COM when the relay is
+            in its normal state.
+        </p>
+
+
+        <h3>Typical Applications</h3>
+
+        <ul>
+
+            <li>Motors</li>
+
+            <li>Lamps</li>
+
+            <li>Fans</li>
+
+            <li>Pumps</li>
+
+            <li>Automotive electrical projects</li>
+
+            <li>IoT projects</li>
+
+            <li>Microcontroller projects</li>
+
+        </ul>
 
 
         <p>
+            Relay modules are useful when a controller such as
+            Arduino, ESP32 or another low-voltage control circuit
+            needs to control a higher-power load.
+        </p>
 
+
+        <p>
+            Reference:
             <a
                 href="https://www.cestore-mm.com/product/1-channel-relay-module-5v10a/"
-                target="_blank"
-            >
-                1 Channel Relay Module
+                target="_blank">
+                1 Channel Relay Module 5V / 10A
             </a>
-
-            တစ်ခုမှာ ပါဝင်တဲ့ အဓိက အစိတ်အပိုင်းများနဲ့
-            ၎င်းတို့ရဲ့ လုပ်ဆောင်ချက်များမှာ အောက်ပါအတိုင်း ဖြစ်ပါသည်။
-
-        </p>
-
-
-        <div>
-
-            <img
-                src="25.png"
-                width="290"
-                height="190"
-                alt="Relay Module"
-            >
-
-            <img
-                src="23.png"
-                width="600"
-                height="190"
-                alt="Relay Module"
-            >
-
-        </div>
-
-
-        <h3>
-            အဓိက အစိတ်အပိုင်းများ
-        </h3>
-
-
-        <ol>
-
-            <li>
-                <strong>Relay (အပြာရောင် Box)</strong>
-                <br>
-                လျှပ်စစ်သံလိုက်စနစ်ကို အသုံးပြုပြီး
-                High Voltage / Current ဝါယာလမ်းကြောင်းများကို
-                အဖွင့်အပိတ် ပြုလုပ်ပေးသည့်
-                အဓိကအစိတ်အပိုင်း ဖြစ်သည်။
-            </li>
-
-
-            <li>
-                <strong>Terminal Connector (3-Pin Screw Block)</strong>
-                <br>
-                Mains လျှပ်စစ်ကြိုးများကို ချိတ်ဆက်ရန် အသုံးပြုပါတယ်။
-                <strong>NO (Normally Open),
-                COM (Common),
-                NC (Normally Closed)</strong>
-                ဆိုပြီး Terminal သုံးခု ပါဝင်သည်။
-            </li>
-
-
-            <li>
-                <strong>Transistor (Q1)</strong>
-                <br>
-                Microcontroller မှလာတဲ့ နည်းပါးတဲ့
-                Current Signal ကို အသုံးပြုပြီး
-                Relay Coil ကို မောင်းနှင်ပေးပါတယ်။
-            </li>
-
-
-            <li>
-                <strong>Flyback Diode (D2)</strong>
-                <br>
-                Relay Coil ကို ပိတ်လိုက်ချိန်မှာ ဖြစ်ပေါ်လာနိုင်တဲ့
-                High Voltage Back-EMF Spike များကြောင့်
-                Transistor နှင့် အခြား Circuit အစိတ်အပိုင်းများ
-                မပျက်စီးအောင် ကာကွယ်ပေးရန် အသုံးပြုထားခြင်းဖြစ်သည်။
-            </li>
-
-
-            <li>
-                <strong>LED Indicators</strong>
-                <br>
-                <strong>Power LED (D1)</strong>
-                သည် Module သို့ Power ရောက်ရှိနေကြောင်း
-                ပြသပေးပါတယ်။
-                <br>
-                <strong>Status LED</strong>
-                သည် Relay အလုပ်လုပ်နေချိန်တွင်
-                လင်းပြပေးပါတယ်။
-            </li>
-
-
-            <li>
-                <strong>Resistors (R1, R2)</strong>
-                <br>
-                Circuit အတွင်း Current ကို ထိန်းညှိပေးပြီး
-                LED နှင့် Transistor ကို ကာကွယ်ပေးသည်။
-            </li>
-
-
-            <li>
-                <strong>Input Pins (Male Headers)</strong>
-                <br>
-                Microcontroller နှင့် ချိတ်ဆက်ရန် အသုံးပြုပါတယ်။
-                <br>
-                <strong>VCC:</strong> Power Supply (5V)
-                <br>
-                <strong>GND:</strong> Ground (0V)
-                <br>
-                <strong>IN:</strong> Relay ကို ထိန်းချုပ်မည့် Trigger Input Signal Pin
-            </li>
-
-        </ol>
-
-
-        <hr>
-
-
-        <h2>
-            CIRCUIT DIAGRAM အလုပ်လုပ်ပုံ
-        </h2>
-
-
-        <div>
-
-            <img
-                src="24.png"
-                width="600"
-                height="400"
-                alt="Relay Circuit Diagram"
-            >
-
-        </div>
-
-
-        <h3>1. Input & Power Section</h3>
-
-
-        <p>
-            <strong>VCC & GND:</strong>
-            <br>
-            Module ကို အလုပ်လုပ်စေရန် Power နှင့် Ground
-            ပေးသွင်းသည့် Pin များ ဖြစ်ပြီး။
-            Power ရောက်ရှိပါက
-            <strong>D1 Power LED</strong>
-            လင်းနေမည်။
-        </p>
-
-
-        <p>
-            <strong>IN (Input Pin):</strong>
-            <br>
-            Microcontroller
-            (Arduino, ESP32 စသည်)
-            မှ Trigger Signal ပေးပို့ရာ Pin ဖြစ်ပါသည်။
-        </p>
-
-
-        <p>
-            <strong>Optocoupler (PC817):</strong>
-            <br>
-            Microcontroller ဘက်ခြမ်းနှင့် Relay ဘက်ခြမ်းကို
-            Optical Isolation နည်းလမ်းဖြင့် ခွဲထုတ်ပေးပြီး
-            Relay ဘက်မှ ဖြစ်လာနိုင်သည့် Electrical Disturbance များ
-            Microcontroller ဘက်သို့ တိုက်ရိုက် မကူးစက်စေရန်
-            ကူညီပေးသည်။
-        </p>
-
-
-        <h3>2. Driver & Protection Section</h3>
-
-
-        <p>
-            <strong>Transistor (Q1):</strong>
-            <br>
-            Optocoupler မှ Signal ရရှိသောအခါ
-            Transistor အလုပ်လုပ်ပြီး
-            Relay Coil အတွင်း Current စီးဆင်းစေကာ
-            Electromagnetic Field ဖြစ်ပေါ်စေပါသည်။
-        </p>
-
-
-        <p>
-            <strong>Status LED:</strong>
-            <br>
-            Input Signal ရရှိပြီး Transistor ပွင့်သွားပါက
-            Relay အလုပ်လုပ်နေကြောင်း ပြသရန်အတွက်
-            Status LED လင်းလာမည် ဖြစ်သည်။
-        </p>
-
-
-        <p>
-            <strong>Flyback Diode (D2):</strong>
-            <br>
-            Relay Coil ကို ပိတ်လိုက်ချိန်တွင် ဖြစ်ပေါ်လာနိုင်သည့်
-            Back-EMF Voltage Spike ကို လမ်းကြောင်းလွှဲပေးပြီး
-            Transistor ကို ကာကွယ်ပေးပါတယ်။
-        </p>
-
-
-        <h3>3. Output Section</h3>
-
-
-        <p>
-            Relay Coil မှ Magnetic Field ဖြစ်ပေါ်လာသောအခါ
-            Mechanical Contact အနေအထား ပြောင်းလဲသွားပြီး
-            COM သည် NC မှ NO ဘက်သို့ ပြောင်းချိတ်ဆက်သွားသည်။
-        </p>
-
-
-        <p>
-            <strong>COM (Common):</strong>
-            <br>
-            Common Terminal ဖြစ်ပါတယ်။
-        </p>
-
-
-        <p>
-            <strong>NC (Normally Closed):</strong>
-            <br>
-            Relay မအလုပ်လုပ်နေချိန်တွင်
-            COM နှင့် ဆက်နေသော Terminal ဖြစ်ပါတယ်။
-        </p>
-
-
-        <p>
-            <strong>NO (Normally Open):</strong>
-            <br>
-            Relay မအလုပ်လုပ်နေချိန်တွင်
-            COM နှင့် မဆက်ထားဘဲ
-            Relay အလုပ်လုပ်သောအခါ
-            COM နှင့် ဆက်သွားသော Terminal ဖြစ်ပါတယ်။
-        </p>
-
-
-        <hr>
-
-
-        <h2>
-            1 CHANNEL RELAY MODULE — အဓိက လမ်းကြောင်း
-        </h2>
-
-
-        <p>
-            <strong>Input Section:</strong>
-            <br>
-            Microcontroller မှ IN Pin သို့
-            Trigger Signal ပေးလိုက်သောအခါ
-            Optocoupler (PC817) စတင်အလုပ်လုပ်သည်။
-        </p>
-
-
-        <p>
-            <strong>Driver Section:</strong>
-            <br>
-            Optocoupler မှတစ်ဆင့်
-            Transistor (Q1) အလုပ်လုပ်ပြီး
-            Relay Coil အတွင်း Current စီးဆင်းစေပါတယ်။
-            Flyback Diode (D2) က Back-EMF Spike ကို
-            ကာကွယ်ပေးပါတယ်။
-        </p>
-
-
-        <p>
-            <strong>Output Section:</strong>
-            <br>
-            Relay Coil ရဲ့ Magnetic Field ကြောင့်
-            Contact ပြောင်းလဲသွားပြီး
-            COM သည် NO ဘက်သို့ ဆက်သွား၍
-            load များကို run စေသည်။
-        </p>
-
-
-        <hr>
-
-
-        <h2>
-            SPDT (Single Pole Double Throw)
-        </h2>
-
-
-        <p>
-            <strong>SPDT</strong>
-            ဆိုတာ
-            <strong>Single Pole Double Throw</strong>
-            ရဲ့ အတိုကောက်ဖြစ်ပြီး
-            Relay တွေမှာ အသုံးများတဲ့
-            Switch Contact အမျိုးအစားတစ်ခု ဖြစ်သည်။
-        </p>
-
-
-        <h3>Single Pole (SP)</h3>
-
-
-        <p>
-            ထိန်းချုပ်မည့် Common Terminal တစ်ခုတည်း
-            (<strong>COM</strong>)
-            ပါဝင်တာကို ဆိုလိုသည်။
-        </p>
-
-
-        <h3>Double Throw (DT)</h3>
-
-
-        <p>
-            COM မှ ထွက်လာသော လမ်းကြောင်းကို
-            <strong>NO</strong>
-            သို့မဟုတ်
-            <strong>NC</strong>
-            ဘက်နှစ်ခုအနက် တစ်ခုသို့
-            ပြောင်းချိတ်ဆက်ပေးနိုင်တာကို ဖော်ပြခြင်းဖြစ်သည်။
-        </p>
-
-
-        <h3>SPDT Switch အလုပ်လုပ်ပုံ</h3>
-
-
-        <ol>
-
-            <li>
-                <strong>Normally Closed (NC) အခြေအနေ</strong>
-                <br>
-                Relay Coil ကို မမောင်းထားချိန်တွင်
-                COM သည် NC နှင့် ဆက်နေမည်ဖြစ်သည်။
-            </li>
-
-
-            <li>
-                <strong>Normally Open (NO) အခြေအနေ</strong>
-                <br>
-                Relay Coil ကို မောင်းလိုက်သောအခါ
-                Contact သည် COM မှ NO ဘက်သို့
-                ပြောင်းချိတ်ဆက်သွားပါတယ်။
-            </li>
-
-        </ol>
-
-
-        <p>
-            <strong>အနှစ်ချုပ်:</strong>
-            <br>
-            SPDT Relay ဆိုသည်မှာ Input Common Line တစ်ခုဖြစ်သော
-            COM ကို Output Contact နှစ်ခုဖြစ်သည့်
-            NO နှင့် NC အနက် တစ်ခုသို့
-            အခြေအနေအလိုက် ပြောင်းချိတ်ဆက်ပေးနိုင်သည့်
-            Switch အမျိုးအစား ဖြစ်ပါတယ်။
-        </p>
-
-
-        <hr>
-
-
-        <h2>
-            OPTOCOUPLER
-        </h2>
-
-
-        <p>
-            Optocoupler က Microcontroller ဘက်ခြမ်းနှင့်
-            Relay ဘက်ခြမ်းကို Electrical Isolation
-            ပြုလုပ်ပေးတဲ့ အစိတ်အပိုင်း ဖြစ်သည်။
-        </p>
-
-
-        <h3>1. Electrical Isolation</h3>
-
-
-        <p>
-            Optocoupler အတွင်းမှာ Input ဘက်နှင့်
-            Output ဘက်ကို တိုက်ရိုက် Electrical Connection
-            မလုပ်ထားဘဲ Isolation Barrier တစ်ခုဖြင့်
-            ခွဲထားပါတယ်။
-            <br><br>
-            Microcontroller ဘက်နှင့် Relay ဘက်ကို
-            တိုက်ရိုက်ကြိုးမဆက်ထားဘဲ
-            Optocoupler အတွင်းရှိ Isolation Barrier မှ
-            ခွဲခြားထားခြင်း ဖြစ်ပါတယ်။
-        </p>
-
-
-        <h3>2. အလင်းဖြင့် Signal ပို့ခြင်း</h3>
-
-
-        <p>
-            Microcontroller ဘက်မှာ Signal ပေးလိုက်သောအခါ
-            အတွင်းရှိ <strong>IR LED</strong> လင်းလာပါတယ်။
-        </p>
-
-
-        <p>
-            အဲဒီအလင်းကို တစ်ဖက်ရှိ
-            <strong>Phototransistor</strong> က
-            လက်ခံပြီး Output ဘက်မှာ Signal ဖြစ်ပေါ်စေသည်။
-        </p>
-
-
-        <p>
-            ဒါကြောင့် Electrical Signal ကို
-            တိုက်ရိုက်ကြိုးဖြင့် မပို့ဘဲ
-            <strong>အလင်း</strong> ဖြင့် Signal ကူးပြောင်းပေးတာ ဖြစ်တယ်။
-        </p>
-
-
-        <h3>
-            Back-EMF / Electrical Surge ဖြစ်လာသောအခါ
-        </h3>
-
-
-        <ol>
-
-            <li>
-                Relay Coil ကို ပိတ်လိုက်ချိန်တွင်
-                Back-EMF Voltage Spike ဖြစ်ပေါ်နိုင်ပါတယ်။
-            </li>
-
-            <li>
-                Relay ဘက်ခြမ်းရှိ Circuit အစိတ်အပိုင်းများက
-                အဲဒီ Surge ကို ခံရနိုင်ပါတယ်။
-            </li>
-
-            <li>
-                Optocoupler ရဲ့ Isolation ကြောင့်
-                Relay ဘက်ရှိ Electrical Voltage ကို
-                Microcontroller ဘက်သို့ တိုက်ရိုက်
-                မကူးစက်စေရန် အကာအကွယ်ပေးသည်။
-            </li>
-
-        </ol>
-
-
-        <p>
-            <strong>အနှစ်ချုပ်:</strong>
-            <br>
-            Optocoupler ဆိုတာ Microcontroller နဲ့
-            Relay Circuit ကြားမှာ
-            <strong>
-                အလင်းကို အသုံးပြုပြီး
-                Electrical Isolation ပေးထားတဲ့
-                Optical Barrier
-            </strong>
-            တစ်ခု ဖြစ်ပါတယ်။
-        </p>
-
-
-        <hr>
-
-
-        <h2>
-            FLYBACK DIODE (D2)
-        </h2>
-
-
-        <h3>1. Back-EMF ဆိုတာ ဘာလဲ</h3>
-
-
-        <p>
-            Relay ရဲ့အတွင်းမှာ လျှပ်စစ်သံလိုက်စက်ကွင်း
-            ဖြစ်ပေါ်စေတဲ့ <strong>Coil</strong> ပါဝင်ပါတယ်။
-        </p>
-
-
-        <p>
-            Coil အတွင်း Current စီးနေချိန်မှာ
-            Magnetic Field အဖြစ် Energy သိုလှောင်ထားပါတယ်။
-        </p>
-
-
-        <p>
-            Relay ကို ပိတ်လိုက်ချိန်မှာ Magnetic Field က
-            ရုတ်တရက် Collapse ဖြစ်ပြီး
-            Coil အတွင်းမှာ Voltage Spike ဖြစ်ပေါ်နိုင်ပါတယ်။
-        </p>
-
-
-        <h3>2. Flyback Diode တပ်ဆင်ပုံ</h3>
-
-
-        <p>
-            Flyback Diode ကို Relay Coil နှင့်
-            <strong>Parallel</strong>
-            ချိတ်ဆက်ထားပါတယ်။
-        </p>
-
-
-        <p>
-            Relay ပုံမှန်အလုပ်လုပ်နေချိန်မှာ Diode က
-            <strong>Reverse Bias</strong>
-            ဖြစ်နေတဲ့အတွက် ပုံမှန် Current မစီးပါဘူး။
-        </p>
-
-
-        <h3>3. Back-EMF ကို ကာကွယ်ပေးပုံ</h3>
-
-
-        <ol>
-
-            <li>
-                <strong>Voltage Spike ပေါ်လာခြင်း:</strong>
-                <br>
-                Relay Coil ကို ပိတ်လိုက်သောအခါ
-                Coil ရဲ့ Current ကို ရုတ်တရက် မဖြတ်နိုင်တာကြောင့်
-                Reverse Voltage ဖြစ်ပေါ်လာနိုင်ပါတယ်။
-            </li>
-
-
-            <li>
-                <strong>Diode Conduct ဖြစ်ခြင်း:</strong>
-                <br>
-                Voltage အခြေအနေ ပြောင်းလဲသောအခါ
-                Flyback Diode သည် Forward Bias ဖြစ်လာပြီး
-                Current စီးနိုင်အောင် လမ်းဖွင့်ပေးပါတယ်။
-            </li>
-
-
-            <li>
-                <strong>Freewheeling Loop:</strong>
-                <br>
-                Coil ထဲမှာ သိုလှောင်ထားတဲ့ Energy ကို
-                Coil နှင့် Diode အကြားမှာ Current Loop အဖြစ်
-                လှည့်ပတ်စီးဆင်းစေပြီး
-                Voltage Spike ကို လျော့ချစေပါတယ်။
-            </li>
-
-        </ol>
-
-
-        <p>
-            <strong>အနှစ်ချုပ်:</strong>
-            <br>
-            Flyback Diode သည် Relay Coil ကို
-            ပိတ်လိုက်ချိန်မှာ ဖြစ်ပေါ်လာနိုင်သည့်
-            Back-EMF Voltage Spike ကို လမ်းကြောင်းလွှဲပေးပြီး
-            Transistor နှင့် အခြား Circuit အစိတ်အပိုင်းများကို
-            ကာကွယ်ပေးသည့်
-            <strong>Protection Device</strong>
-            တစ်ခု ဖြစ်ပါတယ်။
-        </p>
-
-
-        <hr>
-
-
-        <p>
-            <strong>Note:</strong>
-            <br>
-            Circuit Diagram ပုံများကို နောက်ပိုင်းတွင်
-            ထည့်သွင်းနိုင်ပါသည်။
-            Intended as a training aid for staff only.
         </p>
 
     </div>
 
-</div>
-
-
-<!-- ==================================================
-     JAVASCRIPT
-================================================== -->
-
-<script>
-
-function toggleCustomer() {
-
-    var section =
-        document.getElementById("customerSection");
-
-    var arrow =
-        document.getElementById("customerArrow");
-
-
-    if (section.style.display === "none" ||
-        section.style.display === "") {
-
-        section.style.display = "block";
-
-        arrow.innerHTML = "▲";
-
-    } else {
-
-        section.style.display = "none";
-
-        arrow.innerHTML = "▼";
-
-    }
-
-}
-
-
-function toggleNote() {
-
-    var note =
-        document.getElementById("myNote");
-
-    var button =
-        document.getElementById("noteButton");
-
-
-    if (note.style.display === "none") {
-
-        note.style.display = "block";
-
-        button.innerHTML = "CLOSE NOTE";
-
-    } else {
-
-        note.style.display = "none";
-
-        button.innerHTML = "READ NOTE";
-
-    }
-
-}
-
-</script>
+</section>
 
 
 <!-- ==================================================
      ABOUT US
 ================================================== -->
 
-<div class="about-us">
+<section class="about-us">
 
-    <h2>
-        ABOUT US
-    </h2>
+    <h2>ABOUT US</h2>
 
     <p>
-        High Tech Auto Car Service is dedicated to providing
-        professional automotive service, maintenance,
-        diagnostics, and repair solutions.
+        High Tech Auto Car Service focuses on automotive
+        diagnostics, maintenance, electrical and electronic
+        systems, engine service, transmission and CVT service,
+        wiring, air conditioning, braking, suspension,
+        injector cleaning and advanced diagnostic systems.
     </p>
 
     <p>
-        We use modern diagnostic technology and practical
-        automotive knowledge to help keep your vehicle safe,
-        reliable, and performing at its best.
+        Our goal is to understand the real cause of a vehicle
+        problem instead of simply replacing parts without
+        proper diagnosis.
     </p>
 
-</div>
+</section>
 
 
 <!-- ==================================================
      CONTACT
 ================================================== -->
 
-<div class="contact">
+<section class="contact">
 
-    <h2>
-        CONTACT
-    </h2>
+    <h2>CONTACT US</h2>
 
     <p>
-
-        <strong>
-            Address:
-        </strong>
-
-        <br>
-
+        <strong>Address:</strong><br>
         No. A-40, Taw Win Residence, Taw Win Street,
-
-        <br>
-
-        U Wisara Road, (41) Block (Extend),
-
-        <br>
-
-        Dagon (North), Yangon.
-
+        U Wisara Road, (41) Block (Extend), Dagon (North)
     </p>
-
 
     <p>
-
-        <strong>
-            Phone:
-        </strong>
-
-        <a href="tel:09941060666">
-            09941060666
-        </a>
-
+        <strong>Phone:</strong><br>
+        09941060666<br>
+        09 459907461<br>
+        09 794918438
     </p>
 
-</div>
+</section>
 
 
 <!-- ==================================================
      THANK YOU
 ================================================== -->
 
-<div class="thank-you">
+<section class="thank-you">
+
+    <h2>Thank You, Valued Customer</h2>
 
     <p>
-
-        <strong>
-            Thank You for Choosing High Tech Auto Car Service
-        </strong>
-
+        Thank you for choosing High Tech Auto Car Service.
     </p>
-
 
     <p>
-
-        We sincerely appreciate your trust and support.
-
-        <br>
-
-        Your satisfaction is our greatest motivation.
-
+        We appreciate your trust and support.
     </p>
 
+</section>
+
+
+<script>
+
+/* ==================================================
+   CUSTOMER SECTION
+================================================== */
+
+function toggleCustomer() {
+
+    const section =
+        document.getElementById("customerSection");
+
+    const arrow =
+        document.getElementById("customerArrow");
+
+    if (section.style.display === "block") {
+
+        section.style.display = "none";
+        arrow.textContent = "▼";
+
+    } else {
+
+        section.style.display = "block";
+        arrow.textContent = "▲";
+
+    }
+}
+
+
+/* ==================================================
+   CUSTOMER SAVE
+================================================== */
+
+function saveCustomer() {
+
+    const customer = {
+
+        name: document.getElementById("customerName").value,
+
+        phone: document.getElementById("customerPhone").value,
+
+        brand: document.getElementById("carBrand").value,
+
+        model: document.getElementById("carModel").value,
+
+        year: document.getElementById("carYear").value,
+
+        license: document.getElementById("licenseNo").value,
+
+        mileage: document.getElementById("mileage").value
+
+    };
+
+
+    localStorage.setItem(
+        "highTechAutoCustomer",
+        JSON.stringify(customer)
+    );
+
+
+    const button =
+        document.getElementById("saveButton");
+
+    button.textContent = "CUSTOMER SAVED ✓";
+
+    setTimeout(function() {
+
+        button.textContent = "SAVE CUSTOMER";
+
+    }, 2500);
+
+}
+
+
+/* ==================================================
+   LOAD CUSTOMER
+================================================== */
+
+function loadCustomer() {
+
+    const saved =
+        localStorage.getItem("highTechAutoCustomer");
+
+    if (!saved) {
+        return;
+    }
+
+    const customer =
+        JSON.parse(saved);
+
+    document.getElementById("customerName").value =
+        customer.name || "";
+
+    document.getElementById("customerPhone").value =
+        customer.phone || "";
+
+    document.getElementById("carBrand").value =
+        customer.brand || "";
+
+    document.getElementById("carModel").value =
+        customer.model || "";
+
+    document.getElementById("carYear").value =
+        customer.year || "";
+
+    document.getElementById("licenseNo").value =
+        customer.license || "";
+
+    document.getElementById("mileage").value =
+        customer.mileage || "";
+
+}
+
+
+/* ==================================================
+   WORKSHOP GALLERY
+================================================== */
+
+const galleryImages = [
+
+    {
+        src: "19.png",
+        caption: "Gallery Image 1"
+    },
+
+    {
+        src: "16.png",
+        caption: "Gallery Image 2"
+    },
+
+    {
+        src: "20.jpg",
+        caption: "Gallery Image 3"
+    }
+
+];
+
+
+let galleryIndex = 0;
+
+
+function updateGallery() {
+
+    const image =
+        document.getElementById("galleryImage");
+
+    const caption =
+        document.getElementById("galleryCaption");
+
+    image.src =
+        galleryImages[galleryIndex].src;
+
+    caption.textContent =
+        galleryImages[galleryIndex].caption;
+
+
+    updateGalleryDots();
+
+}
+
+
+function nextGallery() {
+
+    galleryIndex++;
+
+    if (galleryIndex >= galleryImages.length) {
+
+        galleryIndex = 0;
+
+    }
+
+    updateGallery();
+
+}
+
+
+function previousGallery() {
+
+    galleryIndex--;
+
+    if (galleryIndex < 0) {
+
+        galleryIndex =
+            galleryImages.length - 1;
+
+    }
+
+    updateGallery();
+
+}
+
+
+function updateGalleryDots() {
+
+    const dots =
+        document.getElementById("galleryDots");
+
+    dots.innerHTML = "";
+
+    galleryImages.forEach(function(image, index) {
+
+        const dot =
+            document.createElement("span");
+
+        dot.className = "gallery-dot";
+
+        if (index === galleryIndex) {
+
+            dot.classList.add("active");
+
+        }
+
+        dot.textContent =
+            index === galleryIndex ? "●" : "○";
+
+        dots.appendChild(dot);
+
+    });
+
+}
+
+
+/* ==================================================
+   TRAINING ARTICLES
+================================================== */
+
+const articles = [
+
+/* --------------------------------------------------
+   1
+-------------------------------------------------- */
+
+{
+    title: "Automotive Repair Basics",
+
+    html: `
 
     <p>
-
-        <strong>
-            Thank you for being our valued customer.
-        </strong>
-
-        <br>
-
-        We look forward to serving you again.
-
+        Automotive repair begins with understanding the vehicle
+        as a complete system. A modern vehicle is not only a
+        mechanical machine. It combines mechanical, electrical,
+        electronic and computer-controlled systems.
     </p>
 
-</div>
+    <h3>Basic Repair Principle</h3>
 
-<!-- ==================================================
-     EXTRA
-================================================== -->
-
-<div
-    style="
-        margin: 30px 40px;
-        padding: 25px;
-        background-color: rgba(255,255,255,0.65);
-        border-radius: 12px;
-        line-height: 1.6;
-        box-sizing: border-box;
-    "
->
-
-    <a
-        href="http://www.w3schools.com"
-        style="
-            margin: 0;
-            color: #0056b3;
-            font-weight: bold;
-        "
-    >
-        This is a link
-    </a>
-
-
-    <h1
-        style="
-            margin-top: 20px;
-            margin-bottom: 15px;
-            color: #063b66;
-        "
-    >
-        My first Heading
-    </h1>
-
-
-    <p style="margin: 0;">
-
-        I am Because We are.
-
-        <br><br>
-
-        A Good One Gives Happiness.
-
-        <br>
-
-        A Bad One Gives Experience.
-
-        <br>
-
-        The Worst One Gives a Lesson.
-
-        <br>
-
-        The Best One Gives Memories.
-
-        <br><br><br>
-
-        <strong>
-            Thank You, Valued Customer!
-        </strong>
-
-        <br><br>
-
-        Your trust is our motivation.
-
-        <br>
-
-        We are always ready to keep your vehicle safe,
-        reliable, and performing at its best.
-
+    <p>
+        The most important rule is:
+        <strong>diagnose before replacing parts.</strong>
     </p>
 
-</div>
+    <p>
+        A warning light or symptom does not always identify the
+        failed component. A diagnostic code may tell you which
+        system has detected an abnormal condition, but further
+        testing is normally required to find the root cause.
+    </p>
+
+    <h3>Basic Inspection</h3>
+
+    <ul>
+
+        <li>Verify the customer's complaint.</li>
+
+        <li>Check visible mechanical damage.</li>
+
+        <li>Inspect connectors and wiring.</li>
+
+        <li>Check battery voltage and grounds.</li>
+
+        <li>Scan the vehicle for diagnostic trouble codes.</li>
+
+        <li>Check live data when necessary.</li>
+
+        <li>Perform a specific test before replacing a component.</li>
+
+    </ul>
+
+    <h3>Mechanical + Electrical + Electronic Thinking</h3>
+
+    <p>
+        For example, an engine that does not start may have a
+        mechanical problem, fuel problem, ignition problem,
+        sensor problem, wiring problem or ECU-related problem.
+        The technician should test these possibilities logically.
+    </p>
+
+    <div class="key-box">
+
+        <strong>Key Point:</strong>
+        Good diagnosis follows evidence. Do not replace a part
+        simply because a fault code mentions that component.
+
+    </div>
+
+    `
+},
 
 
+/* --------------------------------------------------
+   2
+-------------------------------------------------- */
+
+{
+    title: "How an Engine Works",
+
+    html: `
+
+    <p>
+        A typical gasoline engine converts the chemical energy
+        of fuel into mechanical energy. The four-stroke engine
+        uses four basic strokes: intake, compression, power and
+        exhaust.
+    </p>
+
+    <h3>1. Intake Stroke</h3>
+
+    <p>
+        The intake valve opens and the piston moves downward.
+        Air and fuel enter the cylinder.
+    </p>
+
+    <h3>2. Compression Stroke</h3>
+
+    <p>
+        The valves close and the piston moves upward.
+        The air-fuel mixture is compressed.
+    </p>
+
+    <h3>3. Power Stroke</h3>
+
+    <p>
+        In a gasoline engine, the spark plug ignites the mixture.
+        Combustion produces pressure that pushes the piston
+        downward.
+    </p>
+
+    <h3>4. Exhaust Stroke</h3>
+
+    <p>
+        The exhaust valve opens and the piston moves upward,
+        pushing combustion gases out of the cylinder.
+    </p>
+
+    <h3>Modern Engine Control</h3>
+
+    <p>
+        The ECU uses information from sensors such as MAF, MAP,
+        throttle position, engine coolant temperature, oxygen
+        sensors, crankshaft position and camshaft position.
+    </p>
+
+    <div class="key-box">
+
+        <strong>Key Point:</strong>
+        Engine operation depends on air, fuel, ignition,
+        compression and correct timing.
+
+    </div>
+
+    `
+},
 
 
+/* --------------------------------------------------
+   3
+-------------------------------------------------- */
 
+{
+    title: "Automotive Electrical Systems",
+
+    html: `
+
+    <p>
+        Automotive electrical systems provide power and control
+        for starting, charging, lighting, communication, sensors,
+        actuators and many electronic modules.
+    </p>
+
+    <h3>Basic Electrical Quantities</h3>
+
+    <ul>
+
+        <li>
+            <strong>Voltage (V)</strong> – electrical potential difference.
+        </li>
+
+        <li>
+            <strong>Current (A)</strong> – movement of electric charge.
+        </li>
+
+        <li>
+            <strong>Resistance (Ω)</strong> – opposition to current flow.
+        </li>
+
+    </ul>
+
+    <h3>Main Parts</h3>
+
+    <ul>
+
+        <li>Battery</li>
+
+        <li>Alternator</li>
+
+        <li>Starter motor</li>
+
+        <li>Fuses</li>
+
+        <li>Relays</li>
+
+        <li>Wiring</li>
+
+        <li>Ground connections</li>
+
+        <li>Electronic control modules</li>
+
+    </ul>
+
+    <p>
+        A poor ground connection can create many strange symptoms.
+        Therefore voltage and ground testing are important parts of
+        automotive diagnosis.
+    </p>
+
+    <div class="key-box">
+
+        <strong>Key Point:</strong>
+        Do not judge an electrical circuit only by looking at the
+        wire. Measure it.
+
+    </div>
+
+    `
+},
+
+
+/* --------------------------------------------------
+   4
+-------------------------------------------------- */
+
+{
+    title: "Battery, Alternator & Starter",
+
+    html: `
+
+    <p>
+        The battery, alternator and starter form an important part
+        of the vehicle starting and charging system.
+    </p>
+
+    <h3>Battery</h3>
+
+    <p>
+        The battery supplies electrical energy for starting and
+        supports electrical loads when the engine is not running.
+    </p>
+
+    <h3>Starter Motor</h3>
+
+    <p>
+        The starter converts electrical energy into mechanical
+        rotation to crank the engine.
+    </p>
+
+    <h3>Alternator</h3>
+
+    <p>
+        Once the engine is running, the alternator generates
+        electrical power and helps maintain the battery charge.
+    </p>
+
+    <h3>Common Symptoms</h3>
+
+    <ul>
+
+        <li>Slow cranking</li>
+
+        <li>Clicking during starting</li>
+
+        <li>Battery warning light</li>
+
+        <li>Low charging voltage</li>
+
+        <li>Repeatedly discharged battery</li>
+
+        <li>Electrical equipment becoming weak</li>
+
+    </ul>
+
+    <h3>Diagnostic Thinking</h3>
+
+    <p>
+        A weak battery does not automatically mean the battery is
+        the only problem. A charging problem, excessive parasitic
+        drain, poor connection or starter problem can also cause
+        starting complaints.
+    </p>
+
+    `
+},
+
+
+/* --------------------------------------------------
+   5
+-------------------------------------------------- */
+
+{
+    title: "Relays and Fuses",
+
+    html: `
+
+    <p>
+        Fuses and relays are important parts of electrical
+        protection and switching circuits.
+    </p>
+
+    <h3>Fuse</h3>
+
+    <p>
+        A fuse is designed to protect a circuit from excessive
+        current. If the current becomes too high, the fuse element
+        opens the circuit.
+    </p>
+
+    <h3>Relay</h3>
+
+    <p>
+        A relay is an electrically operated switch. A low-power
+        control circuit can operate the relay while the relay
+        contacts control another circuit.
+    </p>
+
+    <h3>Common Relay Contacts</h3>
+
+    <ul>
+
+        <li><strong>COM</strong> – Common</li>
+
+        <li><strong>NO</strong> – Normally Open</li>
+
+        <li><strong>NC</strong> – Normally Closed</li>
+
+    </ul>
+
+    <h3>Important Diagnostic Rule</h3>
+
+    <p>
+        If a fuse is blown, simply replacing it may not solve the
+        problem. The reason for the excessive current should be
+        investigated.
+    </p>
+
+    <div class="key-box">
+
+        <strong>Key Point:</strong>
+        A fuse protects the circuit. A relay controls a circuit.
+
+    </div>
+
+    `
+},
+
+
+/* --------------------------------------------------
+   6
+-------------------------------------------------- */
+
+{
+    title: "Automotive Sensors",
+
+    html: `
+
+    <p>
+        Sensors provide information to electronic control units.
+        The ECU uses these signals to control engine operation,
+        transmission operation, emissions and other systems.
+    </p>
+
+    <h3>Common Sensors</h3>
+
+    <ul>
+
+        <li><strong>MAF</strong> – Measures incoming air mass.</li>
+
+        <li><strong>MAP</strong> – Measures intake manifold pressure.</li>
+
+        <li><strong>ECT</strong> – Measures engine coolant temperature.</li>
+
+        <li><strong>IAT</strong> – Measures intake air temperature.</li>
+
+        <li><strong>TPS</strong> – Indicates throttle position.</li>
+
+        <li><strong>O2 / A-F Sensor</strong> – Helps monitor combustion mixture.</li>
+
+        <li><strong>CKP</strong> – Detects crankshaft position and speed.</li>
+
+        <li><strong>CMP</strong> – Detects camshaft position.</li>
+
+        <li><strong>Wheel Speed Sensor</strong> – Provides wheel speed information.</li>
+
+    </ul>
+
+    <h3>Sensor Diagnosis</h3>
+
+    <p>
+        A sensor code does not always mean the sensor itself is
+        defective. Wiring, power supply, ground, connector problems
+        and mechanical conditions can affect the signal.
+    </p>
+
+    <p>
+        Compare the sensor value with engine conditions and other
+        related data.
+    </p>
+
+    `
+},
+
+
+/* --------------------------------------------------
+   7
+-------------------------------------------------- */
+
+{
+    title: "OBD-II & Diagnostic Scanners",
+
+    html: `
+
+    <p>
+        OBD-II is a vehicle diagnostic system that allows a scan
+        tool to communicate with the vehicle's electronic control
+        systems.
+    </p>
+
+    <h3>DTC</h3>
+
+    <p>
+        DTC means Diagnostic Trouble Code. A code identifies a
+        condition detected by a control module.
+    </p>
+
+    <h3>Useful Scanner Functions</h3>
+
+    <ul>
+
+        <li>Read diagnostic trouble codes.</li>
+
+        <li>Read live data.</li>
+
+        <li>View freeze-frame information.</li>
+
+        <li>Monitor sensor values.</li>
+
+        <li>Clear stored codes.</li>
+
+        <li>Perform selected system tests on supported vehicles.</li>
+
+    </ul>
+
+    <h3>Do Not Confuse Code Clearing With Repair</h3>
+
+    <p>
+        Clearing a diagnostic code does not repair the underlying
+        fault. If the problem remains, the code may return.
+    </p>
+
+    <div class="key-box">
+
+        <strong>Key Point:</strong>
+        Use the scan tool as a diagnostic instrument, not simply
+        as a code reader.
+
+    </div>
+
+    `
+},
+
+
+/* --------------------------------------------------
+   8
+-------------------------------------------------- */
+
+{
+    title: "P0171 Fuel Trim Diagnostics",
+
+    html: `
+
+    <p>
+        P0171 generally indicates that the engine control system
+        has detected a lean condition on Bank 1.
+    </p>
+
+    <h3>Fuel Trim</h3>
+
+    <p>
+        <strong>STFT</strong> means Short Term Fuel Trim.
+        <strong>LTFT</strong> means Long Term Fuel Trim.
+        These values show how the ECU is adjusting fuel delivery.
+    </p>
+
+    <h3>Possible Causes</h3>
+
+    <ul>
+
+        <li>Vacuum leak</li>
+
+        <li>Intake air leak</li>
+
+        <li>MAF sensor problem</li>
+
+        <li>Low fuel pressure</li>
+
+        <li>Restricted fuel supply</li>
+
+        <li>Dirty or restricted injector</li>
+
+        <li>O2 / A-F sensor issue</li>
+
+        <li>Exhaust leak before the sensor</li>
+
+        <li>Wiring or connector problem</li>
+
+    </ul>
+
+    <h3>Useful Diagnostic Questions</h3>
+
+    <ol>
+
+        <li>What are STFT and LTFT at idle?</li>
+
+        <li>What happens to fuel trim at higher RPM?</li>
+
+        <li>Does a vacuum leak become less significant at higher RPM?</li>
+
+        <li>Is the MAF value reasonable?</li>
+
+        <li>Is fuel pressure within specification?</li>
+
+        <li>Are injectors delivering fuel correctly?</li>
+
+        <li>Is the O2/A-F sensor responding correctly?</li>
+
+    </ol>
+
+    <div class="key-box">
+
+        <strong>Key Point:</strong>
+        P0171 should be diagnosed using fuel-trim behavior,
+        live data and physical tests rather than replacing the
+        oxygen sensor immediately.
+
+    </div>
+
+    `
+},
+
+
+/* --------------------------------------------------
+   9
+-------------------------------------------------- */
+
+{
+    title: "Automatic Transmission & CVT",
+
+    html: `
+
+    <p>
+        Automatic transmissions transfer engine power to the wheels
+        while automatically changing the transmission ratio.
+    </p>
+
+    <h3>Traditional Automatic Transmission</h3>
+
+    <p>
+        Many conventional automatic transmissions use a torque
+        converter, hydraulic control system and planetary gear sets.
+    </p>
+
+    <h3>Torque Converter</h3>
+
+    <p>
+        The torque converter transfers power from the engine to the
+        transmission and allows controlled slip when the vehicle
+        is stopped.
+    </p>
+
+    <h3>CVT</h3>
+
+    <p>
+        A Continuously Variable Transmission can provide a continuously
+        changing ratio instead of using fixed traditional gear ratios.
+    </p>
+
+    <h3>Possible Transmission Symptoms</h3>
+
+    <ul>
+
+        <li>Delayed engagement</li>
+
+        <li>Harsh shifting</li>
+
+        <li>Slipping</li>
+
+        <li>Abnormal noise</li>
+
+        <li>Overheating</li>
+
+        <li>Warning light</li>
+
+        <li>Abnormal transmission fluid condition</li>
+
+    </ul>
+
+    <p>
+        Correct fluid type, fluid level and service procedure are
+        important. Always follow the vehicle manufacturer's
+        specifications.
+    </p>
+
+    `
+},
+
+
+/* --------------------------------------------------
+   10
+-------------------------------------------------- */
+
+{
+    title: "Automotive Air Conditioning",
+
+    html: `
+
+    <p>
+        Automotive air conditioning moves heat from inside the
+        vehicle to the outside environment.
+    </p>
+
+    <h3>Main Components</h3>
+
+    <ul>
+
+        <li>Compressor</li>
+
+        <li>Condenser</li>
+
+        <li>Expansion device</li>
+
+        <li>Evaporator</li>
+
+        <li>Refrigerant</li>
+
+    </ul>
+
+    <h3>Basic Refrigeration Cycle</h3>
+
+    <p>
+        The compressor raises refrigerant pressure. The condenser
+        releases heat. The expansion device reduces pressure.
+        The evaporator absorbs heat from the cabin air.
+    </p>
+
+    <h3>Electrical Side</h3>
+
+    <p>
+        Modern air-conditioning systems may use pressure sensors,
+        temperature sensors, relays, control modules and variable
+        compressor controls.
+    </p>
+
+    <h3>Diagnosis</h3>
+
+    <p>
+        A poor cooling complaint can have many causes including
+        refrigerant problems, airflow problems, compressor problems,
+        condenser airflow problems, electrical faults or control
+        system faults.
+    </p>
+
+    `
+},
+
+
+/* --------------------------------------------------
+   11
+-------------------------------------------------- */
+
+{
+    title: "Brake & Suspension Systems",
+
+    html: `
+
+    <p>
+        Brake and suspension systems are directly related to vehicle
+        control and safety.
+    </p>
+
+    <h3>Brake Components</h3>
+
+    <ul>
+
+        <li>Brake pads</li>
+
+        <li>Brake discs / rotors</li>
+
+        <li>Calipers</li>
+
+        <li>Master cylinder</li>
+
+        <li>Brake fluid</li>
+
+        <li>ABS components</li>
+
+    </ul>
+
+    <h3>Suspension Components</h3>
+
+    <ul>
+
+        <li>Shock absorbers / struts</li>
+
+        <li>Springs</li>
+
+        <li>Control arms</li>
+
+        <li>Bushings</li>
+
+        <li>Ball joints</li>
+
+        <li>Stabilizer components</li>
+
+    </ul>
+
+    <h3>Common Symptoms</h3>
+
+    <ul>
+
+        <li>Vehicle pulling to one side</li>
+
+        <li>Steering vibration</li>
+
+        <li>Brake noise</li>
+
+        <li>Uneven tire wear</li>
+
+        <li>Excessive body movement</li>
+
+        <li>Brake pedal abnormalities</li>
+
+    </ul>
+
+    <p>
+        Proper inspection should include mechanical condition,
+        brake operation, tire condition and wheel alignment where
+        necessary.
+    </p>
+
+    `
+},
+
+
+/* --------------------------------------------------
+   12
+-------------------------------------------------- */
+
+{
+    title: "ADAS (Advanced Driver Assistance Systems)",
+
+    html: `
+
+    <p>
+        ADAS means Advanced Driver Assistance Systems. These systems
+        use sensors, cameras, radar and electronic control systems
+        to assist the driver.
+    </p>
+
+    <h3>Examples</h3>
+
+    <ul>
+
+        <li>Adaptive Cruise Control (ACC)</li>
+
+        <li>Forward Collision Warning (FCW)</li>
+
+        <li>Automatic Emergency Braking (AEB)</li>
+
+        <li>Lane Departure Warning (LDW)</li>
+
+        <li>Lane Keeping Assist (LKA)</li>
+
+        <li>Blind Spot Monitoring (BSM)</li>
+
+        <li>Rear Cross Traffic Alert (RCTA)</li>
+
+    </ul>
+
+    <h3>Sensors</h3>
+
+    <p>
+        ADAS may use front cameras, radar sensors, ultrasonic sensors
+        and other vehicle information.
+    </p>
+
+    <h3>Calibration</h3>
+
+    <p>
+        Some ADAS sensors require calibration after certain repairs,
+        windshield replacement, wheel alignment or sensor removal.
+        The exact procedure depends on the vehicle manufacturer.
+    </p>
+
+    <div class="key-box">
+
+        <strong>Key Point:</strong>
+        ADAS diagnosis combines mechanical condition,
+        electronic diagnosis, sensor data and calibration.
+
+    </div>
+
+    `
+},
+
+
+/* --------------------------------------------------
+   13
+-------------------------------------------------- */
+
+{
+    title: "Radar vs LiDAR",
+
+    html: `
+
+    <p>
+        Radar and LiDAR are sensing technologies used to detect
+        objects and measure distance. They work using different
+        forms of electromagnetic energy.
+    </p>
+
+    <h3>Radar</h3>
+
+    <p>
+        Radar uses radio waves. It can measure distance and relative
+        velocity and can operate in conditions where optical sensors
+        may have difficulty.
+    </p>
+
+    <h3>LiDAR</h3>
+
+    <p>
+        LiDAR uses laser light to measure distances and create
+        detailed information about the surrounding environment.
+    </p>
+
+    <h3>Comparison</h3>
+
+    <ul>
+
+        <li>
+            <strong>Radar:</strong>
+            Radio waves, strong velocity measurement capability.
+        </li>
+
+        <li>
+            <strong>LiDAR:</strong>
+            Laser light, detailed spatial information.
+        </li>
+
+        <li>
+            <strong>Camera:</strong>
+            Rich visual information such as colors and road signs.
+        </li>
+
+    </ul>
+
+    <p>
+        Modern autonomous systems can combine several sensor types.
+        This approach is called sensor fusion.
+    </p>
+
+    `
+},
+
+
+/* --------------------------------------------------
+   14
+-------------------------------------------------- */
+
+{
+    title: "AI & Autonomous Driving",
+
+    html: `
+
+    <p>
+        Autonomous driving combines sensors, computers, software,
+        vehicle control and artificial intelligence to understand
+        the environment and control the vehicle.
+    </p>
+
+    <h3>Main Functions</h3>
+
+    <ol>
+
+        <li>
+            <strong>Perception</strong> – Detect vehicles,
+            pedestrians, lanes and other objects.
+        </li>
+
+        <li>
+            <strong>Localization</strong> – Estimate where the
+            vehicle is located.
+        </li>
+
+        <li>
+            <strong>Prediction</strong> – Estimate how nearby
+            objects may move.
+        </li>
+
+        <li>
+            <strong>Planning</strong> – Select a safe path.
+        </li>
+
+        <li>
+            <strong>Control</strong> – Control steering,
+            acceleration and braking.
+        </li>
+
+    </ol>
+
+    <h3>Sensor Fusion</h3>
+
+    <p>
+        Cameras, radar, LiDAR, ultrasonic sensors, GNSS and other
+        information sources can be combined to create a more
+        complete representation of the environment.
+    </p>
+
+    <h3>Engineering Knowledge</h3>
+
+    <p>
+        Autonomous vehicles require knowledge of programming,
+        mathematics, robotics, electronics, sensors, control systems,
+        computer systems and vehicle technology.
+    </p>
+
+    <div class="key-box">
+
+        <strong>Key Point:</strong>
+        Autonomous driving is a multidisciplinary engineering field.
+
+    </div>
+
+    `
+},
+
+
+/* --------------------------------------------------
+   15
+-------------------------------------------------- */
+
+{
+    title: "Automotive Diagnostic Process",
+
+    html: `
+
+    <p>
+        Professional diagnosis is a logical process used to find
+        the root cause of a vehicle problem.
+    </p>
+
+    <h3>Step 1 – Verify the Complaint</h3>
+
+    <p>
+        Understand exactly what the customer experienced.
+        Determine when the problem occurs.
+    </p>
+
+    <h3>Step 2 – Visual Inspection</h3>
+
+    <p>
+        Look for damaged wiring, disconnected connectors, leaks,
+        broken parts, corrosion and other obvious problems.
+    </p>
+
+    <h3>Step 3 – Scan the Vehicle</h3>
+
+    <p>
+        Read DTCs and examine available freeze-frame and live-data
+        information.
+    </p>
+
+    <h3>Step 4 – Create a Test Plan</h3>
+
+    <p>
+        Use the symptoms and data to decide what should be tested
+        next.
+    </p>
+
+    <h3>Step 5 – Perform Measurements</h3>
+
+    <ul>
+
+        <li>Voltage measurement</li>
+
+        <li>Resistance measurement</li>
+
+        <li>Continuity checks</li>
+
+        <li>Pressure tests</li>
+
+        <li>Sensor signal checks</li>
+
+        <li>Mechanical tests</li>
+
+    </ul>
+
+    <h3>Step 6 – Find the Root Cause</h3>
+
+    <p>
+        Do not stop at the first abnormal reading. Determine why
+        the abnormal condition exists.
+    </p>
+
+    <h3>Step 7 – Repair</h3>
+
+    <p>
+        Repair or replace the confirmed faulty component according
+        to the correct procedure.
+    </p>
+
+    <h3>Step 8 – Verify the Repair</h3>
+
+    <p>
+        Clear codes where appropriate, perform a test and confirm
+        that the original complaint has been resolved.
+    </p>
+
+    <div class="key-box">
+
+        <strong>Diagnostic Mindset:</strong>
+        Symptom → Data → Test → Root Cause → Repair → Verify
+
+    </div>
+
+    `
+}
+
+];
+
+
+/* ==================================================
+   SHOW ARTICLE
+================================================== */
+
+function showArticle() {
+
+    const select =
+        document.getElementById("articleSelect");
+
+    const content =
+        document.getElementById("articleContent");
+
+    const index =
+        select.value;
+
+
+    if (index === "") {
+
+        content.style.display = "none";
+
+        content.innerHTML = "";
+
+        return;
+
+    }
+
+
+    content.innerHTML =
+        "<h2>" +
+        articles[index].title +
+        "</h2>" +
+        articles[index].html;
+
+    content.style.display = "block";
+
+}
+
+
+/* ==================================================
+   RELAY NOTE
+================================================== */
+
+function toggleNote() {
+
+    const note =
+        document.getElementById("myNote");
+
+    const button =
+        document.getElementById("noteButton");
+
+
+    if (note.style.display === "block") {
+
+        note.style.display = "none";
+
+        button.textContent = "READ NOTE";
+
+    } else {
+
+        note.style.display = "block";
+
+        button.textContent = "HIDE NOTE";
+
+    }
+
+}
+
+
+/* ==================================================
+   PAGE LOAD
+================================================== */
+
+window.onload = function() {
+
+    loadCustomer();
+
+    updateGalleryDots();
+
+};
+
+</script>
 
 </body>
-
 </html>
+
