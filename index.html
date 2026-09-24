@@ -187,18 +187,23 @@ body {
    MAIN IMAGES
 ================================================== */
 
-.main-images img[src="16.png"] {
-    width: 150px;
-    height: 130px;
-    object-fit: contain;
+.main-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 20px 40px;
 }
 
-.main-images img[src="20.jpg"] {
-    width: 320px;
-    height: 130px;
+.main-images img {
+    max-width: 280px;
+    max-height: 110px;
+    width: auto;
+    height: auto;
     object-fit: contain;
+    border-radius: 8px;
 }
-
 /* ==================================================
    SERVICES
 ================================================== */
