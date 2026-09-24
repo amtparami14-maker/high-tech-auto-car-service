@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html>
 
@@ -7,6 +6,10 @@
 <title>High Tech Auto Car Service</title>
 
 <style>
+
+/* =========================
+   BODY
+========================= */
 
 body {
     margin: 0;
@@ -42,7 +45,9 @@ body {
 }
 
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 .header {
     width: 100%;
@@ -50,7 +55,7 @@ body {
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 
     padding: 20px 40px;
     box-sizing: border-box;
@@ -95,7 +100,9 @@ body {
 }
 
 
-/* LOGO */
+/* =========================
+   HEADER LOGOS
+========================= */
 
 .header .logo {
     width: 90px;
@@ -114,19 +121,28 @@ body {
     box-shadow:
         0 0 12px rgba(0, 191, 255, 0.8);
 
-    margin-right: 25px;
+    margin: 0;
+
+    flex-shrink: 0;
 }
 
 
-/* HEADER CONTENT */
-
+/* =========================
+   HEADER CONTENT
+========================= */
 
 .header-content {
+    flex: 1;
+
     text-align: center;
+
+    padding: 0 25px;
 }
 
 
-/* COMPANY NAME */
+/* =========================
+   COMPANY NAME
+========================= */
 
 .header h1 {
     color: #ffffff;
@@ -142,7 +158,9 @@ body {
 }
 
 
-/* ADDRESS & PHONE */
+/* =========================
+   ADDRESS & PHONE
+========================= */
 
 .header p {
     color: #d1ecf1;
@@ -153,20 +171,115 @@ body {
 }
 
 
-/* OTHER SECTIONS */
+/* =========================
+   CUSTOMER FORM
+========================= */
+
+.customer-section {
+    margin: 30px 40px;
+
+    padding: 25px;
+
+    background-color: rgba(255,255,255,0.85);
+
+    border-radius: 15px;
+
+    border: 2px solid #008acb;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.15);
+}
+
+.customer-section h2 {
+    margin-top: 0;
+
+    color: #063b66;
+
+    font-size: 27px;
+}
+
+.customer-section label {
+    display: block;
+
+    margin-top: 12px;
+
+    margin-bottom: 5px;
+
+    font-weight: bold;
+
+    color: #123;
+}
+
+.customer-section input {
+    width: 100%;
+
+    padding: 10px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #999;
+
+    border-radius: 6px;
+
+    font-size: 16px;
+}
+
+.customer-section button {
+    margin-top: 20px;
+
+    padding: 12px 25px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #006db6;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.customer-section button:hover {
+    background-color: #004f86;
+}
+
+
+/* =========================
+   MAIN IMAGES
+========================= */
 
 .main-images {
     margin: 20px 40px;
+
+    text-align: center;
 }
 
 .main-images img {
     vertical-align: middle;
+
     margin-right: 10px;
+
     border-radius: 8px;
 }
 
+
+/* =========================
+   SERVICES
+========================= */
+
 .services {
     margin: 20px 40px;
+
+    padding: 20px;
+
+    background-color: rgba(255,255,255,0.75);
+
+    border-radius: 12px;
 }
 
 .services h2 {
@@ -177,21 +290,10 @@ body {
     margin-bottom: 8px;
 }
 
-.thank-you {
-    margin: 20px 40px;
 
-    font-size: 16px;
-
-    line-height: 1.6;
-}
-
-a {
-    margin-left: 40px;
-    margin-right: 40px;
-}
-
-
-/* NOTE SECTION */
+/* =========================
+   NOTE SECTION
+========================= */
 
 .note-section {
     margin: 30px 40px;
@@ -275,6 +377,122 @@ a {
     border-top: 1px solid #d6dce5;
 }
 
+
+/* =========================
+   ABOUT US
+========================= */
+
+.about-us {
+    margin: 30px 40px;
+
+    padding: 25px;
+
+    background-color: rgba(255,255,255,0.8);
+
+    border-radius: 12px;
+}
+
+.about-us h2 {
+    color: #063b66;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact {
+    margin: 30px 40px;
+
+    padding: 25px;
+
+    background-color: rgba(255,255,255,0.8);
+
+    border-radius: 12px;
+}
+
+.contact h2 {
+    color: #063b66;
+}
+
+.contact a {
+    margin: 0;
+
+    color: #0056b3;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   THANK YOU
+========================= */
+
+.thank-you {
+    margin: 20px 40px;
+
+    padding: 20px;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    background-color: rgba(255,255,255,0.65);
+
+    border-radius: 12px;
+}
+
+
+/* =========================
+   LINKS
+========================= */
+
+a {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    .header {
+        flex-direction: column;
+
+        text-align: center;
+
+        padding: 25px 20px;
+    }
+
+    .header .logo {
+        margin: 10px;
+    }
+
+    .header-content {
+        padding: 15px 5px;
+    }
+
+    .header h1 {
+        font-size: 28px;
+    }
+
+    .header p {
+        font-size: 13px;
+    }
+
+    .main-images img {
+        max-width: 100%;
+
+        height: auto;
+
+        margin: 5px;
+    }
+
+}
+
 </style>
 
 </head>
@@ -283,13 +501,16 @@ a {
 <body>
 
 
-<!-- HEADER -->
+<!-- ==================================================
+     HEADER
+================================================== -->
 
 <div class="header">
 
     <!-- LEFT LOGO -->
+
     <img
-        src="15.png"
+        src="11.png"
         alt="High Tech Auto Logo"
         class="logo"
     >
@@ -312,526 +533,1235 @@ a {
             Phone No: 09941060666, 09 459907461, 09 794918438.
         </p>
 
-   
     </div>
 
-    </div>
 
-    <img src="15.png" alt="High Tech Auto Logo" class="logo">
+    <!-- RIGHT LOGO -->
+
+    <img
+        src="15.png"
+        alt="High Tech Auto Logo"
+        class="logo"
+    >
+
 </div>
-<form>
 
-    <label>Customer Name</label>
-    <input type="text">
 
-    <label>Phone</label>
-    <input type="text">
+<!-- ==================================================
+     CUSTOMER / VEHICLE
+================================================== -->
 
-    <label>Car Brand</label>
-    <input type="text">
+<div class="customer-section">
 
-    <label>Model</label>
-    <input type="text">
+    <h2>
+        CUSTOMER / VEHICLE
+    </h2>
 
-    <label>Year</label>
-    <input type="number">
 
-    <label>License No.</label>
-    <input type="text">
+    <form>
 
-    <label>Mileage</label>
-    <input type="number">
+        <label>
+            Customer Name
+        </label>
 
-    <button type="submit">SAVE CUSTOMER</button>
+        <input
+            type="text"
+            placeholder="Enter customer name"
+        >
 
-</form>
+
+        <label>
+            Phone
+        </label>
+
+        <input
+            type="text"
+            placeholder="Enter phone number"
+        >
+
+
+        <label>
+            Car Brand
+        </label>
+
+        <input
+            type="text"
+            placeholder="Toyota / Honda / Nissan..."
+        >
+
+
+        <label>
+            Model
+        </label>
+
+        <input
+            type="text"
+            placeholder="Enter car model"
+        >
+
+
+        <label>
+            Year
+        </label>
+
+        <input
+            type="number"
+            placeholder="Enter year"
+        >
+
+
+        <label>
+            License No.
+        </label>
+
+        <input
+            type="text"
+            placeholder="Enter license number"
+        >
+
+
+        <label>
+            Mileage
+        </label>
+
+        <input
+            type="number"
+            placeholder="Enter mileage"
+        >
+
+
+        <button type="submit">
+            SAVE CUSTOMER
+        </button>
+
+    </form>
+
+</div>
+
+
+<!-- ==================================================
+     MAIN IMAGES
+================================================== -->
+
 <div class="main-images">
-    <img src="19.png" width="500" height="170">
-    <img src="16.png" width="200" height="170">    
-    <img src="20.jpg" width="500" height="170"> 
+
+    <img
+        src="19.png"
+        width="500"
+        height="170"
+        alt="High Tech Auto"
+    >
+
+    <img
+        src="16.png"
+        width="200"
+        height="170"
+        alt="High Tech Auto"
+    >
+
+    <img
+        src="20.jpg"
+        width="500"
+        height="170"
+        alt="High Tech Auto"
+    >
+
 </div>
+
+
+<!-- ==================================================
+     SERVICES
+================================================== -->
 
 <div class="services">
 
-    <h2>OUR SERVICES</h2>
+    <h2>
+        OUR SERVICES
+    </h2>
 
     <ol>
-        <li>Computer Diagnostic</li>
-        <li>Engine Service</li>
-        <li>Transmission / CVT Service</li>
-        <li>Wiring Services</li>
-        <li>Air Conditioning Service</li>
-        <li>Brake & Suspension Services</li>
-        <li>Injector Cleaning</li>
-        <li>ADAS / Advanced Diagnostics</li>
+
+        <li>
+            Computer Diagnostic
+        </li>
+
+        <li>
+            Engine Service
+        </li>
+
+        <li>
+            Transmission / CVT Service
+        </li>
+
+        <li>
+            Wiring Services
+        </li>
+
+        <li>
+            Air Conditioning Service
+        </li>
+
+        <li>
+            Brake & Suspension Services
+        </li>
+
+        <li>
+            Injector Cleaning
+        </li>
+
+        <li>
+            ADAS / Advanced Diagnostics
+        </li>
+
     </ol>
 
-</div> 
-    <div class="note-section">
+</div>
 
-    <button onclick="toggleNote()" id="noteButton">READ NOTE</button>
 
-    <div id="myNote" style="display: none; margin-top: 20px;">
+<!-- ==================================================
+     RELAY NOTE
+================================================== -->
 
-        <h2>1 CHANNEL RELAY MODULE</h2>
-     
+<div class="note-section">
+
+    <button
+        onclick="toggleNote()"
+        id="noteButton"
+    >
+        READ NOTE
+    </button>
+
+
+    <div
+        id="myNote"
+        style="display: none;"
+    >
+
+        <h2>
+            1 CHANNEL RELAY MODULE
+        </h2>
+
 
         <p>
-            <a href="https://www.cestore-mm.com/product/1-channel-relay-module-5v10a/" target="_blank">
+
+            <a
+                href="https://www.cestore-mm.com/product/1-channel-relay-module-5v10a/"
+                target="_blank"
+            >
                 1 Channel Relay Module
             </a>
-            တစ်ခုမှာ ပါဝင်တဲ့ အဓိက အစိတ်အပိုင်းများနဲ့ ၎င်းတို့ရဲ့ လုပ်ဆောင်ချက်များမှာ အောက်ပါအတိုင်း ဖြစ်ပါသည်။
+
+            တစ်ခုမှာ ပါဝင်တဲ့ အဓိက အစိတ်အပိုင်းများနဲ့
+            ၎င်းတို့ရဲ့ လုပ်ဆောင်ချက်များမှာ အောက်ပါအတိုင်း ဖြစ်ပါသည်။
+
         </p>
-       <div>
-
-    <img src="25.png" width="290" height="190">      <img src="23.png" width="600" height="190">
-       </div> 
 
 
-        <h3>အဓိက အစိတ်အပိုင်းများ</h3>
+        <div>
+
+            <img
+                src="25.png"
+                width="290"
+                height="190"
+                alt="Relay Module"
+            >
+
+            <img
+                src="23.png"
+                width="600"
+                height="190"
+                alt="Relay Module"
+            >
+
+        </div>
+
+
+        <h3>
+            အဓိက အစိတ်အပိုင်းများ
+        </h3>
+
 
         <ol>
+
             <li>
-                <strong>Relay (အပြာရောင် Box)</strong><br>
-                လျှပ်စစ်သံလိုက်စနစ်ကို အသုံးပြုပြီး High Voltage / Current
-                ဝါယာလမ်းကြောင်းများကို အဖွင့်အပိတ် ပြုလုပ်ပေးသည့်
+
+                <strong>
+                    Relay (အပြာရောင် Box)
+                </strong>
+
+                <br>
+
+                လျှပ်စစ်သံလိုက်စနစ်ကို အသုံးပြုပြီး
+                High Voltage / Current ဝါယာလမ်းကြောင်းများကို
+                အဖွင့်အပိတ် ပြုလုပ်ပေးသည့်
                 အဓိကအစိတ်အပိုင်း ဖြစ်သည်။
+
             </li>
 
+
             <li>
-                <strong>Terminal Connector (3-Pin Screw Block)</strong><br>
+
+                <strong>
+                    Terminal Connector (3-Pin Screw Block)
+                </strong>
+
+                <br>
+
                 Mains လျှပ်စစ်ကြိုးများကို ချိတ်ဆက်ရန် အသုံးပြုပါတယ်။
-                <strong>NO (Normally Open), COM (Common), NC (Normally Closed)</strong>
+
+                <strong>
+                    NO (Normally Open),
+                    COM (Common),
+                    NC (Normally Closed)
+                </strong>
+
                 ဆိုပြီး Terminal သုံးခု ပါဝင်သည်။
+
             </li>
 
+
             <li>
-                <strong>Transistor (Q1)</strong><br>
-                Microcontroller မှလာတဲ့ နည်းပါးတဲ့ Current Signal ကို အသုံးပြုပြီး
+
+                <strong>
+                    Transistor (Q1)
+                </strong>
+
+                <br>
+
+                Microcontroller မှလာတဲ့ နည်းပါးတဲ့
+                Current Signal ကို အသုံးပြုပြီး
                 Relay Coil ကို မောင်းနှင်ပေးပါတယ်။
+
             </li>
 
+
             <li>
-                <strong>Flyback Diode (D2)</strong><br>
+
+                <strong>
+                    Flyback Diode (D2)
+                </strong>
+
+                <br>
+
                 Relay Coil ကို ပိတ်လိုက်ချိန်မှာ ဖြစ်ပေါ်လာနိုင်တဲ့
                 High Voltage Back-EMF Spike များကြောင့်
-                Transistor နှင့် အခြား Circuit အစိတ်အပိုင်းများ မပျက်စီးအောင်
-                ကာကွယ်ပေးရန်အသုံးပြုထားခြင်းဖြစ်သည်။
+                Transistor နှင့် အခြား Circuit အစိတ်အပိုင်းများ
+                မပျက်စီးအောင် ကာကွယ်ပေးရန် အသုံးပြုထားခြင်းဖြစ်သည်။
+
             </li>
 
+
             <li>
-                <strong>LED Indicators</strong><br>
-                <strong>Power LED (D1)</strong> သည် Module သို့ Power ရောက်ရှိနေကြောင်း
-                ပြသပေးပါတယ်။<br>
-                <strong>Status LED</strong> သည် Relay အလုပ်လုပ်နေချိန်တွင်
+
+                <strong>
+                    LED Indicators
+                </strong>
+
+                <br>
+
+                <strong>
+                    Power LED (D1)
+                </strong>
+
+                သည် Module သို့ Power ရောက်ရှိနေကြောင်း
+                ပြသပေးပါတယ်။
+
+                <br>
+
+                <strong>
+                    Status LED
+                </strong>
+
+                သည် Relay အလုပ်လုပ်နေချိန်တွင်
                 လင်းပြပေးပါတယ်။
+
             </li>
 
+
             <li>
-                <strong>Resistors (R1, R2)</strong><br>
+
+                <strong>
+                    Resistors (R1, R2)
+                </strong>
+
+                <br>
+
                 Circuit အတွင်း Current ကို ထိန်းညှိပေးပြီး
                 LED နှင့် Transistor ကို ကာကွယ်ပေးသည်။
+
             </li>
 
+
             <li>
-                <strong>Input Pins (Male Headers)</strong><br>
-                Microcontroller နှင့် ချိတ်ဆက်ရန် အသုံးပြုပါတယ်။<br>
-                <strong>VCC:</strong> Power Supply (5V)<br>
-                <strong>GND:</strong> Ground (0V)<br>
-                <strong>IN:</strong> Relay ကို ထိန်းချုပ်မည့် Trigger Input Signal Pin
+
+                <strong>
+                    Input Pins (Male Headers)
+                </strong>
+
+                <br>
+
+                Microcontroller နှင့် ချိတ်ဆက်ရန် အသုံးပြုပါတယ်။
+
+                <br>
+
+                <strong>
+                    VCC:
+                </strong>
+                Power Supply (5V)
+
+                <br>
+
+                <strong>
+                    GND:
+                </strong>
+                Ground (0V)
+
+                <br>
+
+                <strong>
+                    IN:
+                </strong>
+                Relay ကို ထိန်းချုပ်မည့် Trigger Input Signal Pin
+
             </li>
+
         </ol>
+
 
         <hr>
 
-        <h2>CIRCUIT DIAGRAM အလုပ်လုပ်ပုံ</h2>  
-<div>
-    <img src="24.png" width="600" height="400">
-</div>
-    
-        <h3>1. Input & Power Section</h3>
+
+        <h2>
+            CIRCUIT DIAGRAM အလုပ်လုပ်ပုံ
+        </h2>
+
+
+        <div>
+
+            <img
+                src="24.png"
+                width="600"
+                height="400"
+                alt="Relay Circuit Diagram"
+            >
+
+        </div>
+
+
+        <h3>
+            1. Input & Power Section
+        </h3>
+
 
         <p>
-            <strong>VCC & GND:</strong><br>
-            Module ကို အလုပ်လုပ်စေရန် Power နှင့် Ground ပေးသွင်းသည့် Pin များ ဖြစ်ပြီး။
-            Power ရောက်ရှိပါက <strong>D1 Power LED</strong> လင်းနေမည်။
+
+            <strong>
+                VCC & GND:
+            </strong>
+
+            <br>
+
+            Module ကို အလုပ်လုပ်စေရန် Power နှင့် Ground
+            ပေးသွင်းသည့် Pin များ ဖြစ်ပြီး။
+            Power ရောက်ရှိပါက
+            <strong>D1 Power LED</strong>
+            လင်းနေမည်။
+
         </p>
 
-        <p>
-            <strong>IN (Input Pin):</strong><br>
-            Microcontroller (Arduino, ESP32 စသည်) မှ Trigger Signal ပေးပို့ရာ Pin ဖြစ်ပါသည်။
-        </p>
 
         <p>
-            <strong>Optocoupler (PC817):</strong><br>
+
+            <strong>
+                IN (Input Pin):
+            </strong>
+
+            <br>
+
+            Microcontroller
+            (Arduino, ESP32 စသည်)
+            မှ Trigger Signal ပေးပို့ရာ Pin ဖြစ်ပါသည်။
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Optocoupler (PC817):
+            </strong>
+
+            <br>
+
             Microcontroller ဘက်ခြမ်းနှင့် Relay ဘက်ခြမ်းကို
             Optical Isolation နည်းလမ်းဖြင့် ခွဲထုတ်ပေးပြီး
             Relay ဘက်မှ ဖြစ်လာနိုင်သည့် Electrical Disturbance များ
-            Microcontroller ဘက်သို့ တိုက်ရိုက် မကူးစက်စေရန် ကူညီပေးသည်။
+            Microcontroller ဘက်သို့ တိုက်ရိုက် မကူးစက်စေရန်
+            ကူညီပေးသည်။
+
         </p>
 
-        <h3>2. Driver & Protection Section</h3>
+
+        <h3>
+            2. Driver & Protection Section
+        </h3>
+
 
         <p>
-            <strong>Transistor (Q1):</strong><br>
-            Optocoupler မှ Signal ရရှိသောအခါ Transistor အလုပ်လုပ်ပြီး
+
+            <strong>
+                Transistor (Q1):
+            </strong>
+
+            <br>
+
+            Optocoupler မှ Signal ရရှိသောအခါ
+            Transistor အလုပ်လုပ်ပြီး
             Relay Coil အတွင်း Current စီးဆင်းစေကာ
             Electromagnetic Field ဖြစ်ပေါ်စေပါသည်။
+
         </p>
 
-        <p>
-            <strong>Status LED:</strong><br>
-            Input Signal ရရှိပြီး Transistor ပွင့်သွားပါက Relay အလုပ်လုပ်နေကြောင်း ပြသရန်အတွက် Status LED လင်းလာမည် ဖြစ်သည်။
-        </p>
 
         <p>
-            <strong>Flyback Diode (D2):</strong><br>
+
+            <strong>
+                Status LED:
+            </strong>
+
+            <br>
+
+            Input Signal ရရှိပြီး Transistor ပွင့်သွားပါက
+            Relay အလုပ်လုပ်နေကြောင်း ပြသရန်အတွက်
+            Status LED လင်းလာမည် ဖြစ်သည်။
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Flyback Diode (D2):
+            </strong>
+
+            <br>
+
             Relay Coil ကို ပိတ်လိုက်ချိန်တွင် ဖြစ်ပေါ်လာနိုင်သည့်
             Back-EMF Voltage Spike ကို လမ်းကြောင်းလွှဲပေးပြီး
             Transistor ကို ကာကွယ်ပေးပါတယ်။
+
         </p>
 
-        <h3>3. Output Section</h3>
+
+        <h3>
+            3. Output Section
+        </h3>
+
 
         <p>
+
             Relay Coil မှ Magnetic Field ဖြစ်ပေါ်လာသောအခါ
             Mechanical Contact အနေအထား ပြောင်းလဲသွားပြီး
             COM သည် NC မှ NO ဘက်သို့ ပြောင်းချိတ်ဆက်သွားသည်။
+
         </p>
 
+
         <p>
-            <strong>COM (Common):</strong><br>
+
+            <strong>
+                COM (Common):
+            </strong>
+
+            <br>
+
             Common Terminal ဖြစ်ပါတယ်။
+
         </p>
 
-        <p>
-            <strong>NC (Normally Closed):</strong><br>
-            Relay မအလုပ်လုပ်နေချိန်တွင် COM နှင့် ဆက်နေသော Terminal ဖြစ်ပါတယ်။
-        </p>
 
         <p>
-            <strong>NO (Normally Open):</strong><br>
-            Relay မအလုပ်လုပ်နေချိန်တွင် COM နှင့် မဆက်ထားဘဲ
-            Relay အလုပ်လုပ်သောအခါ COM နှင့် ဆက်သွားသော Terminal ဖြစ်ပါတယ်။
+
+            <strong>
+                NC (Normally Closed):
+            </strong>
+
+            <br>
+
+            Relay မအလုပ်လုပ်နေချိန်တွင်
+            COM နှင့် ဆက်နေသော Terminal ဖြစ်ပါတယ်။
+
         </p>
+
+
+        <p>
+
+            <strong>
+                NO (Normally Open):
+            </strong>
+
+            <br>
+
+            Relay မအလုပ်လုပ်နေချိန်တွင်
+            COM နှင့် မဆက်ထားဘဲ
+            Relay အလုပ်လုပ်သောအခါ
+            COM နှင့် ဆက်သွားသော Terminal ဖြစ်ပါတယ်။
+
+        </p>
+
 
         <hr>
 
-        <h2>1 CHANNEL RELAY MODULE — အဓိက လမ်းကြောင်း</h2>
+
+        <h2>
+            1 CHANNEL RELAY MODULE — အဓိက လမ်းကြောင်း
+        </h2>
+
 
         <p>
-            <strong>Input Section:</strong><br>
-            Microcontroller မှ IN Pin သို့ Trigger Signal ပေးလိုက်သောအခါ
+
+            <strong>
+                Input Section:
+            </strong>
+
+            <br>
+
+            Microcontroller မှ IN Pin သို့
+            Trigger Signal ပေးလိုက်သောအခါ
             Optocoupler (PC817) စတင်အလုပ်လုပ်သည်။
+
         </p>
 
+
         <p>
-            <strong>Driver Section:</strong><br>
-            Optocoupler မှတစ်ဆင့် Transistor (Q1) အလုပ်လုပ်ပြီး
+
+            <strong>
+                Driver Section:
+            </strong>
+
+            <br>
+
+            Optocoupler မှတစ်ဆင့်
+            Transistor (Q1) အလုပ်လုပ်ပြီး
             Relay Coil အတွင်း Current စီးဆင်းစေပါတယ်။
-            Flyback Diode (D2) က Back-EMF Spike ကို ကာကွယ်ပေးပါတယ်။
+            Flyback Diode (D2) က Back-EMF Spike ကို
+            ကာကွယ်ပေးပါတယ်။
+
         </p>
 
+
         <p>
-            <strong>Output Section:</strong><br>
-            Relay Coil ရဲ့ Magnetic Field ကြောင့် Contact ပြောင်းလဲသွားပြီး
-            COM သည် NO ဘက်သို့ ဆက်သွား၍ load များကို run စေသည်။
+
+            <strong>
+                Output Section:
+            </strong>
+
+            <br>
+
+            Relay Coil ရဲ့ Magnetic Field ကြောင့်
+            Contact ပြောင်းလဲသွားပြီး
+            COM သည် NO ဘက်သို့ ဆက်သွား၍
+            load များကို run စေသည်။
+
         </p>
+
 
         <hr>
 
-        <h2>SPDT (Single Pole Double Throw)</h2>
+
+        <h2>
+            SPDT (Single Pole Double Throw)
+        </h2>
+
 
         <p>
-            <strong>SPDT</strong> ဆိုတာ <strong>Single Pole Double Throw</strong>
-            ရဲ့ အတိုကောက်ဖြစ်ပြီး Relay တွေမှာ အသုံးများတဲ့
+
+            <strong>
+                SPDT
+            </strong>
+
+            ဆိုတာ
+            <strong>
+                Single Pole Double Throw
+            </strong>
+
+            ရဲ့ အတိုကောက်ဖြစ်ပြီး
+            Relay တွေမှာ အသုံးများတဲ့
             Switch Contact အမျိုးအစားတစ်ခု ဖြစ်သည်။
+
         </p>
 
-        <h3>Single Pole (SP)</h3>
+
+        <h3>
+            Single Pole (SP)
+        </h3>
+
 
         <p>
+
             ထိန်းချုပ်မည့် Common Terminal တစ်ခုတည်း
-            (<strong>COM</strong>) ပါဝင်တာကို ဆိုလိုသည်။
+            (<strong>COM</strong>)
+            ပါဝင်တာကို ဆိုလိုသည်။
+
         </p>
 
-        <h3>Double Throw (DT)</h3>
+
+        <h3>
+            Double Throw (DT)
+        </h3>
+
 
         <p>
+
             COM မှ ထွက်လာသော လမ်းကြောင်းကို
-            <strong>NO</strong> သို့မဟုတ် <strong>NC</strong>
-            ဘက်နှစ်ခုအနက် တစ်ခုသို့ ပြောင်းချိတ်ဆက်ပေးနိုင်တာကို ဖော်ပြခြင်းဖြစ်သည်။
+            <strong>NO</strong>
+            သို့မဟုတ်
+            <strong>NC</strong>
+            ဘက်နှစ်ခုအနက် တစ်ခုသို့
+            ပြောင်းချိတ်ဆက်ပေးနိုင်တာကို ဖော်ပြခြင်းဖြစ်သည်။
+
         </p>
 
-        <h3>SPDT Switch အလုပ်လုပ်ပုံ</h3>
+
+        <h3>
+            SPDT Switch အလုပ်လုပ်ပုံ
+        </h3>
+
 
         <ol>
-            <li>
-                <strong>Normally Closed (NC) အခြေအနေ</strong><br>
-                Relay Coil ကို မမောင်းထားချိန်တွင်
-                COM သည် NC နှင့် ဆက်နေမည်ဖြစ်သည်။(ဥပမာ - Relay မီးပိတ်ထားသော်လည်း NC တွင် ချိတ်ထားသော မီးလုံးသည် လင်းနေမည် ဖြစ်ပါတယ်)
-            </li>
 
             <li>
-                <strong>Normally Open (NO) အခြေအနေ</strong><br>
-                Relay Coil ကို မောင်းလိုက်သောအခါ
-                Contact သည် COM မှ NO ဘက်သို့ ပြောင်းချိတ်ဆက်သွားပါတယ်။
+
+                <strong>
+                    Normally Closed (NC) အခြေအနေ
+                </strong>
+
+                <br>
+
+                Relay Coil ကို မမောင်းထားချိန်တွင်
+                COM သည် NC နှင့် ဆက်နေမည်ဖြစ်သည်။
+
             </li>
+
+
+            <li>
+
+                <strong>
+                    Normally Open (NO) အခြေအနေ
+                </strong>
+
+                <br>
+
+                Relay Coil ကို မောင်းလိုက်သောအခါ
+                Contact သည် COM မှ NO ဘက်သို့
+                ပြောင်းချိတ်ဆက်သွားပါတယ်။
+
+            </li>
+
         </ol>
 
+
         <p>
-            <strong>အနှစ်ချုပ်:</strong><br>
-            SPDT Relay ဆိုသည်မှာ Input Common Line တစ်ခုဖြစ်သော COM ကို
-            Output Contact နှစ်ခုဖြစ်သည့် NO နှင့် NC အနက်
-            တစ်ခုသို့ အခြေအနေအလိုက် ပြောင်းချိတ်ဆက်ပေးနိုင်သည့် Switch အမျိုးအစား ဖြစ်ပါတယ်။
+
+            <strong>
+                အနှစ်ချုပ်:
+            </strong>
+
+            <br>
+
+            SPDT Relay ဆိုသည်မှာ Input Common Line တစ်ခုဖြစ်သော
+            COM ကို Output Contact နှစ်ခုဖြစ်သည့်
+            NO နှင့် NC အနက် တစ်ခုသို့
+            အခြေအနေအလိုက် ပြောင်းချိတ်ဆက်ပေးနိုင်သည့်
+            Switch အမျိုးအစား ဖြစ်ပါတယ်။
+
         </p>
+
 
         <hr>
 
-        <h2>OPTOCOUPLER</h2>
+
+        <h2>
+            OPTOCOUPLER
+        </h2>
+
 
         <p>
+
             Optocoupler က Microcontroller ဘက်ခြမ်းနှင့်
-            Relay ဘက်ခြမ်းကို Electrical Isolation ပြုလုပ်ပေးတဲ့
-            အစိတ်အပိုင်း ဖြစ်သည်။
+            Relay ဘက်ခြမ်းကို Electrical Isolation
+            ပြုလုပ်ပေးတဲ့ အစိတ်အပိုင်း ဖြစ်သည်။
+
         </p>
 
-        <h3>1. Electrical Isolation</h3>
+
+        <h3>
+            1. Electrical Isolation
+        </h3>
+
 
         <p>
-            Optocoupler အတွင်းမှာ Input ဘက်နှင့် Output ဘက်ကို
-            တိုက်ရိုက် Electrical Connection မလုပ်ထားဘဲ
-            Isolation Barrier တစ်ခုဖြင့် ခွဲထားပါတယ်။
-            •	တိုက်ရိုက် ကြိုးဆက်မထားပါ: Optocoupler (PC817) Chip လေးရဲ့ အတွင်းထဲမှာ Microcontroller (Arduino) နဲ့ ချိတ်ဆက်ထားတဲ့ 
-            လမ်းကြောင်း နဲ့ Relay ဘက်ကို ချိတ်ဆက်ထားတဲ့ လမ်းကြောင်း ၂ ခုဟာ 
-            လျှပ်ကူးပစ္စည်း (ကြိုး/သတ္တု) တစ်ခုမျှ တိုက်ရိုက် ထိစပ်မနေပါဘူး။
-            Physical Air Gap (ရူပဗေဒအရ လေဟာနယ်ခြားထားခြင်းဖြစ်သည်) 
-            Chip အတွင်းထဲမှာ ကြားခံအဖြစ် အလင်းဖြတ်သန်းနိုင်တဲ့ လျှပ်စစ်ဓာတ်မကူးစက်နိုင်သော Insulation ပစ္စည်း 
-            (Silicon/Plastic) ကိုသာ ခြားထားတာ ဖြစ်ပါတယ်။ 
-        </p> 
 
-        <h3>2. အလင်းဖြင့် Signal ပို့ခြင်း</h3>
+            Optocoupler အတွင်းမှာ Input ဘက်နှင့်
+            Output ဘက်ကို တိုက်ရိုက် Electrical Connection
+            မလုပ်ထားဘဲ Isolation Barrier တစ်ခုဖြင့်
+            ခွဲထားပါတယ်။
+
+            <br><br>
+
+            Microcontroller ဘက်နှင့် Relay ဘက်ကို
+            တိုက်ရိုက်ကြိုးမဆက်ထားဘဲ
+            Optocoupler အတွင်းရှိ Isolation Barrier မှ
+            ခွဲခြားထားခြင်း ဖြစ်ပါတယ်။
+
+        </p>
+
+
+        <h3>
+            2. အလင်းဖြင့် Signal ပို့ခြင်း
+        </h3>
+
 
         <p>
+
             Microcontroller ဘက်မှာ Signal ပေးလိုက်သောအခါ
             အတွင်းရှိ <strong>IR LED</strong> လင်းလာပါတယ်။
+
         </p>
 
+
         <p>
-            အဲဒီအလင်းကို တစ်ဖက်ရှိ <strong>Phototransistor</strong> က
+
+            အဲဒီအလင်းကို တစ်ဖက်ရှိ
+            <strong>Phototransistor</strong> က
             လက်ခံပြီး Output ဘက်မှာ Signal ဖြစ်ပေါ်စေသည်။
+
         </p>
+
 
         <p>
-            ဒါကြောင့် Electrical Signal ကို တိုက်ရိုက် ကြိုးဖြင့် မပို့ဘဲ
+
+            ဒါကြောင့် Electrical Signal ကို
+            တိုက်ရိုက်ကြိုးဖြင့် မပို့ဘဲ
             <strong>အလင်း</strong> ဖြင့် Signal ကူးပြောင်းပေးတာ ဖြစ်တယ်။
+
         </p>
 
-        <h3>Back-EMF / Electrical Surge ဖြစ်လာသောအခါ</h3>
+
+        <h3>
+            Back-EMF / Electrical Surge ဖြစ်လာသောအခါ
+        </h3>
+
 
         <ol>
+
             <li>
+
                 Relay Coil ကို ပိတ်လိုက်ချိန်တွင်
                 Back-EMF Voltage Spike ဖြစ်ပေါ်နိုင်ပါတယ်။
+
             </li>
 
+
             <li>
+
                 Relay ဘက်ခြမ်းရှိ Circuit အစိတ်အပိုင်းများက
                 အဲဒီ Surge ကို ခံရနိုင်ပါတယ်။
+
             </li>
+
 
             <li>
+
                 Optocoupler ရဲ့ Isolation ကြောင့်
                 Relay ဘက်ရှိ Electrical Voltage ကို
-                Microcontroller ဘက်သို့ တိုက်ရိုက် မကူးစက်စေရန်
-                အကာကွယ်ပေးသည်။
+                Microcontroller ဘက်သို့ တိုက်ရိုက်
+                မကူးစက်စေရန် အကာအကွယ်ပေးသည်။
+
             </li>
+
         </ol>
 
+
         <p>
-            <strong>အနှစ်ချုပ်:</strong><br>
-            Optocoupler ဆိုတာ Microcontroller နဲ့ Relay Circuit ကြားမှာ
-            <strong>အလင်းကို အသုံးပြုပြီး Electrical Isolation ပေးထားတဲ့
-            Optical Barrier</strong> တစ်ခု ဖြစ်ပါတယ်။
+
+            <strong>
+                အနှစ်ချုပ်:
+            </strong>
+
+            <br>
+
+            Optocoupler ဆိုတာ Microcontroller နဲ့
+            Relay Circuit ကြားမှာ
+            <strong>
+                အလင်းကို အသုံးပြုပြီး
+                Electrical Isolation ပေးထားတဲ့
+                Optical Barrier
+            </strong>
+
+            တစ်ခု ဖြစ်ပါတယ်။
+
         </p>
+
 
         <hr>
 
-        <h2>FLYBACK DIODE (D2)</h2>
 
-        <h3>1. Back-EMF ဆိုတာ ဘာလဲ</h3>
+        <h2>
+            FLYBACK DIODE (D2)
+        </h2>
+
+
+        <h3>
+            1. Back-EMF ဆိုတာ ဘာလဲ
+        </h3>
+
 
         <p>
-            Relay ရဲ့အတွင်းမှာ လျှပ်စစ်သံလိုက်စက်ကွင်း ဖြစ်ပေါ်စေတဲ့
-            <strong>Coil</strong> ပါဝင်ပါတယ်။
+
+            Relay ရဲ့အတွင်းမှာ လျှပ်စစ်သံလိုက်စက်ကွင်း
+            ဖြစ်ပေါ်စေတဲ့ <strong>Coil</strong> ပါဝင်ပါတယ်။
+
         </p>
 
+
         <p>
+
             Coil အတွင်း Current စီးနေချိန်မှာ
             Magnetic Field အဖြစ် Energy သိုလှောင်ထားပါတယ်။
+
         </p>
 
+
         <p>
+
             Relay ကို ပိတ်လိုက်ချိန်မှာ Magnetic Field က
             ရုတ်တရက် Collapse ဖြစ်ပြီး
             Coil အတွင်းမှာ Voltage Spike ဖြစ်ပေါ်နိုင်ပါတယ်။
+
         </p>
 
-        <h3>2. Flyback Diode တပ်ဆင်ပုံ</h3>
+
+        <h3>
+            2. Flyback Diode တပ်ဆင်ပုံ
+        </h3>
+
 
         <p>
+
             Flyback Diode ကို Relay Coil နှင့်
-            <strong>Parallel</strong> ချိတ်ဆက်ထားပါတယ်။
+            <strong>Parallel</strong>
+            ချိတ်ဆက်ထားပါတယ်။
+
         </p>
+
 
         <p>
+
             Relay ပုံမှန်အလုပ်လုပ်နေချိန်မှာ Diode က
-            <strong>Reverse Bias</strong> ဖြစ်နေတဲ့အတွက်
-            ပုံမှန် Current မစီးပါဘူး။
+            <strong>Reverse Bias</strong>
+            ဖြစ်နေတဲ့အတွက် ပုံမှန် Current မစီးပါဘူး။
+
         </p>
 
-        <h3>3. Back-EMF ကို ကာကွယ်ပေးပုံ</h3>
+
+        <h3>
+            3. Back-EMF ကို ကာကွယ်ပေးပုံ
+        </h3>
+
 
         <ol>
+
             <li>
-                <strong>Voltage Spike ပေါ်လာခြင်း:</strong><br>
+
+                <strong>
+                    Voltage Spike ပေါ်လာခြင်း:
+                </strong>
+
+                <br>
+
                 Relay Coil ကို ပိတ်လိုက်သောအခါ
                 Coil ရဲ့ Current ကို ရုတ်တရက် မဖြတ်နိုင်တာကြောင့်
                 Reverse Voltage ဖြစ်ပေါ်လာနိုင်ပါတယ်။
+
             </li>
 
+
             <li>
-                <strong>Diode Conduct ဖြစ်ခြင်း:</strong><br>
+
+                <strong>
+                    Diode Conduct ဖြစ်ခြင်း:
+                </strong>
+
+                <br>
+
                 Voltage အခြေအနေ ပြောင်းလဲသောအခါ
                 Flyback Diode သည် Forward Bias ဖြစ်လာပြီး
                 Current စီးနိုင်အောင် လမ်းဖွင့်ပေးပါတယ်။
+
             </li>
+
 
             <li>
-                <strong>Freewheeling Loop:</strong><br>
+
+                <strong>
+                    Freewheeling Loop:
+                </strong>
+
+                <br>
+
                 Coil ထဲမှာ သိုလှောင်ထားတဲ့ Energy ကို
                 Coil နှင့် Diode အကြားမှာ Current Loop အဖြစ်
-                လှည့်ပတ်စီးဆင်းစေပြီး Voltage Spike ကို လျော့ချစေပါတယ်။
+                လှည့်ပတ်စီးဆင်းစေပြီး
+                Voltage Spike ကို လျော့ချစေပါတယ်။
+
             </li>
+
         </ol>
 
+
         <p>
-            <strong>အနှစ်ချုပ်:</strong><br>
-            Flyback Diode သည် Relay Coil ကို ပိတ်လိုက်ချိန်မှာ
-            ဖြစ်ပေါ်လာနိုင်သည့် Back-EMF Voltage Spike ကို
-            လမ်းကြောင်းလွှဲပေးပြီး Transistor နှင့်
-            အခြား Circuit အစိတ်အပိုင်းများကို ကာကွယ်ပေးသည့်
-            <strong>Protection Device</strong> တစ်ခု ဖြစ်ပါတယ်။
+
+            <strong>
+                အနှစ်ချုပ်:
+            </strong>
+
+            <br>
+
+            Flyback Diode သည် Relay Coil ကို
+            ပိတ်လိုက်ချိန်မှာ ဖြစ်ပေါ်လာနိုင်သည့်
+            Back-EMF Voltage Spike ကို လမ်းကြောင်းလွှဲပေးပြီး
+            Transistor နှင့် အခြား Circuit အစိတ်အပိုင်းများကို
+            ကာကွယ်ပေးသည့်
+            <strong>
+                Protection Device
+            </strong>
+            တစ်ခု ဖြစ်ပါတယ်။
+
         </p>
+
 
         <hr>
 
+
         <p>
-            <strong>Note:</strong><br>
-            Circuit Diagram ပုံများကို နောက်ပိုင်းတွင် ထည့်သွင်းနိုင်ပါသည်။Intended as a training aid for staff only.
+
+            <strong>
+                Note:
+            </strong>
+
+            <br>
+
+            Circuit Diagram ပုံများကို နောက်ပိုင်းတွင်
+            ထည့်သွင်းနိုင်ပါသည်။
+
+            Intended as a training aid for staff only.
+
         </p>
 
     </div>
 
 </div>
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
 
 <script>
 
 function toggleNote() {
 
     var note = document.getElementById("myNote");
+
     var button = document.getElementById("noteButton");
 
+
     if (note.style.display === "none") {
+
         note.style.display = "block";
+
         button.innerHTML = "CLOSE NOTE";
+
     } else {
+
         note.style.display = "none";
+
         button.innerHTML = "READ NOTE";
+
     }
 
 }
 
 </script>
+
+
+<!-- ==================================================
+     ABOUT US
+================================================== -->
+
 <div class="about-us">
 
-    <h2>ABOUT US</h2>
+    <h2>
+        ABOUT US
+    </h2>
 
     <p>
+
         High Tech Auto Car Service is dedicated to providing
-        professional automotive service, maintenance, diagnostics,
-        and repair solutions.
+        professional automotive service, maintenance,
+        diagnostics, and repair solutions.
+
     </p>
 
     <p>
+
         We use modern diagnostic technology and practical
         automotive knowledge to help keep your vehicle safe,
         reliable, and performing at its best.
+
     </p>
 
 </div>
+
+
+<!-- ==================================================
+     CONTACT
+================================================== -->
 
 <div class="contact">
 
-    <h2>CONTACT</h2>
+    <h2>
+        CONTACT
+    </h2>
 
     <p>
-        <strong>Address:</strong><br>
-        No. A-40, Taw Win Residence, Taw Win Street,<br>
-        U Wisara Road, (41) Block (Extend),<br>
-        Dagon (North).Yangon.
-    </p>
 
-    <p>
-        <strong>Phone:</strong>
-        <a href="tel:09941060666">09941060666</a>
-    </p>
+        <strong>
+            Address:
+        </strong>
 
-</div> 
-<div class="thank-you">
-
-    <p>
-        <strong>Thank You for Choosing High Tech Auto Car Service</strong>
-    </p>
-
-    <p>
-        We sincerely appreciate your trust and support.
         <br>
-        Your satisfaction is our greatest motivation.
+
+        No. A-40, Taw Win Residence, Taw Win Street,
+        <br>
+
+        U Wisara Road, (41) Block (Extend),
+        <br>
+
+        Dagon (North), Yangon.
+
     </p>
 
+
     <p>
-        <strong>Thank you for being our valued customer.</strong>
-        <br>
-        We look forward to serving you again.
+
+        <strong>
+            Phone:
+        </strong>
+
+        <a href="tel:09941060666">
+            09941060666
+        </a>
+
     </p>
 
 </div>
+
+
+<!-- ==================================================
+     THANK YOU
+================================================== -->
+
+<div class="thank-you">
+
+    <p>
+
+        <strong>
+            Thank You for Choosing High Tech Auto Car Service
+        </strong>
+
+    </p>
+
+
+    <p>
+
+        We sincerely appreciate your trust and support.
+
+        <br>
+
+        Your satisfaction is our greatest motivation.
+
+    </p>
+
+
+    <p>
+
+        <strong>
+            Thank you for being our valued customer.
+        </strong>
+
+        <br>
+
+        We look forward to serving you again.
+
+    </p>
+
+</div>
+
+
+<!-- ==================================================
+     EXTRA
+================================================== -->
 
 <a href="http://www.w3schools.com">
     This is a link
 </a>
 
-<h1>My first Heading</h1>
+
+<h1>
+    My first Heading
+</h1>
+
 
 <p>
+
     I am Because We are.
+
     <br><br>
+
     A Good One Gives Happiness.
+
     <br>
+
     A Bad One Gives Experience.
+
     <br>
+
     The Worst One Gives a Lesson.
+
     <br>
+
     The Best One Gives Memories.
+
     <br><br><br>
-    <strong>Thank You, Valued Customer!</strong>
+
+    <strong>
+        Thank You, Valued Customer!
+    </strong>
+
     <br><br>
+
     Your trust is our motivation.
+
     <br>
+
     We are always ready to keep your vehicle safe,
     reliable, and performing at its best.
+
 </p>
 
+
 </body>
+
 </html>
