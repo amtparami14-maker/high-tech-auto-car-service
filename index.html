@@ -713,6 +713,49 @@ button {
 }
 
 
+.reader-content p {
+
+    margin-top: 0;
+
+    margin-bottom: 18px;
+}
+
+
+.reader-content h2 {
+
+    margin-top: 25px;
+
+    margin-bottom: 12px;
+}
+
+
+.reader-content h3 {
+
+    margin-top: 24px;
+
+    margin-bottom: 10px;
+
+    color: #075985;
+}
+
+
+.reader-content ul,
+.reader-content ol {
+
+    margin-top: 5px;
+
+    margin-bottom: 18px;
+
+    padding-left: 30px;
+}
+
+
+.reader-content li {
+
+    margin-bottom: 8px;
+}
+
+
 .reader-actions {
 
     margin-top: 25px;
@@ -746,6 +789,24 @@ button {
 .delete-button {
 
     background: #d94841;
+
+    color: white;
+}
+
+
+.restore-button {
+
+    background: #1971c2;
+
+    color: white;
+
+    margin-bottom: 15px;
+}
+
+
+.import-button {
+
+    background: #087f5b;
 
     color: white;
 }
@@ -809,7 +870,7 @@ button {
 
     width: 100%;
 
-    min-height: 250px;
+    min-height: 420px;
 
     padding: 12px;
 
@@ -871,6 +932,20 @@ button {
 }
 
 
+.relay-image-box {
+
+    text-align: center;
+
+    background: white;
+
+    border-radius: 10px;
+
+    padding: 8px;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.10);
+}
+
+
 .relay-images img {
 
     max-width: 250px;
@@ -883,7 +958,17 @@ button {
 
     border-radius: 10px;
 
-    padding: 5px;
+    display: block;
+}
+
+
+.relay-image-caption {
+
+    color: #506070;
+
+    font-size: 13px;
+
+    margin-top: 6px;
 }
 
 
@@ -1476,6 +1561,21 @@ button {
     </div>
 
 
+    <!-- RESTORE RELAY -->
+
+    <div id="relayRestoreArea"
+         class="admin-only">
+
+        <button class="restore-button"
+                onclick="restoreRelayArticle()">
+
+            ↻ RESTORE DEFAULT 1 CHANNEL RELAY
+
+        </button>
+
+    </div>
+
+
     <!-- ARTICLE EDITOR -->
 
     <div id="libraryEditor"
@@ -1663,165 +1763,6 @@ button {
 
 
 <!-- ==================================================
-     BUILT-IN RELAY ARTICLE
-================================================== -->
-
-<template id="relayNoteTemplate">
-
-    <article>
-
-        <h2>1 Channel Relay</h2>
-
-        <div class="reader-date">
-            19/09/2026
-        </div>
-
-
-        <div class="relay-images">
-
-            <img src="25.png"
-                 alt="1 Channel Relay">
-
-            <img src="23.png"
-                 alt="Relay Module">
-
-            <img src="24.png"
-                 alt="Relay Circuit">
-
-        </div>
-
-
-        <h3>Relay ဆိုတာဘာလဲ?</h3>
-
-        <p>
-            Relay ဆိုတာ electrical signal တစ်ခုကို
-            အသုံးပြုပြီး အခြား circuit တစ်ခုကို
-            ON/OFF control လုပ်ပေးနိုင်တဲ့
-            electrically operated switch တစ်ခုဖြစ်ပါတယ်။
-        </p>
-
-
-        <h3>COM / NO / NC</h3>
-
-        <p>
-            Relay module တွေမှာ အများအားဖြင့်
-            COM, NO နဲ့ NC terminals တွေပါပါတယ်။
-        </p>
-
-        <p>
-            <strong>COM</strong> = Common terminal
-        </p>
-
-        <p>
-            <strong>NO</strong> = Normally Open
-        </p>
-
-        <p>
-            <strong>NC</strong> = Normally Closed
-        </p>
-
-
-        <h3>VCC / GND / IN</h3>
-
-        <p>
-            1 Channel Relay Module မှာ
-            VCC, GND နဲ့ IN ဆိုတဲ့ control pins
-            တွေကို တွေ့ရတတ်ပါတယ်။
-        </p>
-
-        <p>
-            <strong>VCC</strong> က module power supply ဖြစ်ပြီး
-            <strong>GND</strong> က ground ဖြစ်ပါတယ်။
-        </p>
-
-        <p>
-            <strong>IN</strong> က relay ကို control လုပ်တဲ့
-            input signal ဖြစ်ပါတယ်။
-        </p>
-
-
-        <h3>Q1 Transistor</h3>
-
-        <p>
-            Module ပေါ်က Q1 transistor က
-            microcontroller ကနေ တိုက်ရိုက် relay coil
-            ကိုမောင်းရန် မလုံလောက်တဲ့အခြေအနေမှာ
-            switching driver အဖြစ် အသုံးပြုနိုင်ပါတယ်။
-        </p>
-
-
-        <h3>PC817 Optocoupler</h3>
-
-        <p>
-            PC817 ပါတဲ့ relay module design တွေမှာ
-            input side နဲ့ relay control side ကြား
-            electrical isolation ရရှိအောင်
-            optocoupler ကို အသုံးပြုနိုင်ပါတယ်။
-        </p>
-
-
-        <h3>D2 Flyback Diode</h3>
-
-        <p>
-            Relay coil ဟာ inductive load ဖြစ်တဲ့အတွက်
-            coil ကို OFF လုပ်တဲ့အချိန်မှာ
-            back EMF voltage ဖြစ်နိုင်ပါတယ်။
-        </p>
-
-        <p>
-            Flyback diode က အဲဒီ voltage spike ကို
-            လျှော့ချပြီး transistor နဲ့ အခြား circuit
-            components တွေကို ကာကွယ်ပေးနိုင်ပါတယ်။
-        </p>
-
-
-        <h3>LED Indicators</h3>
-
-        <p>
-            Relay module ပေါ်မှာ power နဲ့ relay status
-            ကို ပြသဖို့ LED indicator တွေ ပါတတ်ပါတယ်။
-            Resistor တွေက LED current ကို
-            ကန့်သတ်ပေးပါတယ်။
-        </p>
-
-
-        <h3>SPDT Principle</h3>
-
-        <p>
-            COM terminal က NO သို့မဟုတ် NC terminal
-            တစ်ခုနဲ့ ချိတ်ဆက်သွားနိုင်တဲ့အတွက်
-            relay contact arrangement ကို
-            SPDT switch နဲ့ ဆင်တူတဲ့ switching
-            principle အဖြစ် နားလည်နိုင်ပါတယ်။
-        </p>
-
-
-        <h3>Automotive Application</h3>
-
-        <p>
-            Automotive electrical systems တွေမှာ
-            relay ကို motor, fan, lamp, pump,
-            horn နဲ့ အခြား high-current load
-            တွေကို control လုပ်ရာမှာ အသုံးပြုနိုင်ပါတယ်။
-        </p>
-
-
-        <a class="reference-link"
-           href="https://www.cestore-mm.com/product/1-channel-relay-module-5v10a/"
-           target="_blank"
-           rel="noopener noreferrer">
-
-            Relay Reference
-
-        </a>
-
-    </article>
-
-</template>
-
-
-
-<!-- ==================================================
      FIREBASE + JAVASCRIPT
 ================================================== -->
 
@@ -1856,7 +1797,9 @@ import {
     addDoc,
     getDocs,
     updateDoc,
+    setDoc,
     deleteDoc,
+    getDoc,
     doc,
     query,
     orderBy,
@@ -1917,9 +1860,159 @@ const ADMIN_EMAIL =
     "amtparami14@gmail.com";
 
 
+const RELAY_ARTICLE_ID =
+    "relay-1-channel";
+
+
+const RELAY_DEFAULT_TITLE =
+    "1 Channel Relay";
+
+
 let currentUser = null;
 
 let editingArticleId = null;
+
+
+
+/* ==================================================
+   FULL 1 CHANNEL RELAY ARTICLE
+================================================== */
+
+const RELAY_DEFAULT_CONTENT = String.raw`
+
+## 19/09/2026
+
+## 1 Channel Relay
+
+**1 Channel Relay Module** တစ်ခုမှာ ပါဝင်တဲ့ အဓိက အစိတ်အပိုင်းများနဲ့ ၎င်းတို့ရဲ့ လုပ်ဆောင်ချက်များမှာ အောက်ပါအတိုင်း ဖြစ်ပါသည်။
+
+- **Relay (အပြာရောင် ဘောက်စ်):** လျှပ်စစ်သံလိုက်ကို အသုံးပြုပြီး High Voltage/Current ဝါယာလမ်းကြောင်းများကို အဖွင့်အပိတ် လုပ်ပေးသည့် အဓိက အစိတ်အပိုင်း ဖြစ်သည်။
+- **Terminal Connector (3-Pin Screw Block):** Mains လျှပ်စစ်ကြိုးများကို လွယ်ကူခိုင်မာစွာ တွဲဆက်ရန် ဖြစ်ပြီး NO (Normally Open), COM (Common), NC (Normally Closed) ဟူ၍ ပါဝင်ပါသည်။
+- **Transistor (Q1):** Microcontroller (Arduino စသည်) မှလာသော နည်းပါးသည့် Current Signal ကို မြှင့်တင်ပေးပြီး Relay Coil ကို စမောင်းပေးသည်။
+- **Flyback Diode (D2):** Relay ကို ပိတ်လိုက်ချိန်တွင် ပေါ်ထွက်လာသည့် High Voltage Spikes များကြောင့် အခြား Circuit များ မပျက်စီးအောင် ကာကွယ်ပေးသည်။
+- **LED Indicators:**
+  - **Power LED (D1):** Module သို့ ပါဝါ (VCC) ရောက်ရှိနေကြောင်း ပြသပေးသည်။
+  - **Status LED:** Relay အလုပ်လုပ်နေချိန် (Active ဖြစ်နေချိန်) တွင် လင်းပြပေးပါတယ်။
+- **Resistors (R1, R2):** Circuit အတွင်း စီးဆင်းမည့် Current ပမာဏကို ထိန်းညှိပေးပြီး LED များနှင့် Transistor ကို ကာကွယ်ပေးရန်ဖြစ်သည်။
+- **Input Pins (Male Headers):** Microcontroller ဖြင့် ချိတ်ဆက်ရန် Pin များ ဖြစ်ပါတယ်။
+  - **VCC:** Power supply (5V)
+  - **GND:** Ground (0V)
+  - **IN:** Relay ကို ထိန်းချုပ်မည့် Trigger Input signal Pin
+
+
+[IMAGE:25.png|1 Channel Relay Module]
+
+[IMAGE:23.png|1 Channel Relay Module]
+
+
+**1 Channel Relay Module** ရဲ့ ပတ်လမ်း (Circuit Diagram) တွင် ပါဝင်သည့် အစိတ်အပိုင်းများ ချိတ်ဆက်ပုံနှင့် အလုပ်လုပ်ပုံမှာ အောက်ပါအတိုင်း ဖြစ်ပါတယ် -
+
+### 1. Input & Power Section (ထိန်းချုပ်ခန်း)
+
+- **VCC & GND:** Module ကို အလုပ်လုပ်ရန်အတွက် Power (ဥပမာ - 5V DC) နှင့် Ground ပေးသွင်းသည့် Pin များဖြစ်ပါတယ်။ Power ရောက်နေပါက **D1 (Power LED)** လင်းနေမည် ဖြစ်ပါတယ်။
+- **IN (Input Pin):** Microcontroller (Arduino, ESP32 စသည်) မှ Trigger signal ပေးပို့ရာ Pin ဖြစ်ပါတယ်။
+- **Optocoupler (PC817):** Microcontroller ဘက်ခြမ်းနှင့် Relay Switch ဘက်ခြမ်းကို အလင်းစနစ်ဖြင့် သီးခြားခွဲထုတ် (Isolate) ပေးထားတာကြောင့် Relay ကြောင့်ဖြစ်လာသည့် High Voltage တုံ့ပြန်မှုများ Microcontroller ဆီ ပြန်မရောက်အောင် ကာကွယ်ပေးပါတယ်။
+
+### 2. Driver & Protection Section (မောင်းနှင်စနစ်)
+
+- **Transistor (Q1):** Optocoupler မောင်းနှင်လိုက်ချိန်တွင် Transistor အလုပ်လုပ်ပြီး Relay Coil အတွင်းသို့ Current စီးဆင်းစေကာ မဂ္ဂနက်စနစ်ကို စတင်စေပါတယ်။
+- **Status LED:** Input Signal ရရှိပြီး Transistor ပွင့်သွားပါက Relay အလုပ်လုပ်နေကြောင်း ပြသရန်အတွက် Status LED လင်းလာမည် ဖြစ်ပါတယ်။
+- **Flyback Diode (D2):** Relay Coil ကို ပိတ်လိုက်ချိန်တွင် ပေါ်ထွက်လာသည့် High Voltage Back-EMF Spikes များကို စုပ်ယူပေးပြီး Transistor မပျက်စီးအောင် ကာကွယ်ပေးပါတယ်။
+
+### 3. Output Section (အထွက်လမ်းကြောင်း)
+
+- Relay Coil မဂ္ဂနက်ဖြစ်သွားသည့်အခါ စပရင်အဆက်ကို ဆွဲယူပြီး Mains Power (ဥပမာ - 220V AC) ချိတ်ဆက်ထားသော terminal များကို ပြောင်းလဲပေးပါတယ်။
+- **COM (Common):** ပင်မ လျှပ်စစ်ဝင်ပေါက် ဖြစ်ပါတယ်။
+- **NC (Normally Closed):** Trigger signal မပေးထားချိန်တွင် COM နှင့် ပွင့်လျက် (မီးပွင့်/စက်ပွင့်လျက်) ရှိနေပြီး Trigger ပေးလိုက်ပါက ပြန်ပိတ်သွားပါမည်။
+- **NO (Normally Open):** Trigger signal မပေးထားချိန်တွင် COM နှင့် ပိတ်လျက် (မီးပိတ်/စက်ပိတ်လျက်) ရှိနေပြီး Trigger ပေးလိုက်မှသာ COM နှင့် ဆက်သွားပြီး အလုပ်လုပ်ပါမည်။
+
+
+### 1 Channel Relay Module ရဲ့ Circuit Diagram အလုပ်လုပ်ပုံ
+
+[IMAGE:24.png|1 Channel Relay Module Circuit Diagram]
+
+
+1 Channel Relay Module ရဲ့ Circuit Diagram အလုပ်လုပ်ပုံ အဓိက လမ်းကြောင်းများမှာ အောက်ပါအတိုင်း ဖြစ်ပါတယ်။
+
+- **Input Section:** Microcontroller မှ IN Pin သို့ Trigger Signal ပေးလိုက်ပါက **Optocoupler (PC817)** စတင် အလုပ်လုပ်ပါတယ်။
+- **Driver Section:** Optocoupler မှတစ်ဆင့် **Transistor (Q1)** ပွင့်သွားပြီး **Relay Coil** အတွင်း လျှပ်စီးစီးကြောင်း ဖြတ်သန်းကာ သံလိုက်ဓာတ် ဖြစ်ပေါ်စေပါသည်။ **Flyback Diode (D2)** က ပတ်လမ်းကို Surge Voltage များမှ ကာကွယ်ပေးပါတယ်။
+- **Output Section:** သံလိုက်ဓာတ်ကြောင့် Switch အဆက် ပြောင်းလဲသွားပြီး **COM** Pin သည် **NO (Normally Open)** ဘက်သို့ ဆက်သွားကာ ချိတ်ဆက်ထားသော စက်/မီးလုံးကို ပွင့်စေပါတယ်။
+
+---
+
+## SPDT (Single Pole Double Throw)
+
+**SPDT** ဆိုတာ **Single Pole Double Throw** ရဲ့ အတိုကောက် ဖြစ်ပါတယ်။ Relay တွေမှာ သုံးတဲ့ Switch ဒီဇိုင်း/အမျိုးအစား တစ်ခါဖြစ်ပြီး အဓိက လုပ်ဆောင်ချက်များမှာ အောက်ပါအတိုင်း ဖြစ်ပါတယ်။
+
+- **Single Pole (SP):** ထိန်းချုပ်မည့် လျှပ်စစ်ဝင်ပေါက် (Terminal) **၁ ခုတည်း (COM Pin)** သာ ပါဝင်တာကို ဆိုလိုပါတယ်။
+- **Double Throw (DT):** ဝင်လာတဲ့ လျှပ်စစ်လမ်းကြောင်းကို ထွက်ပေါက် **၂ ခု (NO Pin နှင့် NC Pin)** အနက် ၁ ခုဆီသို့ လှည့်ပြောင်းပေးနိုင်တာကို ဆိုလိုပါတယ်။
+
+### SPDT Switch ရဲ့ အလုပ်လုပ်ပုံ
+
+1. **Normally Closed (NC) ဘက်သို့ ဆက်နေချိန်:**
+   - Relay Coil ထံ သံလိုက်ဓာတ် (Power/Signal) မပေးထားချိန်တွင် **COM** သည် **NC** နှင့် အလိုအလျောက် ဆက်နေပါတယ်။
+   - (ဥပမာ - Relay မီးပိတ်ထားသော်လည်း NC တွင် ချိတ်ထားသော မီးလုံးသည် လင်းနေမည် ဖြစ်ပါတယ်)။
+
+2. **Normally Open (NO) ဘက်သို့ ပြောင်းဆက်ချိန်:**
+   - Relay Coil သို့ Signal (Trigger) ပေးလိုက်ပါက မဂ္ဂနက်ဓာတ်ကြောင့် Switch အဆက်သည် **COM** မှ **NO** ဘက်သို့ ပြောင်းလဲချိတ်ဆက်သွားပါတယ်။
+   - (ဥပမာ - Relay ခလုတ်ဖွင့်လိုက်မှသာ NO တွင် ချိတ်ထားသော မီးလုံး လင်းလာမည် ဖြစ်ပါတယ်)။
+
+**အနှစ်ချုပ်:** SPDT Relay ဆိုသည်မှာ Input ၁ လိုင်းကို အခြေအနေပေါ်မူတည်၍ Output ၂ လိုင်း (NO သို့မဟုတ် NC) သို့ ပြောင်းလဲပေးနိုင်သည့် Switch အမျိုးအစား ဖြစ်ပါတယ်။
+
+---
+
+## Optocoupler
+
+Microcontroller ဆီ လျှပ်စစ်ဓာတ် မကူးစက်အောင် ကာကွယ်ပေးတဲ့ နည်းလမ်းကို အလွယ်ဆုံး သဘောတရားနဲ့ အချက် ၃ ချက်နဲ့ ရှင်းပြပေးပါမယ်။
+
+### 1. Physical Air Gap (ရူပဗေဒအရ လေဟာနယ်ခြားထားခြင်း)
+
+- **တိုက်ရိုက် ကြိုးဆက်မထားပါ:** Optocoupler (PC817) Chip လေးရဲ့ အတွင်းထဲမှာ Microcontroller (Arduino) နဲ့ ချိတ်ဆက်ထားတဲ့ လမ်းကြောင်း နဲ့ Relay ဘက်ကို ချိတ်ဆက်ထားတဲ့ လမ်းကြောင်း ၂ ခုဟာ **လျှပ်ကူးပစ္စည်း (ကြိုး/သတ္တု) တစ်ခုမျှ တိုက်ရိုက် ထိစပ်မနေပါဘူး**။
+- **ကြားထဲမှာ လေဟာနယ်ခြားထားပါတယ်:** Chip အတွင်းထဲမှာ ကြားခံအဖြစ် အလင်းဖြတ်သန်းနိုင်တဲ့ လျှပ်စစ်ဓာတ်မကူးစက်နိုင်သော Insulation ပစ္စည်း (Silicon/Plastic) ကိုသာ ခြားထားတာ ဖြစ်ပါတယ်။
+
+### 2. အလင်းဖြင့်သာ Signal ပို့ခြင်း (Optical Transmi)
+
+- Arduino ဘက်က လျှပ်စစ်မီးပေးလိုက်ရင် အတွင်းထဲက **IR LED လေးပဲ လင်းလာပါတယ်**။
+- အဲဒီအလင်းကို တစ်ဖက်က **Phototransistor က လှမ်းမြင်ရုံနဲ့ ပွင့်ပေးလိုက်တာ** ဖြစ်ပါတယ်။
+- သာမန်အားဖြင့် Switch ခလုတ်တစ်ခုကို လက်နဲ့နှိပ်သလိုပါပဲ။ လက်နဲ့ မနှိပ်ဘဲ **"အလင်း" နဲ့ပဲ လှမ်းနှိပ်လိုက်တာ** ဖြစ်တဲ့အတွက် လျှပ်စစ်ဓာတ်ချင်း တိုက်ရိုက် မထိစပ်ပါဘူး။
+
+### Back-EMF / Shock တက်လာရင် ဘာဖြစ်မလဲ (အကာအကွယ်ပေးပုံ)
+
+1. **Back-EMF Surge တက်လာခြင်း:** Relay Coil ကို ပိတ်လိုက်ချိန် သို့မဟုတ် High Voltage ပတ်လမ်းမှာ ရှော့ဖြစ်လို့ မီးအားတွေ ၁၀၀V, ၂၀၀V မက ရုတ်တရက် တက်လာတယ် ဆိုပါစို့။
+2. **Chip တစ်ဖက်ပဲ ပျက်စီးမည်:** အဲဒီ မြင့်မားတဲ့ မီးအား surge ဟာ Relay ဘက်နဲ့ ဆက်ထားတဲ့ Phototransistor ဆီပဲ ရောက်ပါမယ်။ မီးအားလွန်ပြီး ပျက်စီးသွားခဲ့ရင်တောင် Optocoupler Chip အတွင်းထဲမှာပဲ အပိုင်းအစ ပျက်သွားပါမယ်။
+3. **Arduino သို့ မရောက်နိုင်ပါ:** ကြားထဲမှာ ကြိုးဆက်မထားဘဲ အလင်းနဲ့ပဲ ဆက်ထားတာဖြစ်လို့ ဒီဘက်က **Arduino (Microcontroller) ဆီကို လျှပ်စစ်ဓာတ် ကူးစက်စီးဆင်းသွားစရာ လမ်းကြောင်း လုံးဝမရှိပါဘူး**။
+
+**အနှစ်ချုပ်:** Optocoupler ဆိုတာ Arduino နဲ့ High Voltage ပတ်လမ်းကြားမှာ **"အလင်း" စနစ်နဲ့ ခြားပေးထားတဲ့ လျှပ်စစ်လုံခြုံရေးတံခါး (Optical Barrier)** ဖြစ်တာကြောင့် တစ်ဖက်မှာ မီးရှော့ဖြစ်ဖြစ်၊ မီးအားဆောင့်တက်တက် Arduino ဘက်ကို လျှပ်စစ်ဓာတ် လုံးဝကူးစက်မလာနိုင်အောင် ကာကွယ်ပေးတာ ဖြစ်ပါတယ်။
+
+---
+
+## Flyback Diode (D2)
+
+Relay Coil ကြောင့် ဖြစ်ပေါ်လာတဲ့ Back-EMF (Back Electromotive Force) ကို ကာကွယ်ပေးတဲ့ နည်းလမ်းနဲ့ အလုပ်လုပ်ပုံကို အဓိက အချက် ၃ ချက်နဲ့ ရှင်းပြပေးပါမယ်။
+
+### 1. Back-EMF ဆိုတာ ဘာလဲ (ပြဿနာ)
+
+- Relay ရဲ့ အတွင်းထဲမှာ လျှပ်စစ်သံလိုက်လိုင်း ဖြစ်ပေါ်စေတဲ့ နန်းကြိုးခွေ (Coil) ပါဝင်ပါတယ်။
+- Coil အတွင်းသို့ လျှပ်စီးကြောင်း (Current) စီးဆင်းနေချိန်မှာ သံလိုက်စက်ကွင်း (Magnetic Field) စွမ်းအင်အဖြစ် သိမ်းဆည်းထားပါတယ်။
+- Relay ကို ပိတ်လိုက်သည့်ခဏ (Power ဖြတ်လိုက်ချိန်): အဆိုပါ သိမ်းဆည်းထားသော သံလိုက်စက်ကွင်းသည် ရုတ်တရက် ပြိုပျက် (Collapse) သွားပါတယ်။
+- ထိုသို့ သံလိုက်စက်ကွင်း ပြိုပျက်သွားသောအခါ Coil ထဲတွင် မူလပေးထားသော ဗို့အားထက် **ဆယ်ဆမက မြင့်မားသည့် ပြောင်းပြန်ဗို့အား (Back-EMF Voltage Spike - ဥပမာ 5V Relay တွင် 50V မှ 100V ထိ)** ရုတ်တရက် ထွက်ပေါ်လာပါတယ်။ အဆိုပါ ဗို့အားဆောင့်တက်မှုသည် Transistor နှင့် အခြား Circuit အစိတ်အပိုင်းများကို လောင်ကျွမ်း ပျက်စီးစေနိုင်ပါတယ်။
+
+### 2. Flyback Diode ရဲ့ တပ်ဆင်ထားပုံ
+
+- Diode ကို Relay Coil နှင့် **ပြိုင်ပြိုင် (Parallel)** တပ်ဆင်ထားပြီး၊ ပုံမှန် လျှပ်စစ်စီးဆင်းချိန်တွင် Diode ဘက်သို့ လျှပ်စီးကြောင်း မရောက်အောင် **Reverse Bias (ပြောင်းပြန်)** ချိတ်ဆက်ထားပါတယ်။
+- ဒါကြောင့် သာမန်အချိန်တွင် Diode သည် အလုပ်မလုပ်ဘဲ ငြိမ်နေပါတယ်။
+
+### 3. Back-EMF ကို ကာကွယ်ပေးပုံ
+
+1. **ပြောင်းပြန်ဗို့အား ပေါ်ထွက်လာခြင်း:** Relay ကို ပိတ်လိုက်၍ Back-EMF ပေါ်လာသောအခါ ထိုဗို့အား၏ Polar (အပေါင်း/အနှုတ်) သည် မူလဓာတ်အားနှင့် ပြောင်းပြန် ဖြစ်သွားပါတယ်။
+2. **Diode ပွင့်သွားခြင်း:** ပြောင်းပြန်ဖြစ်သွားသော ဗို့အားကြောင့် Reverse Bias ဖြစ်နေသည့် Diode သည် **Forward Bias (ပုံမှန်လမ်းကြောင်း)** ဖြစ်သွားပြီး ပွင့်သွားပါတယ်။
+3. **စွမ်းအင်ကို စိစစ်ပိတ်လှောင်လိုက်ခြင်း (Freewheeling Loop):** Back-EMF မှ ထွက်လာသော မြင့်မားသည့် လျှပ်စီးကြောင်းသည် အခြား Transistor သို့မဟုတ် Microcontroller ဆီသို့ မရောက်တော့ဘဲ **Diode နှင့် Coil အကြား ပတ်လမ်းအတိုင်းသာ လှည့်ပတ်စီးဆင်း (Loop)** သွားကာ အပူအဖြစ် စွမ်းအင် ကုန်ခမ်းသွားစေပါတယ်။
+
+**အနှစ်ချုပ်:** Flyback Diode သည် Relay Coil ကို ပိတ်လိုက်စဉ် ထွက်ပေါ်လာသည့် မြင့်မားသော Back-EMF Voltage Spikes များကို အခြား Circuit အစိတ်အပိုင်းများဆီသို့ မရောက်အောင် **လမ်းကြောင်းလွှဲပေးပြီး ပတ်လမ်းအတွင်း စုပ်ယူ ပျောက်ကွယ်သွားစေသည့် လုံခြုံရေး ဗို့အားစိစစ်ဂိတ် (Freewheeling Path)** အဖြစ် ကာကွယ်ပေးတာ ဖြစ်ပါတယ်။
+
+[REFERENCE:https://www.cestore-mm.com/product/1-channel-relay-module-5v10a/|1 Channel Relay Module 5V / 10A]
+
+`;
 
 
 
@@ -1988,6 +2081,60 @@ function isAdmin() {
 
 
 /* ==================================================
+   ADMIN UI
+================================================== */
+
+function updateAdminUI() {
+
+    const loginArea =
+        document.getElementById("loginArea");
+
+    const loggedInArea =
+        document.getElementById("loggedInArea");
+
+    const newArticleArea =
+        document.getElementById("newArticleArea");
+
+    const restoreArea =
+        document.getElementById("relayRestoreArea");
+
+    if (isAdmin()) {
+
+        loginArea.style.display =
+            "none";
+
+        loggedInArea.style.display =
+            "block";
+
+        newArticleArea.style.display =
+            "block";
+
+        document.getElementById(
+            "loggedInEmail"
+        ).textContent =
+            currentUser.email;
+
+    } else {
+
+        loginArea.style.display =
+            "block";
+
+        loggedInArea.style.display =
+            "none";
+
+        newArticleArea.style.display =
+            "none";
+
+        restoreArea.style.display =
+            "none";
+
+    }
+
+}
+
+
+
+/* ==================================================
    AUTH STATE
 ================================================== */
 
@@ -1997,6 +2144,7 @@ onAuthStateChanged(
 
         currentUser = user;
 
+        updateAdminUI();
 
         if (user) {
 
@@ -2011,66 +2159,25 @@ onAuthStateChanged(
                 );
 
 
-            console.log(
-                "Firebase signed-in email:",
-                firebaseEmail
-            );
-
-            console.log(
-                "Expected admin email:",
-                expectedEmail
-            );
-
-
             if (
                 firebaseEmail === expectedEmail
             ) {
-
-                document.getElementById(
-                    "loginArea"
-                ).style.display =
-                    "none";
-
-
-                document.getElementById(
-                    "loggedInArea"
-                ).style.display =
-                    "block";
-
-
-                document.getElementById(
-                    "loggedInEmail"
-                ).textContent =
-                    user.email;
-
-
-                document.getElementById(
-                    "newArticleArea"
-                ).style.display =
-                    "block";
-
 
                 setAdminStatus(
                     "Admin login successful."
                 );
 
+                /*
+                   Create the full Relay article
+                   in Firestore the first time
+                   the administrator logs in.
+                */
+
+                await ensureRelayArticleInFirestore();
 
             } else {
 
-                console.error(
-                    "ADMIN EMAIL MISMATCH",
-                    {
-                        firebaseEmail:
-                            firebaseEmail,
-
-                        expectedEmail:
-                            expectedEmail
-                    }
-                );
-
-
                 await signOut(auth);
-
 
                 setAdminStatus(
                     "Signed-in account is not the authorized administrator."
@@ -2078,26 +2185,7 @@ onAuthStateChanged(
 
             }
 
-
         } else {
-
-            document.getElementById(
-                "loginArea"
-            ).style.display =
-                "block";
-
-
-            document.getElementById(
-                "loggedInArea"
-            ).style.display =
-                "none";
-
-
-            document.getElementById(
-                "newArticleArea"
-            ).style.display =
-                "none";
-
 
             setAdminStatus(
                 "Library is publicly readable. Admin login required for editing."
@@ -2125,18 +2213,15 @@ async function() {
             "adminEmail"
         );
 
-
     const passwordInput =
         document.getElementById(
             "adminPassword"
         );
 
-
     const email =
         normalizeEmail(
             emailInput.value
         );
-
 
     const password =
         passwordInput.value;
@@ -2160,20 +2245,6 @@ async function() {
         );
 
 
-        console.log(
-            "Login email entered:",
-            email
-        );
-
-
-        console.log(
-            "Expected admin email:",
-            normalizeEmail(
-                ADMIN_EMAIL
-            )
-        );
-
-
         const result =
             await signInWithEmailAndPassword(
                 auth,
@@ -2187,37 +2258,11 @@ async function() {
                 result.user.email
             );
 
-
         const expectedEmail =
             normalizeEmail(
                 ADMIN_EMAIL
             );
 
-
-        console.log(
-            "Firebase Login SUCCESS"
-        );
-
-
-        console.log(
-            "Firebase returned email:",
-            firebaseEmail
-        );
-
-
-        console.log(
-            "Expected admin email:",
-            expectedEmail
-        );
-
-
-        /*
-         IMPORTANT:
-
-         Firebase Login succeeded.
-         Now verify that the signed-in account
-         is the administrator.
-        */
 
         if (
             firebaseEmail !== expectedEmail
@@ -2225,34 +2270,18 @@ async function() {
 
             await signOut(auth);
 
-
             alert(
-
-                "Firebase Login succeeded, but the signed-in email does not match.\n\n" +
-
-                "Firebase returned:\n" +
-                firebaseEmail +
-
-                "\n\nExpected:\n" +
-                expectedEmail
-
+                "Firebase Login succeeded, but the signed-in email does not match the administrator account."
             );
-
 
             setAdminStatus(
-                "Login succeeded but administrator email did not match."
+                "Administrator email mismatch."
             );
-
 
             return;
 
         }
 
-
-        /*
-         Login is correct.
-        Clear password field.
-        */
 
         passwordInput.value = "";
 
@@ -2271,11 +2300,8 @@ async function() {
 
 
         alert(
-
             "Login failed.\n\n" +
-
             error.message
-
         );
 
 
@@ -2394,11 +2420,8 @@ function() {
 
 
     localStorage.setItem(
-
         "highTechAutoCustomer",
-
         JSON.stringify(customer)
-
     );
 
 
@@ -2992,6 +3015,96 @@ function(value) {
 
 
 /* ==================================================
+   RELAY ARTICLE FIRESTORE SETUP
+================================================== */
+
+async function ensureRelayArticleInFirestore() {
+
+    if (!isAdmin()) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const relayRef =
+            doc(
+                db,
+                "libraryArticles",
+                RELAY_ARTICLE_ID
+            );
+
+
+        const relaySnapshot =
+            await getDoc(
+                relayRef
+            );
+
+
+        if (
+            relaySnapshot.exists()
+        ) {
+
+            return;
+
+        }
+
+
+        await setDoc(
+            relayRef,
+            {
+
+                title:
+                    RELAY_DEFAULT_TITLE,
+
+                content:
+                    RELAY_DEFAULT_CONTENT.trim(),
+
+                createdBy:
+                    currentUser.email,
+
+                createdAt:
+                    serverTimestamp(),
+
+                updatedAt:
+                    serverTimestamp(),
+
+                isRelay:
+                    true,
+
+                isDeleted:
+                    false
+
+            }
+        );
+
+
+        console.log(
+            "1 Channel Relay article created in Firestore."
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Could not create Relay article:",
+            error
+        );
+
+        setAdminStatus(
+            "Admin connected, but Relay article could not be initialized: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+
+/* ==================================================
    FIRESTORE
 ================================================== */
 
@@ -3140,51 +3253,126 @@ function renderLibraryArticles(
         );
 
 
-    list.innerHTML = "";
-
-
-    /*
-       BUILT-IN RELAY ARTICLE
-
-       This article is permanently inside the website.
-       It cannot be deleted from Firebase.
-    */
-
-    const relayButton =
-        document.createElement(
-            "button"
+    const restoreArea =
+        document.getElementById(
+            "relayRestoreArea"
         );
 
 
-    relayButton.textContent =
-        "1 Channel Relay";
+    list.innerHTML = "";
 
 
-    relayButton.onclick =
-        function() {
+    const relayArticle =
+        articles.find(
+            article =>
+                article.id === RELAY_ARTICLE_ID
+        );
 
-            readRelayArticle(
-                relayButton
+
+    const activeRelay =
+        relayArticle &&
+        relayArticle.isDeleted !== true;
+
+
+    const deletedRelay =
+        relayArticle &&
+        relayArticle.isDeleted === true;
+
+
+    /*
+       RELAY ARTICLE
+    */
+
+    if (activeRelay) {
+
+        const relayButton =
+            document.createElement(
+                "button"
             );
 
-        };
+
+        relayButton.textContent =
+            RELAY_DEFAULT_TITLE;
 
 
-    list.appendChild(
-        relayButton
-    );
+        relayButton.dataset.articleId =
+            RELAY_ARTICLE_ID;
+
+
+        relayButton.onclick =
+            function() {
+
+                readFirestoreArticle(
+                    relayArticle,
+                    relayButton
+                );
+
+            };
+
+
+        list.appendChild(
+            relayButton
+        );
+
+    } else if (!deletedRelay) {
+
+        /*
+           Fallback before the first
+           Admin initialization.
+        */
+
+        const relayButton =
+            document.createElement(
+                "button"
+            );
+
+
+        relayButton.textContent =
+            RELAY_DEFAULT_TITLE;
+
+
+        relayButton.onclick =
+            function() {
+
+                readDefaultRelayArticle(
+                    relayButton
+                );
+
+            };
+
+
+        list.appendChild(
+            relayButton
+        );
+
+    }
 
 
 
     /*
        FIRESTORE ARTICLES
-
-       These are the articles created
-       from the Admin panel.
     */
 
     articles.forEach(
         (article) => {
+
+            if (
+                article.id === RELAY_ARTICLE_ID
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                article.isDeleted === true
+            ) {
+
+                return;
+
+            }
+
 
             const button =
                 document.createElement(
@@ -3221,7 +3409,13 @@ function renderLibraryArticles(
 
 
     if (
-        articles.length === 0
+        articles.filter(
+            article =>
+                article.id !== RELAY_ARTICLE_ID &&
+                article.isDeleted !== true
+        ).length === 0 &&
+        !activeRelay &&
+        deletedRelay
     ) {
 
         const message =
@@ -3235,7 +3429,7 @@ function renderLibraryArticles(
 
 
         message.textContent =
-            "No user articles yet.";
+            "No active articles in the Library.";
 
 
         list.appendChild(
@@ -3244,15 +3438,36 @@ function renderLibraryArticles(
 
     }
 
+
+    /*
+       RESTORE BUTTON
+    */
+
+    if (isAdmin()) {
+
+        if (deletedRelay) {
+
+            restoreArea.style.display =
+                "block";
+
+        } else {
+
+            restoreArea.style.display =
+                "none";
+
+        }
+
+    }
+
 }
 
 
 
 /* ==================================================
-   READ RELAY ARTICLE
+   READ DEFAULT RELAY ARTICLE
 ================================================== */
 
-function readRelayArticle(
+function readDefaultRelayArticle(
     button
 ) {
 
@@ -3262,14 +3477,44 @@ function readRelayArticle(
         );
 
 
-    const template =
-        document.getElementById(
-            "relayNoteTemplate"
-        );
+    reader.innerHTML = `
 
+        <h2>
+            ${escapeHtml(RELAY_DEFAULT_TITLE)}
+        </h2>
 
-    reader.innerHTML =
-        template.innerHTML;
+        <div class="reader-date">
+            19/09/2026
+        </div>
+
+        <div class="reader-content">
+
+            ${convertArticleContentToHtml(
+                RELAY_DEFAULT_CONTENT
+            )}
+
+        </div>
+
+        <div class="reader-actions">
+
+            ${
+                isAdmin()
+                ?
+                `
+                <button class="import-button"
+                        id="importRelayButton">
+
+                    IMPORT RELAY NOTE TO LIBRARY
+
+                </button>
+                `
+                :
+                ""
+            }
+
+        </div>
+
+    `;
 
 
     clearActiveLibraryButtons();
@@ -3278,6 +3523,26 @@ function readRelayArticle(
     button.classList.add(
         "active"
     );
+
+
+    const importButton =
+        document.getElementById(
+            "importRelayButton"
+        );
+
+
+    if (importButton) {
+
+        importButton.onclick =
+            async function() {
+
+                await ensureRelayArticleInFirestore();
+
+                await loadFirestoreArticles();
+
+            };
+
+    }
 
 }
 
@@ -3306,13 +3571,25 @@ function readFirestoreArticle(
 
 
     const date =
+        article.id === RELAY_ARTICLE_ID
+        ?
+        formatArticleDate(
+            article.createdAt
+        ) === "Date not available"
+        ?
+        "19/09/2026"
+        :
+        formatArticleDate(
+            article.createdAt
+        )
+        :
         formatArticleDate(
             article.createdAt
         );
 
 
     const content =
-        convertPlainTextToHtml(
+        convertArticleContentToHtml(
             article.content || ""
         );
 
@@ -3352,9 +3629,7 @@ function readFirestoreArticle(
         );
 
 
-    if (
-        isAdmin()
-    ) {
+    if (isAdmin()) {
 
         const editButton =
             document.createElement(
@@ -3405,7 +3680,9 @@ function readFirestoreArticle(
 
                 deleteLibraryArticle(
                     article.id,
-                    article.title
+                    article.title,
+                    article.isRelay === true ||
+                    article.id === RELAY_ARTICLE_ID
                 );
 
             };
@@ -3549,6 +3826,21 @@ function openEditArticleEditor(
         "libraryArticleTitle"
     ).focus();
 
+
+    window.scrollTo({
+
+        top:
+            document.getElementById(
+                "libraryEditor"
+            ).getBoundingClientRect().top +
+            window.scrollY -
+            30,
+
+        behavior:
+            "smooth"
+
+    });
+
 }
 
 
@@ -3646,20 +3938,42 @@ async function() {
                 );
 
 
+            const updateData = {
+
+                title:
+                    title,
+
+                content:
+                    content,
+
+                updatedAt:
+                    serverTimestamp()
+
+            };
+
+
+            /*
+               If editing the Relay article,
+               make sure it remains active.
+            */
+
+            if (
+                editingArticleId ===
+                RELAY_ARTICLE_ID
+            ) {
+
+                updateData.isRelay =
+                    true;
+
+                updateData.isDeleted =
+                    false;
+
+            }
+
+
             await updateDoc(
                 articleRef,
-                {
-
-                    title:
-                        title,
-
-                    content:
-                        content,
-
-                    updatedAt:
-                        serverTimestamp()
-
-                }
+                updateData
             );
 
 
@@ -3692,7 +4006,10 @@ async function() {
                         serverTimestamp(),
 
                     updatedAt:
-                        serverTimestamp()
+                        serverTimestamp(),
+
+                    isDeleted:
+                        false
 
                 }
 
@@ -3720,10 +4037,8 @@ async function() {
 
 
         alert(
-
             "Could not save article.\n\n" +
             error.message
-
         );
 
     }
@@ -3738,7 +4053,8 @@ async function() {
 
 async function deleteLibraryArticle(
     articleId,
-    articleTitle
+    articleTitle,
+    isRelayArticle = false
 ) {
 
     if (!isAdmin()) {
@@ -3755,7 +4071,7 @@ async function deleteLibraryArticle(
     const confirmed =
         confirm(
 
-            "Delete this article?\n\n" +
+            "Delete this article from the Library?\n\n" +
             articleTitle
 
         );
@@ -3770,20 +4086,67 @@ async function deleteLibraryArticle(
 
     try {
 
-        await deleteDoc(
+        /*
+           Relay article uses a fixed Firestore
+           document so we mark it deleted rather
+           than allowing the built-in fallback
+           to immediately come back.
+        */
 
-            doc(
-                db,
-                "libraryArticles",
-                articleId
-            )
+        if (
+            isRelayArticle ||
+            articleId === RELAY_ARTICLE_ID
+        ) {
 
-        );
+            await updateDoc(
+
+                doc(
+                    db,
+                    "libraryArticles",
+                    RELAY_ARTICLE_ID
+                ),
+
+                {
+
+                    isDeleted:
+                        true,
+
+                    deletedBy:
+                        currentUser.email,
+
+                    deletedAt:
+                        serverTimestamp(),
+
+                    updatedAt:
+                        serverTimestamp()
+
+                }
+
+            );
 
 
-        alert(
-            "Article deleted successfully."
-        );
+            alert(
+                "1 Channel Relay has been deleted from the Library."
+            );
+
+        } else {
+
+            await deleteDoc(
+
+                doc(
+                    db,
+                    "libraryArticles",
+                    articleId
+                )
+
+            );
+
+
+            alert(
+                "Article deleted successfully."
+            );
+
+        }
 
 
         document.getElementById(
@@ -3812,10 +4175,8 @@ async function deleteLibraryArticle(
 
 
         alert(
-
             "Could not delete article.\n\n" +
             error.message
-
         );
 
     }
@@ -3825,43 +4186,590 @@ async function deleteLibraryArticle(
 
 
 /* ==================================================
-   PLAIN TEXT → HTML
+   RESTORE DEFAULT RELAY
 ================================================== */
 
-function convertPlainTextToHtml(
+window.restoreRelayArticle =
+async function() {
+
+    if (!isAdmin()) {
+
+        alert(
+            "Admin login required."
+        );
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+
+            "Restore the default 1 Channel Relay article?\n\n" +
+            "This will restore the complete original Relay Note."
+
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    try {
+
+        await setDoc(
+
+            doc(
+                db,
+                "libraryArticles",
+                RELAY_ARTICLE_ID
+            ),
+
+            {
+
+                title:
+                    RELAY_DEFAULT_TITLE,
+
+                content:
+                    RELAY_DEFAULT_CONTENT.trim(),
+
+                createdBy:
+                    currentUser.email,
+
+                createdAt:
+                    serverTimestamp(),
+
+                updatedAt:
+                    serverTimestamp(),
+
+                isRelay:
+                    true,
+
+                isDeleted:
+                    false
+
+            }
+
+        );
+
+
+        alert(
+            "Default 1 Channel Relay article restored."
+        );
+
+
+        await loadFirestoreArticles();
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        alert(
+            "Could not restore Relay article.\n\n" +
+            error.message
+        );
+
+    }
+
+};
+
+
+
+/* ==================================================
+   ARTICLE CONTENT → HTML
+================================================== */
+
+function convertArticleContentToHtml(
     text
 ) {
 
-    const escaped =
-        escapeHtml(text);
-
-
-    return escaped
-
+    const lines =
+        String(
+            text || ""
+        )
         .replace(
             /\r\n/g,
             "\n"
         )
+        .split("\n");
 
-        .replace(
-            /\n\n+/g,
-            "</p><p>"
-        )
 
-        .replace(
-            /\n/g,
-            "<br>"
-        )
+    let html = "";
 
-        .replace(
-            /^/,
-            "<p>"
-        )
+    let paragraph = [];
 
-        .replace(
-            /$/,
-            "</p>"
+    let listType = null;
+
+
+    function closeParagraph() {
+
+        if (
+            paragraph.length > 0
+        ) {
+
+            html +=
+                "<p>" +
+                paragraph
+                    .map(
+                        line =>
+                            formatInlineText(
+                                line
+                            )
+                    )
+                    .join("<br>") +
+                "</p>";
+
+            paragraph = [];
+
+        }
+
+    }
+
+
+    function closeList() {
+
+        if (
+            listType === "ul"
+        ) {
+
+            html += "</ul>";
+
+        }
+
+        if (
+            listType === "ol"
+        ) {
+
+            html += "</ol>";
+
+        }
+
+        listType = null;
+
+    }
+
+
+    function closeAll() {
+
+        closeParagraph();
+
+        closeList();
+
+    }
+
+
+    for (
+        let i = 0;
+        i < lines.length;
+        i++
+    ) {
+
+        const originalLine =
+            lines[i];
+
+
+        const line =
+            originalLine.trim();
+
+
+        /*
+           Blank line
+        */
+
+        if (!line) {
+
+            closeAll();
+
+            continue;
+
+        }
+
+
+        /*
+           Image
+        */
+
+        const imageMatch =
+            line.match(
+                /^\[IMAGE:(.+?)\|(.+?)\]$/
+            );
+
+
+        if (imageMatch) {
+
+            closeAll();
+
+
+            const src =
+                sanitizeImageSrc(
+                    imageMatch[1]
+                );
+
+
+            const alt =
+                escapeHtml(
+                    imageMatch[2]
+                );
+
+
+            html += `
+
+                <div class="relay-images">
+
+                    <div class="relay-image-box">
+
+                        <img
+                            src="${src}"
+                            alt="${alt}"
+                            loading="lazy"
+                        >
+
+                        <div class="relay-image-caption">
+                            ${alt}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+            continue;
+
+        }
+
+
+        /*
+           Reference link
+        */
+
+        const referenceMatch =
+            line.match(
+                /^\[REFERENCE:(.+?)\|(.+?)\]$/
+            );
+
+
+        if (referenceMatch) {
+
+            closeAll();
+
+
+            const url =
+                sanitizeLinkUrl(
+                    referenceMatch[1]
+                );
+
+
+            const label =
+                escapeHtml(
+                    referenceMatch[2]
+                );
+
+
+            html += `
+
+                <p>
+
+                    <a
+                        class="reference-link"
+                        href="${url}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        ${label}
+
+                    </a>
+
+                </p>
+
+            `;
+
+            continue;
+
+        }
+
+
+        /*
+           H2
+        */
+
+        if (
+            line.startsWith("## ")
+        ) {
+
+            closeAll();
+
+
+            html +=
+                "<h2>" +
+                formatInlineText(
+                    line.substring(3)
+                ) +
+                "</h2>";
+
+            continue;
+
+        }
+
+
+        /*
+           H3
+        */
+
+        if (
+            line.startsWith("### ")
+        ) {
+
+            closeAll();
+
+
+            html +=
+                "<h3>" +
+                formatInlineText(
+                    line.substring(4)
+                ) +
+                "</h3>";
+
+            continue;
+
+        }
+
+
+        /*
+           Unordered list
+        */
+
+        if (
+            line.startsWith("- ")
+        ) {
+
+            closeParagraph();
+
+
+            if (
+                listType !== "ul"
+            ) {
+
+                closeList();
+
+                html += "<ul>";
+
+                listType = "ul";
+
+            }
+
+
+            html +=
+
+                "<li>" +
+
+                formatInlineText(
+                    line.substring(2)
+                ) +
+
+                "</li>";
+
+            continue;
+
+        }
+
+
+        /*
+           Ordered list
+        */
+
+        const orderedMatch =
+            line.match(
+                /^(\d+)\.\s+(.*)$/
+            );
+
+
+        if (orderedMatch) {
+
+            closeParagraph();
+
+
+            if (
+                listType !== "ol"
+            ) {
+
+                closeList();
+
+                html += "<ol>";
+
+                listType = "ol";
+
+            }
+
+
+            html +=
+
+                "<li>" +
+
+                formatInlineText(
+                    orderedMatch[2]
+                ) +
+
+                "</li>";
+
+            continue;
+
+        }
+
+
+        /*
+           Horizontal separator
+        */
+
+        if (
+            line === "---"
+        ) {
+
+            closeAll();
+
+            html += "<hr>";
+
+            continue;
+
+        }
+
+
+        /*
+           Normal paragraph line
+        */
+
+        closeList();
+
+        paragraph.push(
+            line
         );
+
+    }
+
+
+    closeAll();
+
+
+    return html;
+
+}
+
+
+
+/* ==================================================
+   INLINE FORMAT
+================================================== */
+
+function formatInlineText(
+    text
+) {
+
+    let output =
+        escapeHtml(
+            text
+        );
+
+
+    /*
+       Bold **text**
+    */
+
+    output =
+        output.replace(
+            /\*\*(.+?)\*\*/g,
+            "<strong>$1</strong>"
+        );
+
+
+    return output;
+
+}
+
+
+
+/* ==================================================
+   SAFE IMAGE SOURCE
+================================================== */
+
+function sanitizeImageSrc(
+    value
+) {
+
+    const source =
+        String(
+            value || ""
+        ).trim();
+
+
+    if (
+        /^https?:\/\//i.test(
+            source
+        )
+    ) {
+
+        return escapeHtml(
+            source
+        );
+
+    }
+
+
+    if (
+        /^[a-zA-Z0-9._\/-]+$/.test(
+            source
+        )
+    ) {
+
+        return escapeHtml(
+            source
+        );
+
+    }
+
+
+    return "";
+
+}
+
+
+
+/* ==================================================
+   SAFE LINK
+================================================== */
+
+function sanitizeLinkUrl(
+    value
+) {
+
+    const url =
+        String(
+            value || ""
+        ).trim();
+
+
+    if (
+        /^https?:\/\//i.test(
+            url
+        )
+    ) {
+
+        return escapeHtml(
+            url
+        );
+
+    }
+
+
+    return "#";
 
 }
 
