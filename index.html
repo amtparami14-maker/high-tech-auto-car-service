@@ -712,6 +712,43 @@ body {
 
 
 /* ==================================================
+   LIBRARY READER ACTIONS
+================================================== */
+
+.library-reader-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 25px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #c9e4ef;
+}
+
+.library-delete-button {
+    padding: 10px 16px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #c62828;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.library-delete-button:hover {
+    background: #a91f1f;
+}
+
+
+/* ==================================================
    LIBRARY EDITOR
 ================================================== */
 
@@ -807,30 +844,6 @@ body {
 
 .library-cancel-button:hover {
     background: #555;
-}
-
-.library-delete-button {
-    display: inline-block;
-
-    margin-top: 20px;
-
-    padding: 10px 16px;
-
-    border: none;
-
-    border-radius: 7px;
-
-    background: #c62828;
-
-    color: white;
-
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-.library-delete-button:hover {
-    background: #a91f1f;
 }
 
 .library-empty {
@@ -988,6 +1001,10 @@ a:hover {
 
     .library-editor-buttons {
         flex-direction: column;
+    }
+
+    .library-reader-actions {
+        justify-content: center;
     }
 
 }
@@ -1256,7 +1273,6 @@ a:hover {
 
 <!-- ==================================================
      TRAINING ARTICLES
-     THIS SECTION IS KEPT
 ================================================== -->
 
 <section class="section-card">
@@ -1359,7 +1375,6 @@ a:hover {
 
 <!-- ==================================================
      LIBRARY
-     OLD READ NOTE IS NOW LIBRARY
 ================================================== -->
 
 <section class="library-section">
@@ -1487,13 +1502,6 @@ a:hover {
 
 <!-- ==================================================
      ORIGINAL RELAY NOTE CONTENT
-     
-     IMPORTANT:
-     THIS CONTENT IS PRESERVED.
-     
-     It is hidden inside TEMPLATE and displayed
-     through LIBRARY when "1. 1 Channel Relay"
-     is selected.
 ================================================== -->
 
 <template id="relayNoteTemplate">
@@ -1806,10 +1814,7 @@ a:hover {
     <ol>
 
         <li>
-
-            <strong>
-                Normally Closed (NC) ဘက်သို့ ဆက်နေချိန်:
-            </strong>
+            <strong>Normally Closed (NC) ဘက်သို့ ဆက်နေချိန်:</strong>
 
             <ul>
 
@@ -1826,15 +1831,11 @@ a:hover {
                 </li>
 
             </ul>
-
         </li>
 
 
         <li>
-
-            <strong>
-                Normally Open (NO) ဘက်သို့ ပြောင်းဆက်ချိန်:
-            </strong>
+            <strong>Normally Open (NO) ဘက်သို့ ပြောင်းဆက်ချိန်:</strong>
 
             <ul>
 
@@ -1851,7 +1852,6 @@ a:hover {
                 </li>
 
             </ul>
-
         </li>
 
     </ol>
@@ -1908,7 +1908,7 @@ a:hover {
 
 
     <h3>
-        2. အလင်းဖြင့်သာ Signal ပို့ခြင်း (Optical Transmi)
+        2. အလင်းဖြင့်သာ Signal ပို့ခြင်း (Optical Transmission)
     </h3>
 
 
@@ -2059,11 +2059,6 @@ a:hover {
     <h3>
         3. Back-EMF ကို ကာကွယ်ပေးပုံ (အဖြေ)
     </h3>
-
-
-    <p>
-        ကုန်ခမ်းသွားမည်)----+
-    </p>
 
 
     <ol>
@@ -2305,30 +2300,40 @@ function loadCustomer() {
     }
 
 
-    const customer =
-        JSON.parse(saved);
+    try {
+
+        const customer =
+            JSON.parse(saved);
 
 
-    document.getElementById("customerName").value =
-        customer.name || "";
+        document.getElementById("customerName").value =
+            customer.name || "";
 
-    document.getElementById("customerPhone").value =
-        customer.phone || "";
+        document.getElementById("customerPhone").value =
+            customer.phone || "";
 
-    document.getElementById("carBrand").value =
-        customer.brand || "";
+        document.getElementById("carBrand").value =
+            customer.brand || "";
 
-    document.getElementById("carModel").value =
-        customer.model || "";
+        document.getElementById("carModel").value =
+            customer.model || "";
 
-    document.getElementById("carYear").value =
-        customer.year || "";
+        document.getElementById("carYear").value =
+            customer.year || "";
 
-    document.getElementById("licenseNo").value =
-        customer.license || "";
+        document.getElementById("licenseNo").value =
+            customer.license || "";
 
-    document.getElementById("mileage").value =
-        customer.mileage || "";
+        document.getElementById("mileage").value =
+            customer.mileage || "";
+
+    } catch (error) {
+
+        console.log(
+            "Customer data could not be loaded."
+        );
+
+    }
 
 }
 
@@ -2432,7 +2437,13 @@ function updateGalleryDots() {
         );
 
 
-    dots.innerHTML = "";
+    if (!dots) {
+        return;
+    }
+
+
+    dots.innerHTML =
+        "";
 
 
     galleryImages.forEach(
@@ -2479,6 +2490,7 @@ function updateGalleryDots() {
 ================================================== */
 
 const articles = [
+
 
 /* --------------------------------------------------
    1
@@ -3796,6 +3808,66 @@ function readLibraryArticle(index) {
         article.html;
 
 
+    /*
+       DELETE BUTTON
+       User-created articles only
+    */
+
+    if (
+        article.id !==
+        "relay-note"
+    ) {
+
+        const actions =
+            document.createElement(
+                "div"
+            );
+
+
+        actions.className =
+            "library-reader-actions";
+
+
+        const deleteButton =
+            document.createElement(
+                "button"
+            );
+
+
+        deleteButton.type =
+            "button";
+
+
+        deleteButton.className =
+            "library-delete-button";
+
+
+        deleteButton.textContent =
+            "DELETE ARTICLE";
+
+
+        deleteButton.onclick =
+            function() {
+
+                deleteLibraryArticle(
+                    index
+                );
+
+            };
+
+
+        actions.appendChild(
+            deleteButton
+        );
+
+
+        reader.appendChild(
+            actions
+        );
+
+    }
+
+
     const buttons =
         document.querySelectorAll(
             ".library-article-button"
@@ -4093,6 +4165,10 @@ function deleteLibraryArticle(index) {
     }
 
 
+    /*
+       Protect the original Relay Note
+    */
+
     if (
         article.id ===
         "relay-note"
@@ -4109,7 +4185,9 @@ function deleteLibraryArticle(index) {
 
     const confirmed =
         confirm(
-            "Delete this article?"
+            'Delete "' +
+            article.title +
+            '"?'
         );
 
 
@@ -4160,12 +4238,15 @@ function deleteLibraryArticle(index) {
         <div class="library-empty">
 
             <h2>
-                LIBRARY
+                ARTICLE DELETED
             </h2>
 
             <p>
-                Select an article from the
-                ARTICLES list to start reading.
+                The article has been removed from the library.
+            </p>
+
+            <p>
+                Select another article from the ARTICLES list.
             </p>
 
         </div>
