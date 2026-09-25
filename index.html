@@ -2,17 +2,29 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>High Tech Auto Car Service</title>
 
-<link rel="icon" type="image/png" href="11.png">
+<link rel="icon"
+      type="image/png"
+      href="11.png">
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VCQX7TFJR5"></script>
+
+<!-- ==================================================
+     GOOGLE ANALYTICS
+================================================== -->
+
+<script async
+src="https://www.googletagmanager.com/gtag/js?id=G-VCQX7TFJR5">
+</script>
 
 <script>
+
 window.dataLayer = window.dataLayer || [];
 
 function gtag() {
@@ -22,29 +34,1085 @@ function gtag() {
 gtag('js', new Date());
 
 gtag('config', 'G-VCQX7TFJR5');
+
 </script>
 
+
+<!-- ==================================================
+     FIREBASE
+================================================== -->
+
+<script type="module">
+
+import {
+    initializeApp
+}
+from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    updateDoc,
+    deleteDoc,
+    doc,
+    query,
+    orderBy,
+    serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+
+/* ==================================================
+   FIREBASE CONFIG
+================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyCn_yfLOXWffWVYqc86HuwIWf8eSm9Jc1Q",
+
+    authDomain:
+        "high-tech-auto-library.firebaseapp.com",
+
+    projectId:
+        "high-tech-auto-library",
+
+    storageBucket:
+        "high-tech-auto-library.firebasestorage.app",
+
+    messagingSenderId:
+        "515125574430",
+
+    appId:
+        "1:515125574430:web:b79e41e4697428c0e8e70f",
+
+    measurementId:
+        "G-ZTT2QZQ81M"
+
+};
+
+
+/* ==================================================
+   INITIALIZE FIREBASE
+================================================== */
+
+const firebaseApp =
+    initializeApp(firebaseConfig);
+
+
+const db =
+    getFirestore(firebaseApp);
+
+
+const auth =
+    getAuth(firebaseApp);
+
+
+/* ==================================================
+   ADMIN EMAIL
+==================================================
+
+   IMPORTANT:
+
+   Change only this email to the email address
+   that you will use for Firebase Authentication.
+
+================================================== */
+
+const ADMIN_EMAIL =
+    "YOUR_ADMIN_EMAIL@example.com";
+
+
+/* ==================================================
+   FIREBASE GLOBALS
+================================================== */
+
+window.firebaseDB = db;
+
+window.firebaseAuth = auth;
+
+window.firebaseFunctions = {
+
+    collection,
+    addDoc,
+    getDocs,
+    updateDoc,
+    deleteDoc,
+    doc,
+    query,
+    orderBy,
+    serverTimestamp
+
+};
+
+
+/* ==================================================
+   AUTH STATE
+================================================== */
+
+onAuthStateChanged(
+    auth,
+    function(user) {
+
+        const adminArea =
+            document.getElementById("adminArea");
+
+        const loginArea =
+            document.getElementById("loginArea");
+
+        const adminStatus =
+            document.getElementById("adminStatus");
+
+        if (user) {
+
+            const isAdmin =
+                user.email &&
+                user.email.toLowerCase() ===
+                ADMIN_EMAIL.toLowerCase();
+
+            if (isAdmin) {
+
+                window.isLibraryAdmin = true;
+
+                if (adminArea) {
+                    adminArea.style.display = "block";
+                }
+
+                if (loginArea) {
+                    loginArea.style.display = "none";
+                }
+
+                if (adminStatus) {
+
+                    adminStatus.textContent =
+                        "ADMIN MODE: " + user.email;
+
+                }
+
+            } else {
+
+                window.isLibraryAdmin = false;
+
+                if (adminArea) {
+                    adminArea.style.display = "none";
+                }
+
+                if (loginArea) {
+                    loginArea.style.display = "none";
+                }
+
+            }
+
+        } else {
+
+            window.isLibraryAdmin = false;
+
+            if (adminArea) {
+                adminArea.style.display = "none";
+            }
+
+            if (loginArea) {
+                loginArea.style.display = "none";
+            }
+
+        }
+
+        if (
+            typeof window.loadFirebaseLibrary ===
+            "function"
+        ) {
+
+            window.loadFirebaseLibrary();
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   ADMIN LOGIN
+================================================== */
+
+window.adminLogin = async function() {
+
+    const email =
+        document.getElementById("adminEmail").value.trim();
+
+    const password =
+        document.getElementById("adminPassword").value;
+
+    const message =
+        document.getElementById("loginMessage");
+
+
+    if (!email || !password) {
+
+        message.textContent =
+            "Please enter email and password.";
+
+        return;
+
+    }
+
+
+    try {
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+        message.textContent =
+            "Login successful.";
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            "Login failed. Please check email and password.";
+
+    }
+
+};
+
+
+/* ==================================================
+   ADMIN LOGOUT
+================================================== */
+
+window.adminLogout = async function() {
+
+    try {
+
+        await signOut(auth);
+
+        alert("Admin logged out.");
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+};
+
+
+/* ==================================================
+   SHOW LOGIN
+================================================== */
+
+window.showAdminLogin = function() {
+
+    const loginArea =
+        document.getElementById("loginArea");
+
+    if (loginArea) {
+
+        loginArea.style.display =
+            "block";
+
+        loginArea.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }
+
+};
+
+
+/* ==================================================
+   HIDE LOGIN
+================================================== */
+
+window.hideAdminLogin = function() {
+
+    const loginArea =
+        document.getElementById("loginArea");
+
+    if (loginArea) {
+
+        loginArea.style.display =
+            "none";
+
+    }
+
+};
+
+
+/* ==================================================
+   FIREBASE LIBRARY LOADING
+================================================== */
+
+window.firebaseLibraryArticles = [];
+
+
+window.loadFirebaseLibrary = async function() {
+
+    const list =
+        document.getElementById(
+            "libraryArticleList"
+        );
+
+    if (!list) {
+        return;
+    }
+
+
+    try {
+
+        const articlesRef =
+            collection(
+                db,
+                "articles"
+            );
+
+
+        const snapshot =
+            await getDocs(
+                articlesRef
+            );
+
+
+        const articles = [];
+
+
+        snapshot.forEach(
+            function(firebaseDoc) {
+
+                const data =
+                    firebaseDoc.data();
+
+
+                /*
+                   Do not load the old test version
+                   of the protected Relay article.
+                */
+
+                if (
+                    data.protected === true ||
+                    data.id === "relay-note"
+                ) {
+
+                    return;
+
+                }
+
+
+                articles.push({
+
+                    id:
+                        firebaseDoc.id,
+
+                    title:
+                        data.title || "Untitled Article",
+
+                    html:
+                        data.content || "",
+
+                    createdAt:
+                        data.createdAt || null
+
+                });
+
+            }
+        );
+
+
+        articles.sort(
+            function(a, b) {
+
+                const aTime =
+                    a.createdAt &&
+                    a.createdAt.seconds
+                        ? a.createdAt.seconds
+                        : 0;
+
+                const bTime =
+                    b.createdAt &&
+                    b.createdAt.seconds
+                        ? b.createdAt.seconds
+                        : 0;
+
+                return aTime - bTime;
+
+            }
+        );
+
+
+        window.firebaseLibraryArticles =
+            articles;
+
+
+        renderLibraryArticles();
+
+
+    } catch (error) {
+
+        console.error(
+            "Firebase Library Error:",
+            error
+        );
+
+
+        list.innerHTML = `
+
+            <div style="
+                color:#b00020;
+                text-align:center;
+                padding:15px;
+            ">
+
+                Unable to load Firebase articles.
+
+            </div>
+
+        `;
+
+    }
+
+};
+
+
+/* ==================================================
+   SAVE FIREBASE ARTICLE
+================================================== */
+
+window.saveFirebaseArticle =
+async function(title, html) {
+
+    const articlesRef =
+        collection(
+            db,
+            "articles"
+        );
+
+
+    const newDoc =
+        await addDoc(
+            articlesRef,
+            {
+
+                title:
+                    title,
+
+                content:
+                    html,
+
+                protected:
+                    false,
+
+                createdAt:
+                    serverTimestamp(),
+
+                updatedAt:
+                    serverTimestamp()
+
+            }
+        );
+
+
+    return newDoc.id;
+
+};
+
+
+/* ==================================================
+   UPDATE FIREBASE ARTICLE
+================================================== */
+
+window.updateFirebaseArticle =
+async function(id, title, html) {
+
+    const articleRef =
+        doc(
+            db,
+            "articles",
+            id
+        );
+
+
+    await updateDoc(
+        articleRef,
+        {
+
+            title:
+                title,
+
+            content:
+                html,
+
+            updatedAt:
+                serverTimestamp()
+
+        }
+    );
+
+};
+
+
+/* ==================================================
+   DELETE FIREBASE ARTICLE
+================================================== */
+
+window.deleteFirebaseArticle =
+async function(id) {
+
+    const articleRef =
+        doc(
+            db,
+            "articles",
+            id
+        );
+
+
+    await deleteDoc(
+        articleRef
+    );
+
+};
+
+
+/* ==================================================
+   ADD NEW FIREBASE ARTICLE
+================================================== */
+
+window.createFirebaseLibraryArticle =
+async function() {
+
+    if (!window.isLibraryAdmin) {
+
+        alert(
+            "Admin login is required."
+        );
+
+        return;
+
+    }
+
+
+    const titleInput =
+        document.getElementById(
+            "newArticleTitle"
+        );
+
+
+    const contentInput =
+        document.getElementById(
+            "newArticleContent"
+        );
+
+
+    const title =
+        titleInput.value.trim();
+
+
+    const text =
+        contentInput.value.trim();
+
+
+    if (!title) {
+
+        alert(
+            "Please enter an article title."
+        );
+
+        titleInput.focus();
+
+        return;
+
+    }
+
+
+    if (!text) {
+
+        alert(
+            "Please write the article content."
+        );
+
+        contentInput.focus();
+
+        return;
+
+    }
+
+
+    try {
+
+        const html =
+            convertPlainTextToHtml(
+                text
+            );
+
+
+        await saveFirebaseArticle(
+            title,
+            html
+        );
+
+
+        await loadFirebaseLibrary();
+
+
+        cancelLibraryEditor();
+
+
+        const newIndex =
+            getAllLibraryArticles().length - 1;
+
+
+        readLibraryArticle(
+            newIndex
+        );
+
+
+        alert(
+            "Article saved successfully."
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Article could not be saved.\n\n" +
+            error.message
+        );
+
+    }
+
+};
+
+
+/* ==================================================
+   UPDATE ARTICLE
+================================================== */
+
+window.updateLibraryArticle =
+async function() {
+
+    if (!window.isLibraryAdmin) {
+
+        alert(
+            "Admin login is required."
+        );
+
+        return;
+
+    }
+
+
+    const id =
+        document.getElementById(
+            "editArticleId"
+        ).value;
+
+
+    const title =
+        document.getElementById(
+            "editArticleTitle"
+        ).value.trim();
+
+
+    const content =
+        document.getElementById(
+            "editArticleContent"
+        ).value.trim();
+
+
+    if (!id) {
+
+        return;
+
+    }
+
+
+    if (!title) {
+
+        alert(
+            "Please enter an article title."
+        );
+
+        return;
+
+    }
+
+
+    if (!content) {
+
+        alert(
+            "Please enter article content."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const html =
+            convertPlainTextToHtml(
+                content
+            );
+
+
+        await updateFirebaseArticle(
+            id,
+            title,
+            html
+        );
+
+
+        await loadFirebaseLibrary();
+
+
+        document.getElementById(
+            "libraryEditor"
+        ).style.display =
+            "none";
+
+
+        const updatedIndex =
+            getAllLibraryArticles()
+                .findIndex(
+                    function(article) {
+
+                        return article.id === id;
+
+                    }
+                );
+
+
+        if (updatedIndex !== -1) {
+
+            readLibraryArticle(
+                updatedIndex
+            );
+
+        }
+
+
+        alert(
+            "Article updated successfully."
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Article could not be updated.\n\n" +
+            error.message
+        );
+
+    }
+
+};
+
+
+/* ==================================================
+   EDIT ARTICLE
+================================================== */
+
+window.editLibraryArticle =
+function(index) {
+
+    if (!window.isLibraryAdmin) {
+
+        alert(
+            "Admin login is required."
+        );
+
+        return;
+
+    }
+
+
+    const articles =
+        getAllLibraryArticles();
+
+
+    const article =
+        articles[index];
+
+
+    if (!article) {
+
+        return;
+
+    }
+
+
+    if (
+        article.id ===
+        "relay-note"
+    ) {
+
+        alert(
+            "The original Relay Note cannot be edited."
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "editArticleId"
+    ).value =
+        article.id;
+
+
+    document.getElementById(
+        "editArticleTitle"
+    ).value =
+        article.title;
+
+
+    document.getElementById(
+        "editArticleContent"
+    ).value =
+        htmlToPlainText(
+            article.html
+        );
+
+
+    document.getElementById(
+        "newArticleEditorTitle"
+    ).textContent =
+        "EDIT ARTICLE";
+
+
+    const editor =
+        document.getElementById(
+            "libraryEditor"
+        );
+
+
+    editor.style.display =
+        "block";
+
+
+    editor.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+};
+
+
+/* ==================================================
+   DELETE ARTICLE
+================================================== */
+
+window.deleteLibraryArticle =
+async function(index) {
+
+    if (!window.isLibraryAdmin) {
+
+        alert(
+            "Admin login is required."
+        );
+
+        return;
+
+    }
+
+
+    const articles =
+        getAllLibraryArticles();
+
+
+    const article =
+        articles[index];
+
+
+    if (!article) {
+
+        return;
+
+    }
+
+
+    if (
+        article.id ===
+        "relay-note"
+    ) {
+
+        alert(
+            "The original Relay Note cannot be deleted."
+        );
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+            'Delete "' +
+            article.title +
+            '"?'
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    try {
+
+        await deleteFirebaseArticle(
+            article.id
+        );
+
+
+        await loadFirebaseLibrary();
+
+
+        document.getElementById(
+            "libraryReader"
+        ).innerHTML = `
+
+            <div class="library-empty">
+
+                <h2>
+                    ARTICLE DELETED
+                </h2>
+
+                <p>
+                    The article has been removed from the library.
+                </p>
+
+                <p>
+                    Select another article from the ARTICLES list.
+                </p>
+
+            </div>
+
+        `;
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Article could not be deleted.\n\n" +
+            error.message
+        );
+
+    }
+
+};
+
+
+/* ==================================================
+   HTML TO PLAIN TEXT
+================================================== */
+
+window.htmlToPlainText =
+function(html) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.innerHTML =
+        html;
+
+
+    return div.innerText;
+
+};
+
+
+/* ==================================================
+   INITIAL FIREBASE LOAD
+================================================== */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        setTimeout(
+            function() {
+
+                if (
+                    typeof window.loadFirebaseLibrary ===
+                    "function"
+                ) {
+
+                    window.loadFirebaseLibrary();
+
+                }
+
+            },
+            500
+        );
+
+    }
+);
+
+</script>
+
+
 <style>
+
+/* ==================================================
+   GENERAL
+================================================== */
 
 * {
     box-sizing: border-box;
 }
 
 body {
+
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
     background:
+
         linear-gradient(
             rgba(156,221,255,0.92),
             rgba(156,221,255,0.92)
         ),
+
         repeating-linear-gradient(
             0deg,
             transparent,
             transparent 24px,
             rgba(0,100,180,0.08) 25px
         ),
+
         repeating-linear-gradient(
             90deg,
             transparent,
@@ -53,6 +1121,7 @@ body {
         );
 
     color: #123;
+
 }
 
 
@@ -61,21 +1130,26 @@ body {
 ================================================== */
 
 .header {
+
     min-height: 220px;
 
     padding: 25px 40px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     gap: 20px;
 
     background:
+
         linear-gradient(
             rgba(5,25,55,0.90),
             rgba(8,55,95,0.90)
         ),
+
         repeating-linear-gradient(
             45deg,
             transparent,
@@ -84,41 +1158,54 @@ body {
             transparent 22px
         );
 
-    border-bottom: 4px solid #00d9ff;
+    border-bottom:
+        4px solid #00d9ff;
 
     box-shadow:
         0 4px 15px rgba(0,0,0,0.35);
+
 }
 
 .logo {
+
     width: 90px;
+
     height: 90px;
 
     object-fit: contain;
+
 }
 
 .header-center {
+
     text-align: center;
+
     flex: 1;
+
 }
 
 .header h1 {
-    margin: 0 0 15px;
+
+    margin:
+        0 0 15px;
 
     color: white;
 
     font-size: 39px;
 
     letter-spacing: 1px;
+
 }
 
 .address,
 .phone {
+
     color: white;
 
     font-size: 17px;
 
     margin: 6px 0;
+
 }
 
 
@@ -127,17 +1214,23 @@ body {
 ================================================== */
 
 .customer-tag {
-    margin: 25px 40px;
 
-    padding: 15px 20px;
+    margin:
+        25px 40px;
+
+    padding:
+        15px 20px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     gap: 15px;
 
     background:
+
         linear-gradient(
             135deg,
             #004d80,
@@ -152,23 +1245,31 @@ body {
 
     box-shadow:
         0 4px 12px rgba(0,0,0,0.25);
+
 }
 
 .customer-tag img {
+
     width: 70px;
+
     height: 70px;
 
     object-fit: contain;
+
 }
 
 .customer-tag h2 {
+
     margin: 0;
 
     font-size: 24px;
+
 }
 
 .arrow {
+
     font-size: 25px;
+
 }
 
 
@@ -177,49 +1278,62 @@ body {
 ================================================== */
 
 .customer-section {
+
     display: none;
 
-    margin: 20px 40px;
+    margin:
+        20px 40px;
 
     padding: 25px;
 
-    background: rgba(255,255,255,0.95);
+    background:
+        rgba(255,255,255,0.95);
 
     border-radius: 12px;
 
     box-shadow:
         0 4px 15px rgba(0,0,0,0.2);
+
 }
 
 .customer-section h2 {
+
     text-align: center;
 
     color: #004d80;
+
 }
 
 .customer-section form {
+
     display: grid;
 
     grid-template-columns:
         repeat(2, 1fr);
 
     gap: 15px;
+
 }
 
 .customer-section input {
+
     width: 100%;
 
     padding: 12px;
 
-    border: 1px solid #aaa;
+    border:
+        1px solid #aaa;
 
     border-radius: 7px;
 
     font-size: 16px;
+
 }
 
 .save-button {
-    grid-column: 1 / -1;
+
+    grid-column:
+        1 / -1;
 
     padding: 13px;
 
@@ -227,7 +1341,8 @@ body {
 
     border-radius: 8px;
 
-    background: #006bb3;
+    background:
+        #006bb3;
 
     color: white;
 
@@ -236,10 +1351,14 @@ body {
     font-weight: bold;
 
     cursor: pointer;
+
 }
 
 .save-button:hover {
-    background: #004d80;
+
+    background:
+        #004d80;
+
 }
 
 
@@ -248,19 +1367,24 @@ body {
 ================================================== */
 
 .main-images {
+
     display: flex;
 
     justify-content: center;
+
     align-items: center;
 
     gap: 25px;
 
     flex-wrap: nowrap;
 
-    margin: 30px 20px;
+    margin:
+        30px 20px;
+
 }
 
 .main-images img {
+
     width: 32%;
 
     height: 180px;
@@ -268,6 +1392,7 @@ body {
     object-fit: contain;
 
     border-radius: 10px;
+
 }
 
 
@@ -276,36 +1401,51 @@ body {
 ================================================== */
 
 .services {
-    margin: 30px 40px;
+
+    margin:
+        30px 40px;
 
     padding: 25px;
 
-    background: rgba(255,255,255,0.95);
+    background:
+        rgba(255,255,255,0.95);
 
     border-radius: 12px;
 
     box-shadow:
         0 4px 15px rgba(0,0,0,0.2);
+
 }
 
 .services h2 {
+
     text-align: center;
 
-    color: #004d80;
+    color:
+        #004d80;
+
 }
 
 .services ul {
-    max-width: 700px;
 
-    margin: auto;
+    max-width:
+        700px;
 
-    padding-left: 25px;
+    margin:
+        auto;
+
+    padding-left:
+        25px;
+
 }
 
 .services li {
+
     padding: 8px;
 
-    font-size: 18px;
+    font-size:
+        18px;
+
 }
 
 
@@ -314,129 +1454,200 @@ body {
 ================================================== */
 
 .section-card {
-    margin: 30px 40px;
 
-    padding: 25px;
+    margin:
+        30px 40px;
 
-    background: rgba(255,255,255,0.96);
+    padding:
+        25px;
 
-    border-radius: 12px;
+    background:
+        rgba(255,255,255,0.96);
+
+    border-radius:
+        12px;
 
     box-shadow:
         0 4px 15px rgba(0,0,0,0.2);
+
 }
 
 .section-title {
-    text-align: center;
 
-    color: #004d80;
+    text-align:
+        center;
 
-    margin-top: 0;
+    color:
+        #004d80;
+
+    margin-top:
+        0;
+
 }
 
 
 /* ==================================================
-   WORKSHOP GALLERY
+   GALLERY
 ================================================== */
 
 .gallery-frame {
-    position: relative;
 
-    max-width: 850px;
+    position:
+        relative;
 
-    margin: 20px auto;
+    max-width:
+        850px;
 
-    background: #071f35;
+    margin:
+        20px auto;
 
-    padding: 15px;
+    background:
+        #071f35;
 
-    border-radius: 12px;
+    padding:
+        15px;
 
-    text-align: center;
+    border-radius:
+        12px;
+
+    text-align:
+        center;
+
 }
 
 .gallery-image {
-    width: auto;
 
-    max-width: 450px;
+    width:
+        auto;
 
-    max-height: 150px;
+    max-width:
+        450px;
 
-    height: auto;
+    max-height:
+        150px;
 
-    object-fit: contain;
+    height:
+        auto;
 
-    border-radius: 8px;
+    object-fit:
+        contain;
 
-    display: block;
+    border-radius:
+        8px;
 
-    margin: auto;
+    display:
+        block;
+
+    margin:
+        auto;
+
 }
 
 .gallery-arrow {
-    position: absolute;
 
-    top: 50%;
+    position:
+        absolute;
 
-    transform: translateY(-50%);
+    top:
+        50%;
 
-    width: 50px;
+    transform:
+        translateY(-50%);
 
-    height: 50px;
+    width:
+        50px;
 
-    border: none;
+    height:
+        50px;
 
-    border-radius: 50%;
+    border:
+        none;
 
-    background: rgba(0,0,0,0.65);
+    border-radius:
+        50%;
 
-    color: white;
+    background:
+        rgba(0,0,0,0.65);
 
-    font-size: 25px;
+    color:
+        white;
 
-    font-weight: bold;
+    font-size:
+        25px;
 
-    cursor: pointer;
+    font-weight:
+        bold;
+
+    cursor:
+        pointer;
+
 }
 
 .gallery-arrow:hover {
-    background: rgba(0,110,180,0.9);
+
+    background:
+        rgba(0,110,180,0.9);
+
 }
 
 .gallery-left {
-    left: 25px;
+
+    left:
+        25px;
+
 }
 
 .gallery-right {
-    right: 25px;
+
+    right:
+        25px;
+
 }
 
 .gallery-caption {
-    color: white;
 
-    font-size: 17px;
+    color:
+        white;
 
-    margin: 12px 0 3px;
+    font-size:
+        17px;
+
+    margin:
+        12px 0 3px;
+
 }
 
 .gallery-dots {
-    text-align: center;
 
-    margin-top: 15px;
+    text-align:
+        center;
+
+    margin-top:
+        15px;
+
 }
 
 .gallery-dot {
-    display: inline-block;
 
-    margin: 0 5px;
+    display:
+        inline-block;
 
-    font-size: 18px;
+    margin:
+        0 5px;
 
-    color: #777;
+    font-size:
+        18px;
+
+    color:
+        #777;
+
 }
 
 .gallery-dot.active {
-    color: #006bb3;
+
+    color:
+        #006bb3;
+
 }
 
 
@@ -445,90 +1656,143 @@ body {
 ================================================== */
 
 .article-select-box {
-    max-width: 800px;
 
-    margin: 20px auto;
+    max-width:
+        800px;
+
+    margin:
+        20px auto;
+
 }
 
 .article-select-box label {
-    display: block;
 
-    margin-bottom: 8px;
+    display:
+        block;
 
-    font-weight: bold;
+    margin-bottom:
+        8px;
 
-    color: #004d80;
+    font-weight:
+        bold;
+
+    color:
+        #004d80;
+
 }
 
 .article-select {
-    width: 100%;
 
-    padding: 13px;
+    width:
+        100%;
 
-    border: 2px solid #008dcc;
+    padding:
+        13px;
 
-    border-radius: 8px;
+    border:
+        2px solid #008dcc;
 
-    background: white;
+    border-radius:
+        8px;
 
-    font-size: 17px;
+    background:
+        white;
 
-    cursor: pointer;
+    font-size:
+        17px;
+
+    cursor:
+        pointer;
+
 }
 
 .article-hint {
-    text-align: center;
 
-    color: #555;
+    text-align:
+        center;
 
-    margin-top: 12px;
+    color:
+        #555;
+
+    margin-top:
+        12px;
+
 }
 
 .article-content {
-    display: none;
 
-    max-width: 900px;
+    display:
+        none;
 
-    margin: 25px auto 5px;
+    max-width:
+        900px;
 
-    padding: 25px;
+    margin:
+        25px auto 5px;
 
-    background: #f8fcff;
+    padding:
+        25px;
 
-    border-left: 5px solid #008dcc;
+    background:
+        #f8fcff;
 
-    border-radius: 8px;
+    border-left:
+        5px solid #008dcc;
 
-    line-height: 1.7;
+    border-radius:
+        8px;
+
+    line-height:
+        1.7;
+
 }
 
 .article-content h2 {
-    margin-top: 0;
 
-    color: #004d80;
+    margin-top:
+        0;
+
+    color:
+        #004d80;
+
 }
 
 .article-content h3 {
-    color: #006bb3;
+
+    color:
+        #006bb3;
+
 }
 
 .article-content ul,
 .article-content ol {
-    padding-left: 25px;
+
+    padding-left:
+        25px;
+
 }
 
 .article-content li {
-    margin-bottom: 7px;
+
+    margin-bottom:
+        7px;
+
 }
 
 .key-box {
-    margin-top: 20px;
 
-    padding: 15px;
+    margin-top:
+        20px;
 
-    background: #e3f5ff;
+    padding:
+        15px;
 
-    border-radius: 8px;
+    background:
+        #e3f5ff;
+
+    border-radius:
+        8px;
+
 }
 
 
@@ -537,214 +1801,354 @@ body {
 ================================================== */
 
 .library-section {
-    margin: 30px 40px;
 
-    padding: 25px;
+    margin:
+        30px 40px;
 
-    background: rgba(255,255,255,0.96);
+    padding:
+        25px;
 
-    border-radius: 12px;
+    background:
+        rgba(255,255,255,0.96);
+
+    border-radius:
+        12px;
 
     box-shadow:
         0 4px 15px rgba(0,0,0,0.2);
+
 }
 
 .library-title {
-    text-align: center;
 
-    color: #004d80;
+    text-align:
+        center;
 
-    margin-top: 0;
+    color:
+        #004d80;
+
+    margin-top:
+        0;
+
 }
 
 .library-layout {
-    display: grid;
+
+    display:
+        grid;
 
     grid-template-columns:
         280px 1fr;
 
-    gap: 25px;
+    gap:
+        25px;
 
-    margin-top: 25px;
+    margin-top:
+        25px;
+
 }
 
 .library-list {
-    background: #eef9ff;
 
-    border: 1px solid #b9e5f7;
+    background:
+        #eef9ff;
 
-    border-radius: 10px;
+    border:
+        1px solid #b9e5f7;
 
-    padding: 15px;
+    border-radius:
+        10px;
 
-    height: fit-content;
+    padding:
+        15px;
+
+    height:
+        fit-content;
+
 }
 
 .library-list-title {
-    margin-top: 0;
 
-    color: #004d80;
+    margin-top:
+        0;
 
-    text-align: center;
+    color:
+        #004d80;
+
+    text-align:
+        center;
+
 }
 
 .library-article-button {
-    display: block;
 
-    width: 100%;
+    display:
+        block;
 
-    padding: 12px 14px;
+    width:
+        100%;
 
-    margin-bottom: 10px;
+    padding:
+        12px 14px;
 
-    border: 1px solid #008dcc;
+    margin-bottom:
+        10px;
 
-    border-radius: 8px;
+    border:
+        1px solid #008dcc;
 
-    background: white;
+    border-radius:
+        8px;
 
-    color: #004d80;
+    background:
+        white;
 
-    text-align: left;
+    color:
+        #004d80;
 
-    font-size: 15px;
+    text-align:
+        left;
 
-    font-weight: bold;
+    font-size:
+        15px;
 
-    cursor: pointer;
+    font-weight:
+        bold;
+
+    cursor:
+        pointer;
+
 }
 
 .library-article-button:hover {
-    background: #dff5ff;
+
+    background:
+        #dff5ff;
+
 }
 
 .library-article-button.active {
-    background: #006bb3;
 
-    color: white;
+    background:
+        #006bb3;
+
+    color:
+        white;
+
 }
 
 .library-new-button {
-    display: block;
 
-    width: 100%;
+    display:
+        none;
 
-    padding: 13px;
+    width:
+        100%;
 
-    margin-top: 15px;
+    padding:
+        13px;
 
-    border: none;
+    margin-top:
+        15px;
 
-    border-radius: 8px;
+    border:
+        none;
 
-    background: #008a45;
+    border-radius:
+        8px;
 
-    color: white;
+    background:
+        #008a45;
 
-    font-size: 16px;
+    color:
+        white;
 
-    font-weight: bold;
+    font-size:
+        16px;
 
-    cursor: pointer;
+    font-weight:
+        bold;
+
+    cursor:
+        pointer;
+
 }
 
 .library-new-button:hover {
-    background: #006b35;
+
+    background:
+        #006b35;
+
 }
 
 .library-reader {
-    min-height: 250px;
 
-    padding: 25px;
+    min-height:
+        250px;
 
-    background: #f8fcff;
+    padding:
+        25px;
 
-    border-left: 5px solid #008dcc;
+    background:
+        #f8fcff;
 
-    border-radius: 8px;
+    border-left:
+        5px solid #008dcc;
 
-    line-height: 1.7;
+    border-radius:
+        8px;
+
+    line-height:
+        1.7;
+
 }
 
 .library-reader h2 {
-    margin-top: 0;
 
-    color: #004d80;
+    margin-top:
+        0;
+
+    color:
+        #004d80;
+
 }
 
 .library-reader h3 {
-    color: #006bb3;
+
+    color:
+        #006bb3;
+
 }
 
 .library-reader ul,
 .library-reader ol {
-    padding-left: 25px;
+
+    padding-left:
+        25px;
+
 }
 
 .library-reader li {
-    margin-bottom: 7px;
+
+    margin-bottom:
+        7px;
+
 }
 
 .library-images {
-    display: flex;
 
-    justify-content: center;
+    display:
+        flex;
 
-    align-items: center;
+    justify-content:
+        center;
 
-    flex-wrap: wrap;
+    align-items:
+        center;
 
-    gap: 15px;
+    flex-wrap:
+        wrap;
 
-    margin: 20px 0;
+    gap:
+        15px;
+
+    margin:
+        20px 0;
+
 }
 
 .library-images img {
-    max-width: 100%;
 
-    height: auto;
+    max-width:
+        100%;
 
-    border-radius: 8px;
+    height:
+        auto;
+
+    border-radius:
+        8px;
 
     box-shadow:
         0 3px 10px rgba(0,0,0,0.2);
+
 }
 
 
 /* ==================================================
-   LIBRARY READER ACTIONS
+   READER ACTIONS
 ================================================== */
 
 .library-reader-actions {
-    display: flex;
 
-    justify-content: flex-end;
+    display:
+        flex;
 
-    margin-top: 25px;
+    justify-content:
+        flex-end;
 
-    padding-top: 15px;
+    gap:
+        10px;
 
-    border-top: 1px solid #c9e4ef;
+    margin-top:
+        25px;
+
+    padding-top:
+        15px;
+
+    border-top:
+        1px solid #c9e4ef;
+
+}
+
+.library-edit-button,
+.library-delete-button {
+
+    padding:
+        10px 16px;
+
+    border:
+        none;
+
+    border-radius:
+        7px;
+
+    color:
+        white;
+
+    font-weight:
+        bold;
+
+    cursor:
+        pointer;
+
+}
+
+.library-edit-button {
+
+    background:
+        #006bb3;
+
+}
+
+.library-edit-button:hover {
+
+    background:
+        #004d80;
+
 }
 
 .library-delete-button {
-    padding: 10px 16px;
 
-    border: none;
+    background:
+        #c62828;
 
-    border-radius: 7px;
-
-    background: #c62828;
-
-    color: white;
-
-    font-weight: bold;
-
-    cursor: pointer;
 }
 
 .library-delete-button:hover {
-    background: #a91f1f;
+
+    background:
+        #a91f1f;
+
 }
 
 
@@ -753,105 +2157,399 @@ body {
 ================================================== */
 
 .library-editor {
-    display: none;
 
-    margin-top: 25px;
+    display:
+        none;
 
-    padding: 20px;
+    margin-top:
+        25px;
 
-    background: #eef9ff;
+    padding:
+        20px;
 
-    border: 2px solid #b9e5f7;
+    background:
+        #eef9ff;
 
-    border-radius: 10px;
+    border:
+        2px solid #b9e5f7;
+
+    border-radius:
+        10px;
+
 }
 
 .library-editor h3 {
-    margin-top: 0;
 
-    color: #004d80;
+    margin-top:
+        0;
+
+    color:
+        #004d80;
+
 }
 
 .library-editor label {
-    display: block;
 
-    margin: 12px 0 6px;
+    display:
+        block;
 
-    color: #004d80;
+    margin:
+        12px 0 6px;
 
-    font-weight: bold;
+    color:
+        #004d80;
+
+    font-weight:
+        bold;
+
 }
 
 .library-editor input,
 .library-editor textarea {
-    width: 100%;
 
-    padding: 12px;
+    width:
+        100%;
 
-    border: 1px solid #aaa;
+    padding:
+        12px;
 
-    border-radius: 7px;
+    border:
+        1px solid #aaa;
 
-    font-size: 16px;
+    border-radius:
+        7px;
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-size:
+        16px;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
 }
 
 .library-editor textarea {
-    min-height: 250px;
 
-    resize: vertical;
+    min-height:
+        250px;
 
-    line-height: 1.6;
+    resize:
+        vertical;
+
+    line-height:
+        1.6;
+
 }
 
 .library-editor-buttons {
-    display: flex;
 
-    gap: 10px;
+    display:
+        flex;
 
-    margin-top: 15px;
+    gap:
+        10px;
+
+    margin-top:
+        15px;
+
 }
 
 .library-save-button,
 .library-cancel-button {
-    padding: 12px 20px;
 
-    border: none;
+    padding:
+        12px 20px;
 
-    border-radius: 8px;
+    border:
+        none;
 
-    color: white;
+    border-radius:
+        8px;
 
-    font-size: 15px;
+    color:
+        white;
 
-    font-weight: bold;
+    font-size:
+        15px;
 
-    cursor: pointer;
+    font-weight:
+        bold;
+
+    cursor:
+        pointer;
+
 }
 
 .library-save-button {
-    background: #008a45;
-}
 
-.library-save-button:hover {
-    background: #006b35;
+    background:
+        #008a45;
+
 }
 
 .library-cancel-button {
-    background: #777;
-}
 
-.library-cancel-button:hover {
-    background: #555;
+    background:
+        #777;
+
 }
 
 .library-empty {
-    text-align: center;
 
-    color: #666;
+    text-align:
+        center;
 
-    padding: 40px 20px;
+    color:
+        #666;
+
+    padding:
+        40px 20px;
+
+}
+
+
+/* ==================================================
+   ADMIN LOGIN
+================================================== */
+
+.admin-login-button {
+
+    display:
+        block;
+
+    margin:
+        20px auto;
+
+    padding:
+        10px 18px;
+
+    border:
+        none;
+
+    border-radius:
+        7px;
+
+    background:
+        #555;
+
+    color:
+        white;
+
+    font-weight:
+        bold;
+
+    cursor:
+        pointer;
+
+}
+
+.login-area {
+
+    display:
+        none;
+
+    max-width:
+        500px;
+
+    margin:
+        20px auto;
+
+    padding:
+        20px;
+
+    background:
+        #eef9ff;
+
+    border:
+        2px solid #b9e5f7;
+
+    border-radius:
+        10px;
+
+}
+
+.login-area h3 {
+
+    margin-top:
+        0;
+
+    text-align:
+        center;
+
+    color:
+        #004d80;
+
+}
+
+.login-area input {
+
+    width:
+        100%;
+
+    padding:
+        12px;
+
+    margin:
+        6px 0;
+
+    border:
+        1px solid #aaa;
+
+    border-radius:
+        7px;
+
+    font-size:
+        16px;
+
+}
+
+.login-buttons {
+
+    display:
+        flex;
+
+    gap:
+        10px;
+
+    margin-top:
+        10px;
+
+}
+
+.login-button {
+
+    flex:
+        1;
+
+    padding:
+        11px;
+
+    border:
+        none;
+
+    border-radius:
+        7px;
+
+    background:
+        #006bb3;
+
+    color:
+        white;
+
+    font-weight:
+        bold;
+
+    cursor:
+        pointer;
+
+}
+
+.login-cancel {
+
+    flex:
+        1;
+
+    padding:
+        11px;
+
+    border:
+        none;
+
+    border-radius:
+        7px;
+
+    background:
+        #777;
+
+    color:
+        white;
+
+    font-weight:
+        bold;
+
+    cursor:
+        pointer;
+
+}
+
+.login-message {
+
+    text-align:
+        center;
+
+    color:
+        #b00020;
+
+    margin-top:
+        10px;
+
+}
+
+.admin-area {
+
+    display:
+        none;
+
+    margin:
+        15px 0;
+
+    padding:
+        12px;
+
+    background:
+        #e7fff1;
+
+    border:
+        1px solid #8bd8aa;
+
+    border-radius:
+        8px;
+
+    text-align:
+        center;
+
+}
+
+.admin-status {
+
+    display:
+        block;
+
+    margin-bottom:
+        10px;
+
+    color:
+        #006b35;
+
+    font-weight:
+        bold;
+
+}
+
+.logout-button {
+
+    padding:
+        8px 15px;
+
+    border:
+        none;
+
+    border-radius:
+        6px;
+
+    background:
+        #c62828;
+
+    color:
+        white;
+
+    font-weight:
+        bold;
+
+    cursor:
+        pointer;
+
 }
 
 
@@ -861,23 +2559,33 @@ body {
 
 .about-us,
 .contact {
-    margin: 30px 40px;
 
-    padding: 25px;
+    margin:
+        30px 40px;
 
-    background: rgba(255,255,255,0.96);
+    padding:
+        25px;
 
-    border-radius: 12px;
+    background:
+        rgba(255,255,255,0.96);
+
+    border-radius:
+        12px;
 
     box-shadow:
         0 4px 15px rgba(0,0,0,0.2);
+
 }
 
 .about-us h2,
 .contact h2 {
-    color: #004d80;
 
-    text-align: center;
+    color:
+        #004d80;
+
+    text-align:
+        center;
+
 }
 
 
@@ -886,29 +2594,40 @@ body {
 ================================================== */
 
 .thank-you {
-    margin: 30px 40px 50px;
 
-    padding: 30px;
+    margin:
+        30px 40px 50px;
 
-    text-align: center;
+    padding:
+        30px;
+
+    text-align:
+        center;
 
     background:
+
         linear-gradient(
             135deg,
             #004d80,
             #008dcc
         );
 
-    color: white;
+    color:
+        white;
 
-    border-radius: 12px;
+    border-radius:
+        12px;
 
     box-shadow:
         0 4px 15px rgba(0,0,0,0.25);
+
 }
 
 .thank-you h2 {
-    margin-top: 0;
+
+    margin-top:
+        0;
+
 }
 
 
@@ -917,13 +2636,20 @@ body {
 ================================================== */
 
 a {
-    color: #006bb3;
 
-    font-weight: bold;
+    color:
+        #006bb3;
+
+    font-weight:
+        bold;
+
 }
 
 a:hover {
-    color: #004d80;
+
+    color:
+        #004d80;
+
 }
 
 
@@ -931,26 +2657,41 @@ a:hover {
    MOBILE
 ================================================== */
 
-@media (max-width: 800px) {
+@media (max-width:800px) {
 
     .header {
-        padding: 20px;
 
-        flex-direction: column;
+        padding:
+            20px;
+
+        flex-direction:
+            column;
+
     }
 
     .header h1 {
-        font-size: 28px;
+
+        font-size:
+            28px;
+
     }
 
     .logo {
-        width: 75px;
-        height: 75px;
+
+        width:
+            75px;
+
+        height:
+            75px;
+
     }
 
     .address,
     .phone {
-        font-size: 14px;
+
+        font-size:
+            14px;
+
     }
 
     .customer-tag,
@@ -962,54 +2703,91 @@ a:hover {
     .about-us,
     .contact,
     .thank-you {
-        margin-left: 15px;
 
-        margin-right: 15px;
+        margin-left:
+            15px;
+
+        margin-right:
+            15px;
+
     }
 
     .customer-section form {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+            1fr;
+
     }
 
     .gallery-arrow {
-        width: 42px;
 
-        height: 42px;
+        width:
+            42px;
 
-        font-size: 20px;
+        height:
+            42px;
+
+        font-size:
+            20px;
+
     }
 
     .gallery-left {
-        left: 10px;
+
+        left:
+            10px;
+
     }
 
     .gallery-right {
-        right: 10px;
+
+        right:
+            10px;
+
     }
 
     .article-content {
-        padding: 18px;
+
+        padding:
+            18px;
+
     }
 
     .library-layout {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+            1fr;
+
     }
 
     .library-reader {
-        padding: 18px;
+
+        padding:
+            18px;
+
     }
 
     .library-editor-buttons {
-        flex-direction: column;
+
+        flex-direction:
+            column;
+
     }
 
     .library-reader-actions {
-        justify-content: center;
+
+        justify-content:
+            center;
+
+        flex-wrap:
+            wrap;
+
     }
 
 }
 
 </style>
+
 </head>
 
 
@@ -1027,25 +2805,33 @@ a:hover {
         class="logo"
         alt="High Tech Auto Logo">
 
+
     <div class="header-center">
 
         <h1>
             High Tech Auto Car Service
         </h1>
 
+
         <div class="address">
+
             No. A--, ---Residence, Street,
             U Wisara Road, (   ) Block (Extend),
             Dagon (North)
+
         </div>
 
+
         <div class="phone">
+
             📞 09941060------- &nbsp; | &nbsp;
             09 459907---- &nbsp; | &nbsp;
             09 794918----
+
         </div>
 
     </div>
+
 
     <img
         src="15.png"
@@ -1074,7 +2860,9 @@ a:hover {
     <span
         class="arrow"
         id="customerArrow">
+
         ▼
+
     </span>
 
 </div>
@@ -1088,44 +2876,53 @@ a:hover {
         Customer & Vehicle Information
     </h2>
 
+
     <form
         id="customerForm"
         onsubmit="saveCustomer(); return false;">
+
 
         <input
             id="customerName"
             type="text"
             placeholder="Customer Name">
 
+
         <input
             id="customerPhone"
             type="text"
             placeholder="Phone">
+
 
         <input
             id="carBrand"
             type="text"
             placeholder="Car Brand">
 
+
         <input
             id="carModel"
             type="text"
             placeholder="Model">
+
 
         <input
             id="carYear"
             type="text"
             placeholder="Year">
 
+
         <input
             id="licenseNo"
             type="text"
             placeholder="License No.">
 
+
         <input
             id="mileage"
             type="text"
             placeholder="Mileage">
+
 
         <button
             class="save-button"
@@ -1171,6 +2968,7 @@ a:hover {
     <h2>
         OUR SERVICES
     </h2>
+
 
     <ul>
 
@@ -1221,6 +3019,7 @@ a:hover {
         WORKSHOP GALLERY
     </h2>
 
+
     <div class="gallery-frame">
 
         <button
@@ -1233,11 +3032,13 @@ a:hover {
 
         </button>
 
+
         <img
             id="galleryImage"
             class="gallery-image"
             src="19.png"
             alt="Workshop Gallery">
+
 
         <button
             type="button"
@@ -1249,6 +3050,7 @@ a:hover {
 
         </button>
 
+
         <div
             id="galleryCaption"
             class="gallery-caption">
@@ -1259,13 +3061,17 @@ a:hover {
 
     </div>
 
+
     <div
         id="galleryDots"
         class="gallery-dots">
     </div>
 
+
     <p style="text-align:center;">
+
         Use the ◀ and ▶ buttons to view workshop photos.
+
     </p>
 
 </section>
@@ -1278,92 +3084,119 @@ a:hover {
 <section class="section-card">
 
     <h2 class="section-title">
+
         AUTOMOTIVE TRAINING NOTES
+
     </h2>
+
 
     <div class="article-select-box">
 
         <label for="articleSelect">
+
             Select an article to read:
+
         </label>
+
 
         <select
             id="articleSelect"
             class="article-select"
             onchange="showArticle()">
 
+
             <option value="">
                 -- Select Article --
             </option>
+
 
             <option value="0">
                 1. Automotive Repair Basics
             </option>
 
+
             <option value="1">
                 2. How an Engine Works
             </option>
+
 
             <option value="2">
                 3. Automotive Electrical Systems
             </option>
 
+
             <option value="3">
                 4. Battery, Alternator & Starter
             </option>
+
 
             <option value="4">
                 5. Relays and Fuses
             </option>
 
+
             <option value="5">
                 6. Automotive Sensors
             </option>
+
 
             <option value="6">
                 7. OBD-II & Diagnostic Scanners
             </option>
 
+
             <option value="7">
                 8. P0171 Fuel Trim Diagnostics
             </option>
+
 
             <option value="8">
                 9. Automatic Transmission & CVT
             </option>
 
+
             <option value="9">
                 10. Automotive Air Conditioning
             </option>
+
 
             <option value="10">
                 11. Brake & Suspension Systems
             </option>
 
+
             <option value="11">
                 12. ADAS (Advanced Driver Assistance Systems)
             </option>
+
 
             <option value="12">
                 13. Radar vs LiDAR
             </option>
 
+
             <option value="13">
                 14. AI & Autonomous Driving
             </option>
+
 
             <option value="14">
                 15. Automotive Diagnostic Process
             </option>
 
+
         </select>
 
     </div>
 
+
     <p class="article-hint">
+
         Select a topic from the list above.
         The full lesson will appear here.
+
     </p>
+
 
     <div
         id="articleContent"
@@ -1379,13 +3212,117 @@ a:hover {
 
 <section class="library-section">
 
+
     <h2 class="library-title">
         LIBRARY
     </h2>
 
+
     <p style="text-align:center;">
+
         Select an article from the library to read.
+
     </p>
+
+
+    <!-- ==================================================
+         ADMIN LOGIN BUTTON
+    ================================================== -->
+
+    <button
+        type="button"
+        class="admin-login-button"
+        onclick="showAdminLogin()">
+
+        ADMIN LOGIN
+
+    </button>
+
+
+    <!-- ==================================================
+         LOGIN AREA
+    ================================================== -->
+
+    <div
+        id="loginArea"
+        class="login-area">
+
+        <h3>
+            ADMIN LOGIN
+        </h3>
+
+
+        <input
+            id="adminEmail"
+            type="email"
+            placeholder="Admin Email">
+
+
+        <input
+            id="adminPassword"
+            type="password"
+            placeholder="Password">
+
+
+        <div class="login-buttons">
+
+            <button
+                type="button"
+                class="login-button"
+                onclick="adminLogin()">
+
+                LOGIN
+
+            </button>
+
+
+            <button
+                type="button"
+                class="login-cancel"
+                onclick="hideAdminLogin()">
+
+                CANCEL
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="loginMessage"
+            class="login-message">
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         ADMIN AREA
+    ================================================== -->
+
+    <div
+        id="adminArea"
+        class="admin-area">
+
+        <span
+            id="adminStatus"
+            class="admin-status">
+
+            ADMIN MODE
+
+        </span>
+
+
+        <button
+            type="button"
+            class="logout-button"
+            onclick="adminLogout()">
+
+            LOGOUT
+
+        </button>
+
+    </div>
 
 
     <div class="library-layout">
@@ -1397,15 +3334,27 @@ a:hover {
 
         <div class="library-list">
 
+
             <h3 class="library-list-title">
                 ARTICLES
             </h3>
 
-            <div id="libraryArticleList">
+
+            <div
+                id="libraryArticleList">
+
+                <div class="library-empty">
+
+                    Loading Library...
+
+                </div>
+
             </div>
+
 
             <button
                 type="button"
+                id="newArticleButton"
                 class="library-new-button"
                 onclick="openLibraryEditor()">
 
@@ -1424,15 +3373,19 @@ a:hover {
             class="library-reader"
             id="libraryReader">
 
+
             <div class="library-empty">
 
                 <h2>
                     LIBRARY
                 </h2>
 
+
                 <p>
+
                     Select an article from the
                     ARTICLES list to start reading.
+
                 </p>
 
             </div>
@@ -1443,20 +3396,33 @@ a:hover {
 
 
     <!-- ==================================================
-         NEW ARTICLE EDITOR
+         ARTICLE EDITOR
     ================================================== -->
 
     <div
         class="library-editor"
         id="libraryEditor">
 
-        <h3>
+
+        <h3
+            id="newArticleEditorTitle">
+
             WRITE NEW ARTICLE
+
         </h3>
 
+
+        <input
+            type="hidden"
+            id="editArticleId">
+
+
         <label for="newArticleTitle">
+
             Article Title
+
         </label>
+
 
         <input
             id="newArticleTitle"
@@ -1465,24 +3431,62 @@ a:hover {
 
 
         <label for="newArticleContent">
+
             Article Content
+
         </label>
+
 
         <textarea
             id="newArticleContent"
             placeholder="Write your article here..."></textarea>
 
 
+        <label
+            id="editArticleTitleLabel"
+            for="editArticleTitle"
+            style="display:none;">
+
+            Article Title
+
+        </label>
+
+
+        <input
+            id="editArticleTitle"
+            type="hidden">
+
+
+        <textarea
+            id="editArticleContent"
+            style="display:none;"></textarea>
+
+
         <div class="library-editor-buttons">
+
 
             <button
                 type="button"
+                id="librarySaveButton"
                 class="library-save-button"
                 onclick="saveNewLibraryArticle()">
 
                 SAVE ARTICLE
 
             </button>
+
+
+            <button
+                type="button"
+                id="libraryUpdateButton"
+                class="library-save-button"
+                style="display:none;"
+                onclick="updateLibraryArticle()">
+
+                UPDATE ARTICLE
+
+            </button>
+
 
             <button
                 type="button"
@@ -1501,621 +3505,813 @@ a:hover {
 
 
 <!-- ==================================================
-     ORIGINAL RELAY NOTE CONTENT
+     ORIGINAL RELAY NOTE
 ================================================== -->
 
 <template id="relayNoteTemplate">
 
-    <h2>19/09/2026</h2>
 
-    <h2>1 Channel Relay</h2>
+<h2>
+    19/09/2026
+</h2>
 
 
-    <p>
-        <strong>1 Channel Relay Module</strong> တစ်ခုမှာ ပါဝင်တဲ့
-        အဓိက အစိတ်အပိုင်းများနဲ့ ၎င်းတို့ရဲ့ လုပ်ဆောင်ချက်များမှာ
-        အောက်ပါအတိုင်း ဖြစ်ပါသည်။
-    </p>
+<h2>
+    1 Channel Relay
+</h2>
 
 
-    <ul>
+<p>
 
-        <li>
-            <strong>Relay (အပြာရောင် ဘောက်စ်):</strong>
-            လျှပ်စစ်သံလိုက်ကို အသုံးပြုပြီး High Voltage/Current
-            ဝါယာလမ်းကြောင်းများကို အဖွင့်အပိတ် လုပ်ပေးသည့်
-            အဓိက အစိတ်အပိုင်း ဖြစ်သည်။
-        </li>
+<strong>1 Channel Relay Module</strong> တစ်ခုမှာ ပါဝင်တဲ့
+အဓိက အစိတ်အပိုင်းများနဲ့ ၎င်းတို့ရဲ့ လုပ်ဆောင်ချက်များမှာ
+အောက်ပါအတိုင်း ဖြစ်ပါသည်။
 
-        <li>
-            <strong>Terminal Connector (3-Pin Screw Block):</strong>
-            Mains လျှပ်စစ်ကြိုးများကို လွယ်ကူခိုင်မာစွာ တွဲဆက်ရန်
-            ဖြစ်ပြီး NO (Normally Open), COM (Common),
-            NC (Normally Closed) ဟူ၍ ပါဝင်ပါသည်။
-        </li>
+</p>
 
-        <li>
-            <strong>Transistor (Q1):</strong>
-            Microcontroller (Arduino စသည်) မှလာသော
-            နည်းပါးသည့် Current Signal ကို မြှင့်တင်ပေးပြီး
-            Relay Coil ကို စမောင်းပေးသည်။
-        </li>
 
-        <li>
-            <strong>Flyback Diode (D2):</strong>
-            Relay ကို ပိတ်လိုက်ချိန်တွင် ပေါ်ထွက်လာသည့်
-            High Voltage Spikes များကြောင့် အခြား Circuit
-            များ မပျက်စီးအောင် ကာကွယ်ပေးသည်။
-        </li>
+<ul>
 
-        <li>
-            <strong>LED Indicators:</strong>
+<li>
 
-            <ul>
+<strong>Relay (အပြာရောင် ဘောက်စ်):</strong>
 
-                <li>
-                    <strong>Power LED (D1):</strong>
-                    Module သို့ ပါဝါ (VCC) ရောက်ရှိနေကြောင်း
-                    ပြသပေးသည်။
-                </li>
+လျှပ်စစ်သံလိုက်ကို အသုံးပြုပြီး High Voltage/Current
+ဝါယာလမ်းကြောင်းများကို အဖွင့်အပိတ် လုပ်ပေးသည့်
+အဓိက အစိတ်အပိုင်း ဖြစ်သည်။
 
-                <li>
-                    <strong>Status LED:</strong>
-                    Relay အလုပ်လုပ်နေချိန် (Active ဖြစ်နေချိန်)
-                    တွင် လင်းပြပေးပါတယ်။
-                </li>
+</li>
 
-            </ul>
 
-        </li>
+<li>
 
-        <li>
-            <strong>Resistors (R1, R2):</strong>
-            Circuit အတွင်း စီးဆင်းမည့် Current ပမာဏကို
-            ထိန်းညှိပေးပြီး LED များနှင့် Transistor ကို
-            ကာကွယ်ပေးရန်ဖြစ်သည်။
-        </li>
+<strong>Terminal Connector (3-Pin Screw Block):</strong>
 
-        <li>
-            <strong>Input Pins (Male Headers):</strong>
-            Microcontroller ဖြင့် ချိတ်ဆက်ရန် Pin များ ဖြစ်ပါတယ်။
+Mains လျှပ်စစ်ကြိုးများကို လွယ်ကူခိုင်မာစွာ တွဲဆက်ရန်
+ဖြစ်ပြီး NO (Normally Open), COM (Common),
+NC (Normally Closed) ဟူ၍ ပါဝင်ပါသည်။
 
-            <ul>
+</li>
 
-                <li>
-                    <strong>VCC:</strong>
-                    Power supply (5V)
-                </li>
 
-                <li>
-                    <strong>GND:</strong>
-                    Ground (0V)
-                </li>
+<li>
 
-                <li>
-                    <strong>IN:</strong>
-                    Relay ကို ထိန်းချုပ်မည့် Trigger Input signal Pin
-                </li>
+<strong>Transistor (Q1):</strong>
 
-            </ul>
+Microcontroller (Arduino စသည်) မှလာသော
+နည်းပါးသည့် Current Signal ကို မြှင့်တင်ပေးပြီး
+Relay Coil ကို စမောင်းပေးသည်။
 
-        </li>
+</li>
 
-    </ul>
 
+<li>
 
-    <div class="library-images">
+<strong>Flyback Diode (D2):</strong>
 
-        <img
-            src="25.png"
-            alt="1 Channel Relay Module">
-
-        <img
-            src="23.png"
-            alt="1 Channel Relay Module">
-
-    </div>
-
-
-    <p>
-        <strong>1 Channel Relay Module</strong> ရဲ့
-        ပတ်လမ်း (Circuit Diagram) တွင် ပါဝင်သည့် အစိတ်အပိုင်းများ
-        ချိတ်ဆက်ပုံနှင့် အလုပ်လုပ်ပုံမှာ အောက်ပါအတိုင်း ဖြစ်ပါတယ် -
-    </p>
-
-
-    <h3>
-        1. Input &amp; Power Section (ထိန်းချုပ်ခန်း)
-    </h3>
+Relay ကို ပိတ်လိုက်ချိန်တွင် ပေါ်ထွက်လာသည့်
+High Voltage Spikes များကြောင့် အခြား Circuit
+များ မပျက်စီးအောင် ကာကွယ်ပေးသည်။
 
-    <ul>
+</li>
 
-        <li>
-            <strong>VCC &amp; GND:</strong>
-            Module ကို အလုပ်လုပ်ရန်အတွက် Power (ဥပမာ - 5V DC)
-            နှင့် Ground ပေးသွင်းသည့် Pin များဖြစ်ပါတယ်။
-            Power ရောက်နေပါက <strong>D1 (Power LED)</strong>
-            လင်းနေမည် ဖြစ်ပါတယ်။
-        </li>
 
-        <li>
-            <strong>IN (Input Pin):</strong>
-            Microcontroller (Arduino, ESP32 စသည်) မှ Trigger
-            signal ပေးပို့ရာ Pin ဖြစ်ပါတယ်။
-        </li>
+<li>
 
-        <li>
-            <strong>Optocoupler (PC817):</strong>
-            Microcontroller ဘက်ခြမ်းနှင့် Relay Switch ဘက်ခြမ်းကို
-            အလင်းစနစ်ဖြင့် သီးခြားခွဲထုတ် (Isolate) ပေးထားတာကြောင့်
-            Relay ကြောင့်ဖြစ်လာသည့် High Voltage တုံ့ပြန်မှုများ
-            Microcontroller ဆီ ပြန်မရောက်အောင် ကာကွယ်ပေးပါတယ်။
-        </li>
+<strong>LED Indicators:</strong>
 
-    </ul>
+<ul>
 
+<li>
 
-    <h3>
-        2. Driver &amp; Protection Section (မောင်းနှင်စနစ်)
-    </h3>
+<strong>Power LED (D1):</strong>
 
-    <ul>
+Module သို့ ပါဝါ (VCC) ရောက်ရှိနေကြောင်း
+ပြသပေးသည်။
 
-        <li>
-            <strong>Transistor (Q1):</strong>
-            Optocoupler မောင်းနှင်လိုက်ချိန်တွင် Transistor
-            အလုပ်လုပ်ပြီး Relay Coil အတွင်းသို့ Current
-            စီးဆင်းစေကာ မဂ္ဂနက်စနစ်ကို စတင်စေပါတယ်။
-        </li>
-
-        <li>
-            <strong>Status LED:</strong>
-            Input Signal ရရှိပြီး Transistor ပွင့်သွားပါက
-            Relay အလုပ်လုပ်နေကြောင်း ပြသရန်အတွက် Status LED
-            လင်းလာမည် ဖြစ်ပါတယ်။
-        </li>
+</li>
 
-        <li>
-            <strong>Flyback Diode (D2):</strong>
-            Relay Coil ကို ပိတ်လိုက်ချိန်တွင် ပေါ်ထွက်လာသည့်
-            High Voltage Back-EMF Spikes များကို စုပ်ယူပေးပြီး
-            Transistor မပျက်စီးအောင် ကာကွယ်ပေးပါတယ်။
-        </li>
 
-    </ul>
+<li>
 
+<strong>Status LED:</strong>
 
-    <h3>
-        3. Output Section (အထွက်လမ်းကြောင်း)
-    </h3>
+Relay အလုပ်လုပ်နေချိန် (Active ဖြစ်နေချိန်)
+တွင် လင်းပြပေးပါတယ်။
 
-    <ul>
+</li>
 
-        <li>
-            Relay Coil မဂ္ဂနက်ဖြစ်သွားသည့်အခါ စပရင်အဆက်ကို
-            ဆွဲယူပြီး Mains Power (ဥပမာ - 220V AC) ချိတ်ဆက်ထားသော
-            terminal များကို ပြောင်းလဲပေးပါတယ်။
-        </li>
+</ul>
 
-        <li>
-            <strong>COM (Common):</strong>
-            ပင်မ လျှပ်စစ်ဝင်ပေါက် ဖြစ်ပါတယ်။
-        </li>
+</li>
 
-        <li>
-            <strong>NC (Normally Closed):</strong>
-            Trigger signal မပေးထားချိန်တွင် COM နှင့် ပွင့်လျက်
-            (မီးပွင့်/စက်ပွင့်လျက်) ရှိနေပြီး Trigger ပေးလိုက်ပါက
-            ပြန်ပိတ်သွားပါမည်။
-        </li>
 
-        <li>
-            <strong>NO (Normally Open):</strong>
-            Trigger signal မပေးထားချိန်တွင် COM နှင့် ပိတ်လျက်
-            (မီးပိတ်/စက်ပိတ်လျက်) ရှိနေပြီး Trigger ပေးလိုက်မှသာ
-            COM နှင့် ဆက်သွားပြီး အလုပ်လုပ်ပါမည်။
-        </li>
+<li>
 
-    </ul>
+<strong>Resistors (R1, R2):</strong>
 
+Circuit အတွင်း စီးဆင်းမည့် Current ပမာဏကို
+ထိန်းညှိပေးပြီး LED များနှင့် Transistor ကို
+ကာကွယ်ပေးရန်ဖြစ်သည်။
 
-    <h3>
-        1 Channel Relay Module ရဲ့ Circuit Diagram အလုပ်လုပ်ပုံ
-    </h3>
+</li>
 
-    <br>
 
-    <div class="library-images">
+<li>
 
-        <img
-            src="24.png"
-            alt="1 Channel Relay Module">
+<strong>Input Pins (Male Headers):</strong>
 
-    </div>
+Microcontroller ဖြင့် ချိတ်ဆက်ရန် Pin များ ဖြစ်ပါတယ်။
 
+<ul>
 
-    <p>
-        1 Channel Relay Module ရဲ့ Circuit Diagram အလုပ်လုပ်ပုံ
-        အဓိက လမ်းကြောင်းများမှာ အောက်ပါအတိုင်း ဖြစ်ပါတယ်။
-    </p>
+<li>
+<strong>VCC:</strong>
+Power supply (5V)
+</li>
 
+<li>
+<strong>GND:</strong>
+Ground (0V)
+</li>
 
-    <ul>
+<li>
+<strong>IN:</strong>
+Relay ကို ထိန်းချုပ်မည့် Trigger Input signal Pin
+</li>
 
-        <li>
-            <strong>Input Section:</strong>
-            Microcontroller မှ IN Pin သို့ Trigger Signal
-            ပေးလိုက်ပါက <strong>Optocoupler (PC817)</strong>
-            စတင် အလုပ်လုပ်ပါတယ်။
-        </li>
+</ul>
 
-        <li>
-            <strong>Driver Section:</strong>
-            Optocoupler မှတစ်ဆင့် <strong>Transistor (Q1)</strong>
-            ပွင့်သွားပြီး <strong>Relay Coil</strong> အတွင်း
-            လျှပ်စီးစီးကြောင်း ဖြတ်သန်းကာ သံလိုက်ဓာတ် ဖြစ်ပေါ်စေပါသည်။
-            <strong>Flyback Diode (D2)</strong> က ပတ်လမ်းကို
-            Surge Voltage များမှ ကာကွယ်ပေးပါတယ်။
-        </li>
+</li>
 
-        <li>
-            <strong>Output Section:</strong>
-            သံလိုက်ဓာတ်ကြောင့် Switch အဆက် ပြောင်းလဲသွားပြီး
-            <strong>COM</strong> Pin သည်
-            <strong>NO (Normally Open)</strong> ဘက်သို့
-            ဆက်သွားကာ ချိတ်ဆက်ထားသော စက်/မီးလုံးကို
-            ပွင့်စေပါတယ်။
-        </li>
+</ul>
 
-    </ul>
 
+<div class="library-images">
 
-    <hr>
+<img
+    src="25.png"
+    alt="1 Channel Relay Module">
 
+<img
+    src="23.png"
+    alt="1 Channel Relay Module">
 
-    <h2>
-        SPDT (Single Pole Double Throw)
-    </h2>
+</div>
 
 
-    <p>
-        <strong>SPDT</strong> ဆိုတာ
-        <strong>Single Pole Double Throw</strong> ရဲ့ အတိုကောက်
-        ဖြစ်ပါတယ်။ Relay တွေမှာ သုံးတဲ့ Switch ဒီဇိုင်း/အမျိုးအစား
-        တစ်ခါဖြစ်ပြီး အဓိက လုပ်ဆောင်ချက်များမှာ အောက်ပါအတိုင်း
-        ဖြစ်ပါတယ်။
-    </p>
+<p>
 
+<strong>1 Channel Relay Module</strong> ရဲ့
+ပတ်လမ်း (Circuit Diagram) တွင် ပါဝင်သည့် အစိတ်အပိုင်းများ
+ချိတ်ဆက်ပုံနှင့် အလုပ်လုပ်ပုံမှာ အောက်ပါအတိုင်း ဖြစ်ပါတယ် -
 
-    <ul>
+</p>
 
-        <li>
-            <strong>Single Pole (SP):</strong>
-            ထိန်းချုပ်မည့် လျှပ်စစ်ဝင်ပေါက် (Terminal)
-            <strong>၁ ခုတည်း (COM Pin)</strong> သာ ပါဝင်တာကို
-            ဆိုလိုပါတယ်။
-        </li>
 
-        <li>
-            <strong>Double Throw (DT):</strong>
-            ဝင်လာတဲ့ လျှပ်စစ်လမ်းကြောင်းကို ထွက်ပေါက်
-            <strong>၂ ခု (NO Pin နှင့် NC Pin)</strong> အနက်
-            ၁ ခုဆီသို့ လှည့်ပြောင်းပေးနိုင်တာကို ဆိုလိုပါတယ်။
-        </li>
+<h3>
+1. Input &amp; Power Section (ထိန်းချုပ်ခန်း)
+</h3>
 
-    </ul>
 
+<ul>
 
-    <h3>
-        SPDT Switch ရဲ့ အလုပ်လုပ်ပုံ
-    </h3>
+<li>
 
+<strong>VCC &amp; GND:</strong>
 
-    <ol>
+Module ကို အလုပ်လုပ်ရန်အတွက် Power (ဥပမာ - 5V DC)
+နှင့် Ground ပေးသွင်းသည့် Pin များဖြစ်ပါတယ်။
 
-        <li>
-            <strong>Normally Closed (NC) ဘက်သို့ ဆက်နေချိန်:</strong>
+Power ရောက်နေပါက
+<strong>D1 (Power LED)</strong>
+လင်းနေမည် ဖြစ်ပါတယ်။
 
-            <ul>
+</li>
 
-                <li>
-                    Relay Coil ထံ သံလိုက်ဓာတ် (Power/Signal)
-                    မပေးထားချိန်တွင် <strong>COM</strong> သည်
-                    <strong>NC</strong> နှင့် အလိုအလျောက်
-                    ဆက်နေပါတယ်။
-                </li>
 
-                <li>
-                    (ဥပမာ - Relay မီးပိတ်ထားသော်လည်း NC တွင်
-                    ချိတ်ထားသော မီးလုံးသည် လင်းနေမည် ဖြစ်ပါတယ်)။
-                </li>
+<li>
 
-            </ul>
-        </li>
+<strong>IN (Input Pin):</strong>
 
+Microcontroller (Arduino, ESP32 စသည်) မှ Trigger
+signal ပေးပို့ရာ Pin ဖြစ်ပါတယ်။
 
-        <li>
-            <strong>Normally Open (NO) ဘက်သို့ ပြောင်းဆက်ချိန်:</strong>
+</li>
 
-            <ul>
 
-                <li>
-                    Relay Coil သို့ Signal (Trigger) ပေးလိုက်ပါက
-                    မဂ္ဂနက်ဓာတ်ကြောင့် Switch အဆက်သည်
-                    <strong>COM</strong> မှ <strong>NO</strong>
-                    ဘက်သို့ ပြောင်းလဲချိတ်ဆက်သွားပါတယ်။
-                </li>
+<li>
 
-                <li>
-                    (ဥပမာ - Relay ခလုတ်ဖွင့်လိုက်မှသာ NO တွင်
-                    ချိတ်ထားသော မီးလုံး လင်းလာမည် ဖြစ်ပါတယ်)။
-                </li>
+<strong>Optocoupler (PC817):</strong>
 
-            </ul>
-        </li>
+Microcontroller ဘက်ခြမ်းနှင့် Relay Switch ဘက်ခြမ်းကို
+အလင်းစနစ်ဖြင့် သီးခြားခွဲထုတ် (Isolate) ပေးထားတာကြောင့်
+Relay ကြောင့်ဖြစ်လာသည့် High Voltage တုံ့ပြန်မှုများ
+Microcontroller ဆီ ပြန်မရောက်အောင် ကာကွယ်ပေးပါတယ်။
 
-    </ol>
+</li>
 
+</ul>
 
-    <p>
-        <strong>အနှစ်ချုပ်:</strong>
-        SPDT Relay ဆိုသည်မှာ Input ၁ လိုင်းကို အခြေအနေပေါ်မူတည်၍
-        Output ၂ လိုင်း (NO သို့မဟုတ် NC) သို့ ပြောင်းလဲပေးနိုင်သည့်
-        Switch အမျိုးအစား ဖြစ်ပါတယ်။
-    </p>
 
+<h3>
+2. Driver &amp; Protection Section (မောင်းနှင်စနစ်)
+</h3>
 
-    <hr>
 
+<ul>
 
-    <h2>
-        Optocoupler
-    </h2>
+<li>
 
+<strong>Transistor (Q1):</strong>
 
-    <p>
-        Microcontroller ဆီ လျှပ်စစ်ဓာတ် မကူးစက်အောင်
-        ကာကွယ်ပေးတဲ့ နည်းလမ်းကို အလွယ်ဆုံး သဘောတရားနဲ့
-        အချက် ၃ ချက်နဲ့ ရှင်းပြပေးပါမယ်။
-    </p>
+Optocoupler မောင်းနှင်လိုက်ချိန်တွင် Transistor
+အလုပ်လုပ်ပြီး Relay Coil အတွင်းသို့ Current
+စီးဆင်းစေကာ မဂ္ဂနက်စနစ်ကို စတင်စေပါတယ်။
 
+</li>
 
-    <h3>
-        1. Physical Air Gap (ရူပဗေဒအရ လေဟာနယ်ခြားထားခြင်း)
-    </h3>
 
+<li>
 
-    <ul>
+<strong>Status LED:</strong>
 
-        <li>
-            <strong>တိုက်ရိုက် ကြိုးဆက်မထားပါ:</strong>
-            Optocoupler (PC817) Chip လေးရဲ့ အတွင်းထဲမှာ
-            Microcontroller (Arduino) နဲ့ ချိတ်ဆက်ထားတဲ့
-            လမ်းကြောင်း နဲ့ Relay ဘက်ကို ချိတ်ဆက်ထားတဲ့
-            လမ်းကြောင်း ၂ ခုဟာ
-            <strong>လျှပ်ကူးပစ္စည်း (ကြိုး/သတ္တု) တစ်ခုမျှ
-            တိုက်ရိုက် ထိစပ်မနေပါဘူး</strong>။
-        </li>
+Input Signal ရရှိပြီး Transistor ပွင့်သွားပါက
+Relay အလုပ်လုပ်နေကြောင်း ပြသရန်အတွက် Status LED
+လင်းလာမည် ဖြစ်ပါတယ်။
 
-        <li>
-            <strong>ကြားထဲမှာ လေဟာနယ်ခြားထားပါတယ်:</strong>
-            Chip အတွင်းထဲမှာ ကြားခံအဖြစ် အလင်းဖြတ်သန်းနိုင်တဲ့
-            လျှပ်စစ်ဓာတ်မကူးစက်နိုင်သော Insulation ပစ္စည်း
-            (Silicon/Plastic) ကိုသာ ခြားထားတာ ဖြစ်ပါတယ်။
-        </li>
+</li>
 
-    </ul>
 
+<li>
 
-    <h3>
-        2. အလင်းဖြင့်သာ Signal ပို့ခြင်း (Optical Transmission)
-    </h3>
+<strong>Flyback Diode (D2):</strong>
 
+Relay Coil ကို ပိတ်လိုက်ချိန်တွင် ပေါ်ထွက်လာသည့်
+High Voltage Back-EMF Spikes များကို စုပ်ယူပေးပြီး
+Transistor မပျက်စီးအောင် ကာကွယ်ပေးပါတယ်။
 
-    <ul>
+</li>
 
-        <li>
-            Arduino ဘက်က လျှပ်စစ်မီးပေးလိုက်ရင် အတွင်းထဲက
-            <strong>IR LED လေးပဲ လင်းလာပါတယ်</strong>။
-        </li>
+</ul>
 
-        <li>
-            အဲဒီအလင်းကို တစ်ဖက်က
-            <strong>Phototransistor က လှမ်းမြင်ရုံနဲ့
-            ပွင့်ပေးလိုက်တာ</strong> ဖြစ်ပါတယ်။
-        </li>
 
-        <li>
-            သာမန်အားဖြင့် Switch ခလုတ်တစ်ခုကို လက်နဲ့နှိပ်သလိုပါပဲ။
-            လက်နဲ့ မနှိပ်ဘဲ
-            <strong>"အလင်း" နဲ့ပဲ လှမ်းနှိပ်လိုက်တာ</strong>
-            ဖြစ်တဲ့အတွက် လျှပ်စစ်ဓာတ်ချင်း တိုက်ရိုက် မထိစပ်ပါဘူး။
-        </li>
+<h3>
+3. Output Section (အထွက်လမ်းကြောင်း)
+</h3>
 
-    </ul>
 
+<ul>
 
-    <h3>
-        Back-EMF / Shock တက်လာရင် ဘာဖြစ်မလဲ (အကာအကွယ်ပေးပုံ)
-    </h3>
+<li>
 
+Relay Coil မဂ္ဂနက်ဖြစ်သွားသည့်အခါ စပရင်အဆက်ကို
+ဆွဲယူပြီး Mains Power (ဥပမာ - 220V AC) ချိတ်ဆက်ထားသော
+terminal များကို ပြောင်းလဲပေးပါတယ်။
 
-    <ol>
+</li>
 
-        <li>
-            <strong>Back-EMF Surge တက်လာခြင်း:</strong>
-            Relay Coil ကို ပိတ်လိုက်ချိန် သို့မဟုတ် High Voltage
-            ပတ်လမ်းမှာ ရှော့ဖြစ်လို့ မီးအားတွေ ၁၀၀V, ၂၀၀V မက
-            ရုတ်တရက် တက်လာတယ် ဆိုပါစို့။
-        </li>
 
-        <li>
-            <strong>Chip တစ်ဖက်ပဲ ပျက်စီးမည်:</strong>
-            အဲဒီ မြင့်မားတဲ့ မီးအား surge ဟာ Relay ဘက်နဲ့
-            ဆက်ထားတဲ့ Phototransistor ဆီပဲ ရောက်ပါမယ်။
-            မီးအားလွန်ပြီး ပျက်စီးသွားခဲ့ရင်တောင်
-            Optocoupler Chip အတွင်းထဲမှာပဲ အပိုင်းအစ ပျက်သွားပါမယ်။
-        </li>
+<li>
 
-        <li>
-            <strong>Arduino သို့ မရောက်နိုင်ပါ:</strong>
-            ကြားထဲမှာ ကြိုးဆက်မထားဘဲ အလင်းနဲ့ပဲ ဆက်ထားတာဖြစ်လို့
-            ဒီဘက်က <strong>Arduino (Microcontroller) ဆီကို
-            လျှပ်စစ်ဓာတ် ကူးစက်စီးဆင်းသွားစရာ လမ်းကြောင်း
-            လုံးဝမရှိပါဘူး</strong>။
-        </li>
+<strong>COM (Common):</strong>
 
-    </ol>
+ပင်မ လျှပ်စစ်ဝင်ပေါက် ဖြစ်ပါတယ်။
 
+</li>
 
-    <p>
-        <strong>အနှစ်ချုပ်:</strong>
-        Optocoupler ဆိုတာ Arduino နဲ့ High Voltage ပတ်လမ်းကြားမှာ
-        <strong>"အလင်း" စနစ်နဲ့ ခြားပေးထားတဲ့ လျှပ်စစ်လုံခြုံရေးတံခါး
-        (Optical Barrier)</strong> ဖြစ်တာကြောင့် တစ်ဖက်မှာ
-        မီးရှော့ဖြစ်ဖြစ်၊ မီးအားဆောင့်တက်တက် Arduino ဘက်ကို
-        လျှပ်စစ်ဓာတ် လုံးဝကူးစက်မလာနိုင်အောင် ကာကွယ်ပေးတာ
-        ဖြစ်ပါတယ်။
-    </p>
 
+<li>
 
-    <hr>
+<strong>NC (Normally Closed):</strong>
 
+Trigger signal မပေးထားချိန်တွင် COM နှင့် ပွင့်လျက်
+(မီးပွင့်/စက်ပွင့်လျက်) ရှိနေပြီး Trigger ပေးလိုက်ပါက
+ပြန်ပိတ်သွားပါမည်။
 
-    <h2>
-        Flyback Diode (D2)
-    </h2>
+</li>
 
 
-    <p>
-        Relay Coil ကြောင့် ဖြစ်ပေါ်လာတဲ့ Back-EMF
-        (Back Electromotive Force) ကို ကာကွယ်ပေးတဲ့ နည်းလမ်းနဲ့
-        အလုပ်လုပ်ပုံကို အဓိက အချက် ၃ ချက်နဲ့ ရှင်းပြပေးပါမယ်။
-    </p>
+<li>
 
+<strong>NO (Normally Open):</strong>
 
-    <h3>
-        1. Back-EMF ဆိုတာ ဘာလဲ (ပြဿနာ)
-    </h3>
+Trigger signal မပေးထားချိန်တွင် COM နှင့် ပိတ်လျက်
+(မီးပိတ်/စက်ပိတ်လျက်) ရှိနေပြီး Trigger ပေးလိုက်မှသာ
+COM နှင့် ဆက်သွားပြီး အလုပ်လုပ်ပါမည်။
 
+</li>
 
-    <ul>
+</ul>
 
-        <li>
-            Relay ရဲ့ အတွင်းထဲမှာ လျှပ်စစ်သံလိုက်လိုင်း
-            ဖြစ်ပေါ်စေတဲ့ နန်းကြိုးခွေ (Coil) ပါဝင်ပါတယ်။
-        </li>
 
-        <li>
-            Coil အတွင်းသို့ လျှပ်စီးကြောင်း (Current)
-            စီးဆင်းနေချိန်မှာ သံလိုက်စက်ကွင်း
-            (Magnetic Field) စွမ်းအင်အဖြစ် သိမ်းဆည်းထားပါတယ်။
-        </li>
+<h3>
 
-        <li>
-            Relay ကို ပိတ်လိုက်သည့်ခဏ (Power ဖြတ်လိုက်ချိန်):
-            အဆိုပါ သိမ်းဆည်းထားသော သံလိုက်စက်ကွင်းသည်
-            ရုတ်တရက် ပြိုပျက် (Collapse) သွားပါတယ်။
-        </li>
+1 Channel Relay Module ရဲ့ Circuit Diagram အလုပ်လုပ်ပုံ
 
-        <li>
-            ထိုသို့ သံလိုက်စက်ကွင်း ပြိုပျက်သွားသောအခါ
-            Coil ထဲတွင် မူလပေးထားသော ဗို့အားထက်
-            <strong>ဆယ်ဆမက မြင့်မားသည့် ပြောင်းပြန်ဗို့အား
-            (Back-EMF Voltage Spike - ဥပမာ 5V Relay တွင်
-            50V မှ 100V ထိ)</strong> ရုတ်တရက် ထွက်ပေါ်လာပါတယ်။
-            အဆိုပါ ဗို့အားဆောင့်တက်မှုသည် Transistor နှင့်
-            အခြား Circuit အစိတ်အပိုင်းများကို လောင်ကျွမ်း
-            ပျက်စီးစေနိုင်ပါတယ်။
-        </li>
+</h3>
 
-    </ul>
 
+<br>
 
-    <h3>
-        2. Flyback Diode ရဲ့ တပ်ဆင်ထားပုံ
-    </h3>
 
+<div class="library-images">
 
-    <ul>
+<img
+    src="24.png"
+    alt="1 Channel Relay Module">
 
-        <li>
-            Diode ကို Relay Coil နှင့်
-            <strong>ပြိုင်ပြိုင် (Parallel)</strong> တပ်ဆင်ထားပြီး၊
-            ပုံမှန် လျှပ်စစ်စီးဆင်းချိန်တွင် Diode ဘက်သို့
-            လျှပ်စီးကြောင်း မရောက်အောင်
-            <strong>Reverse Bias (ပြောင်းပြန်)</strong>
-            ချိတ်ဆက်ထားပါတယ်။
-        </li>
+</div>
 
-        <li>
-            ဒါကြောင့် သာမန်အချိန်တွင် Diode သည် အလုပ်မလုပ်ဘဲ
-            ငြိမ်နေပါတယ်။
-        </li>
 
-    </ul>
+<p>
 
+1 Channel Relay Module ရဲ့ Circuit Diagram အလုပ်လုပ်ပုံ
+အဓိက လမ်းကြောင်းများမှာ အောက်ပါအတိုင်း ဖြစ်ပါတယ်။
 
-    <h3>
-        3. Back-EMF ကို ကာကွယ်ပေးပုံ (အဖြေ)
-    </h3>
+</p>
 
 
-    <ol>
+<ul>
 
-        <li>
-            <strong>ပြောင်းပြန်ဗို့အား ပေါ်ထွက်လာခြင်း:</strong>
-            Relay ကို ပိတ်လိုက်၍ Back-EMF ပေါ်လာသောအခါ
-            ထိုဗို့အား၏ Polar (အပေါင်း/အနှုတ်) သည်
-            မူလဓာတ်အားနှင့် ပြောင်းပြန် ဖြစ်သွားပါတယ်။
-        </li>
+<li>
 
-        <li>
-            <strong>Diode ပွင့်သွားခြင်း:</strong>
-            ပြောင်းပြန်ဖြစ်သွားသော ဗို့အားကြောင့် Reverse Bias
-            ဖြစ်နေသည့် Diode သည် <strong>Forward Bias
-            (ပုံမှန်လမ်းကြောင်း)</strong> ဖြစ်သွားပြီး
-            ပွင့်သွားပါတယ်။
-        </li>
+<strong>Input Section:</strong>
 
-        <li>
-            <strong>စွမ်းအင်ကို စိစစ်ပိတ်လှောင်လိုက်ခြင်း
-            (Freewheeling Loop):</strong>
-            Back-EMF မှ ထွက်လာသော မြင့်မားသည့် လျှပ်စီးကြောင်းသည်
-            အခြား Transistor သို့မဟုတ် Microcontroller ဆီသို့
-            မရောက်တော့ဘဲ <strong>Diode နှင့် Coil အကြား
-            ပတ်လမ်းအတိုင်းသာ လှည့်ပတ်စီးဆင်း (Loop)</strong>
-            သွားကာ အပူအဖြစ် စွမ်းအင် ကုန်ခမ်းသွားစေပါတယ်။
-        </li>
+Microcontroller မှ IN Pin သို့ Trigger Signal
+ပေးလိုက်ပါက <strong>Optocoupler (PC817)</strong>
+စတင် အလုပ်လုပ်ပါတယ်။
 
-    </ol>
+</li>
 
 
-    <p>
-        <strong>အနှစ်ချုပ်:</strong>
-        Flyback Diode သည် Relay Coil ကို ပိတ်လိုက်စဉ်
-        ထွက်ပေါ်လာသည့် မြင့်မားသော Back-EMF Voltage Spikes
-        များကို အခြား Circuit အစိတ်အပိုင်းများဆီသို့
-        မရောက်အောင် <strong>လမ်းကြောင်းလွှဲပေးပြီး ပတ်လမ်းအတွင်း
-        စုပ်ယူ ပျောက်ကွယ်သွားစေသည့် လုံခြုံရေး ဗို့အားစိစစ်ဂိတ်
-        (Freewheeling Path)</strong> အဖြစ် ကာကွယ်ပေးတာ
-        ဖြစ်ပါတယ်။
-    </p>
+<li>
 
+<strong>Driver Section:</strong>
 
-    <p>
-        Reference:
+Optocoupler မှတစ်ဆင့် <strong>Transistor (Q1)</strong>
+ပွင့်သွားပြီး <strong>Relay Coil</strong> အတွင်း
+လျှပ်စီးစီးကြောင်း ဖြတ်သန်းကာ သံလိုက်ဓာတ် ဖြစ်ပေါ်စေပါသည်။
 
-        <a
-            href="https://www.cestore-mm.com/product/1-channel-relay-module-5v10a/"
-            target="_blank"
-            rel="noopener noreferrer">
+<strong>Flyback Diode (D2)</strong> က ပတ်လမ်းကို
+Surge Voltage များမှ ကာကွယ်ပေးပါတယ်။
 
-            1 Channel Relay Module 5V / 10A
+</li>
 
-        </a>
 
-    </p>
+<li>
+
+<strong>Output Section:</strong>
+
+သံလိုက်ဓာတ်ကြောင့် Switch အဆက် ပြောင်းလဲသွားပြီး
+<strong>COM</strong> Pin သည်
+<strong>NO (Normally Open)</strong> ဘက်သို့
+ဆက်သွားကာ ချိတ်ဆက်ထားသော စက်/မီးလုံးကို
+ပွင့်စေပါတယ်။
+
+</li>
+
+</ul>
+
+
+<hr>
+
+
+<h2>
+SPDT (Single Pole Double Throw)
+</h2>
+
+
+<p>
+
+<strong>SPDT</strong> ဆိုတာ
+<strong>Single Pole Double Throw</strong> ရဲ့ အတိုကောက်
+ဖြစ်ပါတယ်။ Relay တွေမှာ သုံးတဲ့ Switch ဒီဇိုင်း/အမျိုးအစား
+တစ်ခါဖြစ်ပြီး အဓိက လုပ်ဆောင်ချက်များမှာ အောက်ပါအတိုင်း
+ဖြစ်ပါတယ်။
+
+</p>
+
+
+<ul>
+
+<li>
+
+<strong>Single Pole (SP):</strong>
+
+ထိန်းချုပ်မည့် လျှပ်စစ်ဝင်ပေါက် (Terminal)
+<strong>၁ ခုတည်း (COM Pin)</strong> သာ ပါဝင်တာကို
+ဆိုလိုပါတယ်။
+
+</li>
+
+
+<li>
+
+<strong>Double Throw (DT):</strong>
+
+ဝင်လာတဲ့ လျှပ်စစ်လမ်းကြောင်းကို ထွက်ပေါက်
+<strong>၂ ခု (NO Pin နှင့် NC Pin)</strong> အနက်
+၁ ခုဆီသို့ လှည့်ပြောင်းပေးနိုင်တာကို ဆိုလိုပါတယ်။
+
+</li>
+
+</ul>
+
+
+<h3>
+SPDT Switch ရဲ့ အလုပ်လုပ်ပုံ
+</h3>
+
+
+<ol>
+
+<li>
+
+<strong>Normally Closed (NC) ဘက်သို့ ဆက်နေချိန်:</strong>
+
+<ul>
+
+<li>
+
+Relay Coil ထံ သံလိုက်ဓာတ် (Power/Signal)
+မပေးထားချိန်တွင် <strong>COM</strong> သည်
+<strong>NC</strong> နှင့် အလိုအလျောက်
+ဆက်နေပါတယ်။
+
+</li>
+
+
+<li>
+
+(ဥပမာ - Relay မီးပိတ်ထားသော်လည်း NC တွင်
+ချိတ်ထားသော မီးလုံးသည် လင်းနေမည် ဖြစ်ပါတယ်)။
+
+</li>
+
+</ul>
+
+</li>
+
+
+<li>
+
+<strong>Normally Open (NO) ဘက်သို့ ပြောင်းဆက်ချိန်:</strong>
+
+<ul>
+
+<li>
+
+Relay Coil သို့ Signal (Trigger) ပေးလိုက်ပါက
+မဂ္ဂနက်ဓာတ်ကြောင့် Switch အဆက်သည်
+<strong>COM</strong> မှ <strong>NO</strong>
+ဘက်သို့ ပြောင်းလဲချိတ်ဆက်သွားပါတယ်။
+
+</li>
+
+
+<li>
+
+(ဥပမာ - Relay ခလုတ်ဖွင့်လိုက်မှသာ NO တွင်
+ချိတ်ထားသော မီးလုံး လင်းလာမည် ဖြစ်ပါတယ်)။
+
+</li>
+
+</ul>
+
+</li>
+
+</ol>
+
+
+<p>
+
+<strong>အနှစ်ချုပ်:</strong>
+
+SPDT Relay ဆိုသည်မှာ Input ၁ လိုင်းကို အခြေအနေပေါ်မူတည်၍
+Output ၂ လိုင်း (NO သို့မဟုတ် NC) သို့ ပြောင်းလဲပေးနိုင်သည့်
+Switch အမျိုးအစား ဖြစ်ပါတယ်။
+
+</p>
+
+
+<hr>
+
+
+<h2>
+Optocoupler
+</h2>
+
+
+<p>
+
+Microcontroller ဆီ လျှပ်စစ်ဓာတ် မကူးစက်အောင်
+ကာကွယ်ပေးတဲ့ နည်းလမ်းကို အလွယ်ဆုံး သဘောတရားနဲ့
+အချက် ၃ ချက်နဲ့ ရှင်းပြပေးပါမယ်။
+
+</p>
+
+
+<h3>
+1. Physical Air Gap (ရူပဗေဒအရ လေဟာနယ်ခြားထားခြင်း)
+</h3>
+
+
+<ul>
+
+<li>
+
+<strong>တိုက်ရိုက် ကြိုးဆက်မထားပါ:</strong>
+
+Optocoupler (PC817) Chip လေးရဲ့ အတွင်းထဲမှာ
+Microcontroller (Arduino) နဲ့ ချိတ်ဆက်ထားတဲ့
+လမ်းကြောင်း နဲ့ Relay ဘက်ကို ချိတ်ဆက်ထားတဲ့
+လမ်းကြောင်း ၂ ခုဟာ
+<strong>လျှပ်ကူးပစ္စည်း (ကြိုး/သတ္တု) တစ်ခုမျှ
+တိုက်ရိုက် ထိစပ်မနေပါဘူး</strong>။
+
+</li>
+
+
+<li>
+
+<strong>ကြားထဲမှာ လေဟာနယ်ခြားထားပါတယ်:</strong>
+
+Chip အတွင်းထဲမှာ ကြားခံအဖြစ် အလင်းဖြတ်သန်းနိုင်တဲ့
+လျှပ်စစ်ဓာတ်မကူးစက်နိုင်သော Insulation ပစ္စည်း
+(Silicon/Plastic) ကိုသာ ခြားထားတာ ဖြစ်ပါတယ်။
+
+</li>
+
+</ul>
+
+
+<h3>
+2. အလင်းဖြင့်သာ Signal ပို့ခြင်း (Optical Transmission)
+</h3>
+
+
+<ul>
+
+<li>
+
+Arduino ဘက်က လျှပ်စစ်မီးပေးလိုက်ရင် အတွင်းထဲက
+<strong>IR LED လေးပဲ လင်းလာပါတယ်</strong>။
+
+</li>
+
+
+<li>
+
+အဲဒီအလင်းကို တစ်ဖက်က
+<strong>Phototransistor က လှမ်းမြင်ရုံနဲ့
+ပွင့်ပေးလိုက်တာ</strong> ဖြစ်ပါတယ်။
+
+</li>
+
+
+<li>
+
+သာမန်အားဖြင့် Switch ခလုတ်တစ်ခုကို လက်နဲ့နှိပ်သလိုပါပဲ။
+လက်နဲ့ မနှိပ်ဘဲ
+<strong>"အလင်း" နဲ့ပဲ လှမ်းနှိပ်လိုက်တာ</strong>
+ဖြစ်တဲ့အတွက် လျှပ်စစ်ဓာတ်ချင်း တိုက်ရိုက် မထိစပ်ပါဘူး။
+
+</li>
+
+</ul>
+
+
+<h3>
+Back-EMF / Shock တက်လာရင် ဘာဖြစ်မလဲ (အကာအကွယ်ပေးပုံ)
+</h3>
+
+
+<ol>
+
+<li>
+
+<strong>Back-EMF Surge တက်လာခြင်း:</strong>
+
+Relay Coil ကို ပိတ်လိုက်ချိန် သို့မဟုတ် High Voltage
+ပတ်လမ်းမှာ ရှော့ဖြစ်လို့ မီးအားတွေ ၁၀၀V, ၂၀၀V မက
+ရုတ်တရက် တက်လာတယ် ဆိုပါစို့။
+
+</li>
+
+
+<li>
+
+<strong>Chip တစ်ဖက်ပဲ ပျက်စီးမည်:</strong>
+
+အဲဒီ မြင့်မားတဲ့ မီးအား surge ဟာ Relay ဘက်နဲ့
+ဆက်ထားတဲ့ Phototransistor ဆီပဲ ရောက်ပါမယ်။
+မီးအားလွန်ပြီး ပျက်စီးသွားခဲ့ရင်တောင်
+Optocoupler Chip အတွင်းထဲမှာပဲ အပိုင်းအစ ပျက်သွားပါမယ်။
+
+</li>
+
+
+<li>
+
+<strong>Arduino သို့ မရောက်နိုင်ပါ:</strong>
+
+ကြားထဲမှာ ကြိုးဆက်မထားဘဲ အလင်းနဲ့ပဲ ဆက်ထားတာဖြစ်လို့
+ဒီဘက်က <strong>Arduino (Microcontroller) ဆီကို
+လျှပ်စစ်ဓာတ် ကူးစက်စီးဆင်းသွားစရာ လမ်းကြောင်း
+လုံးဝမရှိပါဘူး</strong>။
+
+</li>
+
+</ol>
+
+
+<p>
+
+<strong>အနှစ်ချုပ်:</strong>
+
+Optocoupler ဆိုတာ Arduino နဲ့ High Voltage ပတ်လမ်းကြားမှာ
+<strong>"အလင်း" စနစ်နဲ့ ခြားပေးထားတဲ့ လျှပ်စစ်လုံခြုံရေးတံခါး
+(Optical Barrier)</strong> ဖြစ်တာကြောင့် တစ်ဖက်မှာ
+မီးရှော့ဖြစ်ဖြစ်၊ မီးအားဆောင့်တက်တက် Arduino ဘက်ကို
+လျှပ်စစ်ဓာတ် လုံးဝကူးစက်မလာနိုင်အောင် ကာကွယ်ပေးတာ
+ဖြစ်ပါတယ်။
+
+</p>
+
+
+<hr>
+
+
+<h2>
+Flyback Diode (D2)
+</h2>
+
+
+<p>
+
+Relay Coil ကြောင့် ဖြစ်ပေါ်လာတဲ့ Back-EMF
+(Back Electromotive Force) ကို ကာကွယ်ပေးတဲ့ နည်းလမ်းနဲ့
+အလုပ်လုပ်ပုံကို အဓိက အချက် ၃ ချက်နဲ့ ရှင်းပြပေးပါမယ်။
+
+</p>
+
+
+<h3>
+1. Back-EMF ဆိုတာ ဘာလဲ (ပြဿနာ)
+</h3>
+
+
+<ul>
+
+<li>
+
+Relay ရဲ့ အတွင်းထဲမှာ လျှပ်စစ်သံလိုက်လိုင်း
+ဖြစ်ပေါ်စေတဲ့ နန်းကြိုးခွေ (Coil) ပါဝင်ပါတယ်။
+
+</li>
+
+
+<li>
+
+Coil အတွင်းသို့ လျှပ်စီးကြောင်း (Current)
+စီးဆင်းနေချိန်မှာ သံလိုက်စက်ကွင်း
+(Magnetic Field) စွမ်းအင်အဖြစ် သိမ်းဆည်းထားပါတယ်။
+
+</li>
+
+
+<li>
+
+Relay ကို ပိတ်လိုက်သည့်ခဏ (Power ဖြတ်လိုက်ချိန်):
+အဆိုပါ သိမ်းဆည်းထားသော သံလိုက်စက်ကွင်းသည်
+ရုတ်တရက် ပြိုပျက် (Collapse) သွားပါတယ်။
+
+</li>
+
+
+<li>
+
+ထိုသို့ သံလိုက်စက်ကွင်း ပြိုပျက်သွားသောအခါ
+Coil ထဲတွင် မူလပေးထားသော ဗို့အားထက်
+<strong>ဆယ်ဆမက မြင့်မားသည့် ပြောင်းပြန်ဗို့အား
+(Back-EMF Voltage Spike - ဥပမာ 5V Relay တွင်
+50V မှ 100V ထိ)</strong> ရုတ်တရက် ထွက်ပေါ်လာပါတယ်။
+
+အဆိုပါ ဗို့အားဆောင့်တက်မှုသည် Transistor နှင့်
+အခြား Circuit အစိတ်အပိုင်းများကို လောင်ကျွမ်း
+ပျက်စီးစေနိုင်ပါတယ်။
+
+</li>
+
+</ul>
+
+
+<h3>
+2. Flyback Diode ရဲ့ တပ်ဆင်ထားပုံ
+</h3>
+
+
+<ul>
+
+<li>
+
+Diode ကို Relay Coil နှင့်
+<strong>ပြိုင်ပြိုင် (Parallel)</strong> တပ်ဆင်ထားပြီး၊
+ပုံမှန် လျှပ်စစ်စီးဆင်းချိန်တွင် Diode ဘက်သို့
+လျှပ်စီးကြောင်း မရောက်အောင်
+<strong>Reverse Bias (ပြောင်းပြန်)</strong>
+ချိတ်ဆက်ထားပါတယ်။
+
+</li>
+
+
+<li>
+
+ဒါကြောင့် သာမန်အချိန်တွင် Diode သည် အလုပ်မလုပ်ဘဲ
+ငြိမ်နေပါတယ်။
+
+</li>
+
+</ul>
+
+
+<h3>
+3. Back-EMF ကို ကာကွယ်ပေးပုံ (အဖြေ)
+</h3>
+
+
+<ol>
+
+<li>
+
+<strong>ပြောင်းပြန်ဗို့အား ပေါ်ထွက်လာခြင်း:</strong>
+
+Relay ကို ပိတ်လိုက်၍ Back-EMF ပေါ်လာသောအခါ
+ထိုဗို့အား၏ Polar (အပေါင်း/အနှုတ်) သည်
+မူလဓာတ်အားနှင့် ပြောင်းပြန် ဖြစ်သွားပါတယ်။
+
+</li>
+
+
+<li>
+
+<strong>Diode ပွင့်သွားခြင်း:</strong>
+
+ပြောင်းပြန်ဖြစ်သွားသော ဗို့အားကြောင့် Reverse Bias
+ဖြစ်နေသည့် Diode သည် <strong>Forward Bias
+(ပုံမှန်လမ်းကြောင်း)</strong> ဖြစ်သွားပြီး
+ပွင့်သွားပါတယ်။
+
+</li>
+
+
+<li>
+
+<strong>စွမ်းအင်ကို စိစစ်ပိတ်လှောင်လိုက်ခြင်း
+(Freewheeling Loop):</strong>
+
+Back-EMF မှ ထွက်လာသော မြင့်မားသည့် လျှပ်စီးကြောင်းသည်
+အခြား Transistor သို့မဟုတ် Microcontroller ဆီသို့
+မရောက်တော့ဘဲ <strong>Diode နှင့် Coil အကြား
+ပတ်လမ်းအတိုင်းသာ လှည့်ပတ်စီးဆင်း (Loop)</strong>
+သွားကာ အပူအဖြစ် စွမ်းအင် ကုန်ခမ်းသွားစေပါတယ်။
+
+</li>
+
+</ol>
+
+
+<p>
+
+<strong>အနှစ်ချုပ်:</strong>
+
+Flyback Diode သည် Relay Coil ကို ပိတ်လိုက်စဉ်
+ထွက်ပေါ်လာသည့် မြင့်မားသော Back-EMF Voltage Spikes
+များကို အခြား Circuit အစိတ်အပိုင်းများဆီသို့
+မရောက်အောင် <strong>လမ်းကြောင်းလွှဲပေးပြီး ပတ်လမ်းအတွင်း
+စုပ်ယူ ပျောက်ကွယ်သွားစေသည့် လုံခြုံရေး ဗို့အားစိစစ်ဂိတ်
+(Freewheeling Path)</strong> အဖြစ် ကာကွယ်ပေးတာ
+ဖြစ်ပါတယ်။
+
+</p>
+
+
+<p>
+
+Reference:
+
+<a
+href="https://www.cestore-mm.com/product/1-channel-relay-module-5v10a/"
+target="_blank"
+rel="noopener noreferrer">
+
+1 Channel Relay Module 5V / 10A
+
+</a>
+
+</p>
+
 
 </template>
 
@@ -2130,18 +4326,24 @@ a:hover {
         ABOUT US
     </h2>
 
+
     <p>
+
         High Tech Auto Car Service focuses on automotive
         diagnostics, maintenance, electrical and electronic
         systems, engine service, transmission and CVT service,
         wiring, air conditioning, braking, suspension,
         injector cleaning and advanced diagnostic systems.
+
     </p>
 
+
     <p>
+
         Our goal is to understand the real cause of a vehicle
         problem instead of simply replacing parts without
         proper diagnosis.
+
     </p>
 
 </section>
@@ -2157,17 +4359,27 @@ a:hover {
         CONTACT US
     </h2>
 
-    <p>
-        <strong>Address:</strong><br>
-        No. --, --Residence, --- Street,
-        U Wisara Road, (--) Block , Dagon (North)
-    </p>
 
     <p>
+
+        <strong>Address:</strong><br>
+
+        No. --, --Residence, --- Street,
+        U Wisara Road, (--) Block , Dagon (North)
+
+    </p>
+
+
+    <p>
+
         <strong>Phone:</strong><br>
+
         0994------<br>
+
         09 45------<br>
+
         09 79------
+
     </p>
 
 </section>
@@ -2183,19 +4395,24 @@ a:hover {
         Thank You, Valued Customer
     </h2>
 
-    <p>
-        Thank you for choosing High Tech Auto Car Service.
-    </p>
 
     <p>
+
+        Thank you for choosing High Tech Auto Car Service.
+
+    </p>
+
+
+    <p>
+
         We appreciate your trust and support.
+
     </p>
 
 </section>
 
 
 <script>
-
 
 /* ==================================================
    CUSTOMER SECTION
@@ -2204,23 +4421,35 @@ a:hover {
 function toggleCustomer() {
 
     const section =
-        document.getElementById("customerSection");
+        document.getElementById(
+            "customerSection"
+        );
+
 
     const arrow =
-        document.getElementById("customerArrow");
+        document.getElementById(
+            "customerArrow"
+        );
 
 
-    if (section.style.display === "block") {
+    if (
+        section.style.display ===
+        "block"
+    ) {
 
-        section.style.display = "none";
+        section.style.display =
+            "none";
 
-        arrow.textContent = "▼";
+        arrow.textContent =
+            "▼";
 
     } else {
 
-        section.style.display = "block";
+        section.style.display =
+            "block";
 
-        arrow.textContent = "▲";
+        arrow.textContent =
+            "▲";
 
     }
 
@@ -2236,25 +4465,39 @@ function saveCustomer() {
     const customer = {
 
         name:
-            document.getElementById("customerName").value,
+            document.getElementById(
+                "customerName"
+            ).value,
 
         phone:
-            document.getElementById("customerPhone").value,
+            document.getElementById(
+                "customerPhone"
+            ).value,
 
         brand:
-            document.getElementById("carBrand").value,
+            document.getElementById(
+                "carBrand"
+            ).value,
 
         model:
-            document.getElementById("carModel").value,
+            document.getElementById(
+                "carModel"
+            ).value,
 
         year:
-            document.getElementById("carYear").value,
+            document.getElementById(
+                "carYear"
+            ).value,
 
         license:
-            document.getElementById("licenseNo").value,
+            document.getElementById(
+                "licenseNo"
+            ).value,
 
         mileage:
-            document.getElementById("mileage").value
+            document.getElementById(
+                "mileage"
+            ).value
 
     };
 
@@ -2266,19 +4509,24 @@ function saveCustomer() {
 
 
     const button =
-        document.getElementById("saveButton");
+        document.getElementById(
+            "saveButton"
+        );
 
 
     button.textContent =
         "CUSTOMER SAVED ✓";
 
 
-    setTimeout(function() {
+    setTimeout(
+        function() {
 
-        button.textContent =
-            "SAVE CUSTOMER";
+            button.textContent =
+                "SAVE CUSTOMER";
 
-    }, 2500);
+        },
+        2500
+    );
 
 }
 
@@ -2296,7 +4544,9 @@ function loadCustomer() {
 
 
     if (!saved) {
+
         return;
+
     }
 
 
@@ -2306,25 +4556,45 @@ function loadCustomer() {
             JSON.parse(saved);
 
 
-        document.getElementById("customerName").value =
+        document.getElementById(
+            "customerName"
+        ).value =
             customer.name || "";
 
-        document.getElementById("customerPhone").value =
+
+        document.getElementById(
+            "customerPhone"
+        ).value =
             customer.phone || "";
 
-        document.getElementById("carBrand").value =
+
+        document.getElementById(
+            "carBrand"
+        ).value =
             customer.brand || "";
 
-        document.getElementById("carModel").value =
+
+        document.getElementById(
+            "carModel"
+        ).value =
             customer.model || "";
 
-        document.getElementById("carYear").value =
+
+        document.getElementById(
+            "carYear"
+        ).value =
             customer.year || "";
 
-        document.getElementById("licenseNo").value =
+
+        document.getElementById(
+            "licenseNo"
+        ).value =
             customer.license || "";
 
-        document.getElementById("mileage").value =
+
+        document.getElementById(
+            "mileage"
+        ).value =
             customer.mileage || "";
 
     } catch (error) {
@@ -2345,18 +4615,29 @@ function loadCustomer() {
 const galleryImages = [
 
     {
-        src: "19.png",
-        caption: "Gallery Image 1"
+        src:
+            "19.png",
+
+        caption:
+            "Gallery Image 1"
     },
 
-    {
-        src: "16.png",
-        caption: "Gallery Image 2"
-    },
 
     {
-        src: "20.jpg",
-        caption: "Gallery Image 3"
+        src:
+            "16.png",
+
+        caption:
+            "Gallery Image 2"
+    },
+
+
+    {
+        src:
+            "20.jpg",
+
+        caption:
+            "Gallery Image 3"
     }
 
 ];
@@ -2372,6 +4653,7 @@ function updateGallery() {
             "galleryImage"
         );
 
+
     const caption =
         document.getElementById(
             "galleryCaption"
@@ -2379,11 +4661,15 @@ function updateGallery() {
 
 
     image.src =
-        galleryImages[galleryIndex].src;
+        galleryImages[
+            galleryIndex
+        ].src;
 
 
     caption.textContent =
-        galleryImages[galleryIndex].caption;
+        galleryImages[
+            galleryIndex
+        ].caption;
 
 
     updateGalleryDots();
@@ -2401,7 +4687,8 @@ function nextGallery() {
         galleryImages.length
     ) {
 
-        galleryIndex = 0;
+        galleryIndex =
+            0;
 
     }
 
@@ -2416,7 +4703,9 @@ function previousGallery() {
     galleryIndex--;
 
 
-    if (galleryIndex < 0) {
+    if (
+        galleryIndex < 0
+    ) {
 
         galleryIndex =
             galleryImages.length - 1;
@@ -2438,7 +4727,9 @@ function updateGalleryDots() {
 
 
     if (!dots) {
+
         return;
+
     }
 
 
@@ -2477,7 +4768,9 @@ function updateGalleryDots() {
                     : "○";
 
 
-            dots.appendChild(dot);
+            dots.appendChild(
+                dot
+            );
 
         }
     );
@@ -2491,13 +4784,9 @@ function updateGalleryDots() {
 
 const articles = [
 
-
-/* --------------------------------------------------
-   1
--------------------------------------------------- */
-
 {
-    title: "Automotive Repair Basics",
+    title:
+        "Automotive Repair Basics",
 
     html: `
 
@@ -2526,19 +4815,33 @@ const articles = [
 
     <ul>
 
-        <li>Verify the customer's complaint.</li>
+        <li>
+            Verify the customer's complaint.
+        </li>
 
-        <li>Check visible mechanical damage.</li>
+        <li>
+            Check visible mechanical damage.
+        </li>
 
-        <li>Inspect connectors and wiring.</li>
+        <li>
+            Inspect connectors and wiring.
+        </li>
 
-        <li>Check battery voltage and grounds.</li>
+        <li>
+            Check battery voltage and grounds.
+        </li>
 
-        <li>Scan the vehicle for diagnostic trouble codes.</li>
+        <li>
+            Scan the vehicle for diagnostic trouble codes.
+        </li>
 
-        <li>Check live data when necessary.</li>
+        <li>
+            Check live data when necessary.
+        </li>
 
-        <li>Perform a specific test before replacing a component.</li>
+        <li>
+            Perform a specific test before replacing a component.
+        </li>
 
     </ul>
 
@@ -2563,12 +4866,9 @@ const articles = [
 },
 
 
-/* --------------------------------------------------
-   2
--------------------------------------------------- */
-
 {
-    title: "How an Engine Works",
+    title:
+        "How an Engine Works",
 
     html: `
 
@@ -2628,12 +4928,9 @@ const articles = [
 },
 
 
-/* --------------------------------------------------
-   3
--------------------------------------------------- */
-
 {
-    title: "Automotive Electrical Systems",
+    title:
+        "Automotive Electrical Systems",
 
     html: `
 
@@ -2701,12 +4998,9 @@ const articles = [
 },
 
 
-/* --------------------------------------------------
-   4
--------------------------------------------------- */
-
 {
-    title: "Battery, Alternator & Starter",
+    title:
+        "Battery, Alternator & Starter",
 
     html: `
 
@@ -2767,12 +5061,9 @@ const articles = [
 },
 
 
-/* --------------------------------------------------
-   5
--------------------------------------------------- */
-
 {
-    title: "Relays and Fuses",
+    title:
+        "Relays and Fuses",
 
     html: `
 
@@ -2828,12 +5119,9 @@ const articles = [
 },
 
 
-/* --------------------------------------------------
-   6
--------------------------------------------------- */
-
 {
-    title: "Automotive Sensors",
+    title:
+        "Automotive Sensors",
 
     html: `
 
@@ -2906,12 +5194,9 @@ const articles = [
 },
 
 
-/* --------------------------------------------------
-   7
--------------------------------------------------- */
-
 {
-    title: "OBD-II & Diagnostic Scanners",
+    title:
+        "OBD-II & Diagnostic Scanners",
 
     html: `
 
@@ -2967,12 +5252,9 @@ const articles = [
 },
 
 
-/* --------------------------------------------------
-   8
--------------------------------------------------- */
-
 {
-    title: "P0171 Fuel Trim Diagnostics",
+    title:
+        "P0171 Fuel Trim Diagnostics",
 
     html: `
 
@@ -3060,12 +5342,9 @@ const articles = [
 },
 
 
-/* --------------------------------------------------
-   9
--------------------------------------------------- */
-
 {
-    title: "Automatic Transmission & CVT",
+    title:
+        "Automatic Transmission & CVT",
 
     html: `
 
@@ -3126,12 +5405,9 @@ const articles = [
 },
 
 
-/* --------------------------------------------------
-   10
--------------------------------------------------- */
-
 {
-    title: "Automotive Air Conditioning",
+    title:
+        "Automotive Air Conditioning",
 
     html: `
 
@@ -3185,12 +5461,9 @@ const articles = [
 },
 
 
-/* --------------------------------------------------
-   11
--------------------------------------------------- */
-
 {
-    title: "Brake & Suspension Systems",
+    title:
+        "Brake & Suspension Systems",
 
     html: `
 
@@ -3263,12 +5536,9 @@ const articles = [
 },
 
 
-/* --------------------------------------------------
-   12
--------------------------------------------------- */
-
 {
-    title: "ADAS (Advanced Driver Assistance Systems)",
+    title:
+        "ADAS (Advanced Driver Assistance Systems)",
 
     html: `
 
@@ -3325,12 +5595,9 @@ const articles = [
 },
 
 
-/* --------------------------------------------------
-   13
--------------------------------------------------- */
-
 {
-    title: "Radar vs LiDAR",
+    title:
+        "Radar vs LiDAR",
 
     html: `
 
@@ -3385,12 +5652,9 @@ const articles = [
 },
 
 
-/* --------------------------------------------------
-   14
--------------------------------------------------- */
-
 {
-    title: "AI & Autonomous Driving",
+    title:
+        "AI & Autonomous Driving",
 
     html: `
 
@@ -3457,12 +5721,9 @@ const articles = [
 },
 
 
-/* --------------------------------------------------
-   15
--------------------------------------------------- */
-
 {
-    title: "Automotive Diagnostic Process",
+    title:
+        "Automotive Diagnostic Process",
 
     html: `
 
@@ -3562,16 +5823,20 @@ function showArticle() {
             "articleSelect"
         );
 
+
     const content =
         document.getElementById(
             "articleContent"
         );
 
+
     const index =
         select.value;
 
 
-    if (index === "") {
+    if (
+        index === ""
+    ) {
 
         content.style.display =
             "none";
@@ -3598,15 +5863,7 @@ function showArticle() {
 
 
 /* ==================================================
-   LIBRARY DATA
-================================================== */
-
-const LIBRARY_STORAGE_KEY =
-    "highTechAutoLibraryArticles";
-
-
-/* ==================================================
-   GET BUILT-IN RELAY ARTICLE
+   LIBRARY STORAGE
 ================================================== */
 
 function getRelayLibraryArticle() {
@@ -3619,9 +5876,11 @@ function getRelayLibraryArticle() {
 
     return {
 
-        id: "relay-note",
+        id:
+            "relay-note",
 
-        title: "1 Channel Relay",
+        title:
+            "1 Channel Relay",
 
         html:
             template
@@ -3634,78 +5893,24 @@ function getRelayLibraryArticle() {
 
 
 /* ==================================================
-   GET USER ARTICLES
-================================================== */
-
-function getSavedLibraryArticles() {
-
-    const saved =
-        localStorage.getItem(
-            LIBRARY_STORAGE_KEY
-        );
-
-
-    if (!saved) {
-
-        return [];
-
-    }
-
-
-    try {
-
-        const articles =
-            JSON.parse(saved);
-
-
-        if (!Array.isArray(articles)) {
-
-            return [];
-
-        }
-
-
-        return articles;
-
-    } catch (error) {
-
-        return [];
-
-    }
-
-}
-
-
-/* ==================================================
-   SAVE USER ARTICLES
-================================================== */
-
-function saveLibraryArticles(articles) {
-
-    localStorage.setItem(
-        LIBRARY_STORAGE_KEY,
-        JSON.stringify(articles)
-    );
-
-}
-
-
-/* ==================================================
    GET ALL LIBRARY ARTICLES
 ================================================== */
 
 function getAllLibraryArticles() {
 
     return [
+
         getRelayLibraryArticle(),
-        ...getSavedLibraryArticles()
+
+        ...(window.firebaseLibraryArticles || [])
+
     ];
 
 }
 
 
 /* ==================================================
-   RENDER LIBRARY ARTICLE LIST
+   RENDER LIBRARY ARTICLES
 ================================================== */
 
 function renderLibraryArticles() {
@@ -3729,6 +5934,25 @@ function renderLibraryArticles() {
 
     const libraryArticles =
         getAllLibraryArticles();
+
+
+    if (
+        libraryArticles.length === 0
+    ) {
+
+        list.innerHTML = `
+
+            <div class="library-empty">
+
+                No articles available.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
 
 
     libraryArticles.forEach(
@@ -3771,6 +5995,22 @@ function renderLibraryArticles() {
         }
     );
 
+
+    const newButton =
+        document.getElementById(
+            "newArticleButton"
+        );
+
+
+    if (newButton) {
+
+        newButton.style.display =
+            window.isLibraryAdmin
+                ? "block"
+                : "none";
+
+    }
+
 }
 
 
@@ -3803,19 +6043,21 @@ function readLibraryArticle(index) {
 
     reader.innerHTML =
         "<h2>" +
-        escapeHtml(article.title) +
+        escapeHtml(
+            article.title
+        ) +
         "</h2>" +
         article.html;
 
 
     /*
-       DELETE BUTTON
-       User-created articles only
+       ADMIN ACTIONS
     */
 
     if (
         article.id !==
-        "relay-note"
+        "relay-note" &&
+        window.isLibraryAdmin
     ) {
 
         const actions =
@@ -3826,6 +6068,34 @@ function readLibraryArticle(index) {
 
         actions.className =
             "library-reader-actions";
+
+
+        const editButton =
+            document.createElement(
+                "button"
+            );
+
+
+        editButton.type =
+            "button";
+
+
+        editButton.className =
+            "library-edit-button";
+
+
+        editButton.textContent =
+            "EDIT ARTICLE";
+
+
+        editButton.onclick =
+            function() {
+
+                editLibraryArticle(
+                    index
+                );
+
+            };
 
 
         const deleteButton =
@@ -3857,6 +6127,11 @@ function readLibraryArticle(index) {
 
 
         actions.appendChild(
+            editButton
+        );
+
+
+        actions.appendChild(
             deleteButton
         );
 
@@ -3878,7 +6153,8 @@ function readLibraryArticle(index) {
         function(button, buttonIndex) {
 
             if (
-                buttonIndex === index
+                buttonIndex ===
+                index
             ) {
 
                 button.classList.add(
@@ -3908,15 +6184,20 @@ function readLibraryArticle(index) {
 
 
     reader.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+
+        behavior:
+            "smooth",
+
+        block:
+            "start"
+
     });
 
 }
 
 
 /* ==================================================
-   ESCAPE TITLE TEXT
+   ESCAPE HTML
 ================================================== */
 
 function escapeHtml(text) {
@@ -3942,6 +6223,17 @@ function escapeHtml(text) {
 
 function openLibraryEditor() {
 
+    if (!window.isLibraryAdmin) {
+
+        alert(
+            "Admin login is required."
+        );
+
+        return;
+
+    }
+
+
     const editor =
         document.getElementById(
             "libraryEditor"
@@ -3953,25 +6245,80 @@ function openLibraryEditor() {
 
 
     document.getElementById(
+        "newArticleEditorTitle"
+    ).textContent =
+        "WRITE NEW ARTICLE";
+
+
+    document.getElementById(
         "newArticleTitle"
-    ).value = "";
+    ).style.display =
+        "block";
 
 
     document.getElementById(
         "newArticleContent"
-    ).value = "";
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "newArticleTitle"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "newArticleContent"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "editArticleId"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "editArticleTitle"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "editArticleContent"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "librarySaveButton"
+    ).style.display =
+        "inline-block";
+
+
+    document.getElementById(
+        "libraryUpdateButton"
+    ).style.display =
+        "none";
 
 
     editor.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+
+        behavior:
+            "smooth",
+
+        block:
+            "start"
+
     });
 
 }
 
 
 /* ==================================================
-   CANCEL NEW ARTICLE
+   CANCEL EDITOR
 ================================================== */
 
 function cancelLibraryEditor() {
@@ -3988,39 +6335,218 @@ function cancelLibraryEditor() {
 
     document.getElementById(
         "newArticleTitle"
-    ).value = "";
+    ).value =
+        "";
 
 
     document.getElementById(
         "newArticleContent"
-    ).value = "";
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "editArticleId"
+    ).value =
+        "";
 
 }
 
 
 /* ==================================================
-   SAVE NEW LIBRARY ARTICLE
+   SAVE NEW ARTICLE
 ================================================== */
 
 function saveNewLibraryArticle() {
 
-    const titleInput =
-        document.getElementById(
-            "newArticleTitle"
+    if (!window.isLibraryAdmin) {
+
+        alert(
+            "Admin login is required."
         );
 
-    const contentInput =
+        return;
+
+    }
+
+
+    window.createFirebaseLibraryArticle();
+
+}
+
+
+/* ==================================================
+   PREPARE EDITOR
+================================================== */
+
+function prepareEditEditor(article) {
+
+    const editor =
         document.getElementById(
-            "newArticleContent"
+            "libraryEditor"
         );
+
+
+    editor.style.display =
+        "block";
+
+
+    document.getElementById(
+        "newArticleEditorTitle"
+    ).textContent =
+        "EDIT ARTICLE";
+
+
+    document.getElementById(
+        "newArticleTitle"
+    ).value =
+        article.title;
+
+
+    document.getElementById(
+        "newArticleContent"
+    ).value =
+        htmlToPlainText(
+            article.html
+        );
+
+
+    document.getElementById(
+        "editArticleId"
+    ).value =
+        article.id;
+
+
+    document.getElementById(
+        "librarySaveButton"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "libraryUpdateButton"
+    ).style.display =
+        "inline-block";
+
+}
+
+
+/* ==================================================
+   EDIT ARTICLE - USING SAME FIELDS
+================================================== */
+
+const originalEditLibraryArticle =
+    window.editLibraryArticle;
+
+
+window.editLibraryArticle =
+function(index) {
+
+    if (!window.isLibraryAdmin) {
+
+        alert(
+            "Admin login is required."
+        );
+
+        return;
+
+    }
+
+
+    const articles =
+        getAllLibraryArticles();
+
+
+    const article =
+        articles[index];
+
+
+    if (!article) {
+
+        return;
+
+    }
+
+
+    if (
+        article.id ===
+        "relay-note"
+    ) {
+
+        alert(
+            "The original Relay Note cannot be edited."
+        );
+
+        return;
+
+    }
+
+
+    prepareEditEditor(
+        article
+    );
+
+
+    document.getElementById(
+        "libraryEditor"
+    ).scrollIntoView({
+
+        behavior:
+            "smooth",
+
+        block:
+            "start"
+
+    });
+
+};
+
+
+/* ==================================================
+   UPDATE USING EDITOR FIELDS
+================================================== */
+
+const originalUpdate =
+    window.updateLibraryArticle;
+
+
+window.updateLibraryArticle =
+async function() {
+
+    if (!window.isLibraryAdmin) {
+
+        alert(
+            "Admin login is required."
+        );
+
+        return;
+
+    }
+
+
+    const id =
+        document.getElementById(
+            "editArticleId"
+        ).value;
 
 
     const title =
-        titleInput.value.trim();
+        document.getElementById(
+            "newArticleTitle"
+        ).value.trim();
 
 
     const text =
-        contentInput.value.trim();
+        document.getElementById(
+            "newArticleContent"
+        ).value.trim();
+
+
+    if (!id) {
+
+        return;
+
+    }
 
 
     if (!title) {
@@ -4028,8 +6554,6 @@ function saveNewLibraryArticle() {
         alert(
             "Please enter an article title."
         );
-
-        titleInput.focus();
 
         return;
 
@@ -4039,73 +6563,86 @@ function saveNewLibraryArticle() {
     if (!text) {
 
         alert(
-            "Please write the article content."
+            "Please write article content."
         );
-
-        contentInput.focus();
 
         return;
 
     }
 
 
-    const newArticle = {
+    try {
 
-        id:
-            "article-" +
-            Date.now(),
-
-        title:
-            title,
-
-        html:
+        const html =
             convertPlainTextToHtml(
                 text
-            )
-
-    };
+            );
 
 
-    const savedArticles =
-        getSavedLibraryArticles();
+        await window.updateFirebaseArticle(
+            id,
+            title,
+            html
+        );
 
 
-    savedArticles.push(
-        newArticle
-    );
+        await window.loadFirebaseLibrary();
 
 
-    saveLibraryArticles(
-        savedArticles
-    );
+        cancelLibraryEditor();
 
 
-    renderLibraryArticles();
+        const updatedIndex =
+            getAllLibraryArticles()
+                .findIndex(
+                    function(article) {
+
+                        return article.id === id;
+
+                    }
+                );
 
 
-    const newIndex =
-        getAllLibraryArticles().length -
-        1;
+        if (
+            updatedIndex !== -1
+        ) {
+
+            readLibraryArticle(
+                updatedIndex
+            );
+
+        }
 
 
-    cancelLibraryEditor();
+        alert(
+            "Article updated successfully."
+        );
 
 
-    readLibraryArticle(
-        newIndex
-    );
+    } catch (error) {
 
-}
+        console.error(error);
+
+        alert(
+            "Article could not be updated.\n\n" +
+            error.message
+        );
+
+    }
+
+};
 
 
 /* ==================================================
-   CONVERT PLAIN TEXT TO ARTICLE HTML
+   CONVERT PLAIN TEXT TO HTML
 ================================================== */
 
 function convertPlainTextToHtml(text) {
 
     const lines =
-        text.split(/\r?\n/);
+        text.split(
+            /\r?\n/
+        );
 
 
     let html =
@@ -4119,7 +6656,9 @@ function convertPlainTextToHtml(text) {
                 line.trim();
 
 
-            if (cleanLine === "") {
+            if (
+                cleanLine === ""
+            ) {
 
                 html +=
                     "<br>";
@@ -4145,17 +6684,54 @@ function convertPlainTextToHtml(text) {
 
 
 /* ==================================================
-   DELETE USER ARTICLE
+   HTML TO TEXT
 ================================================== */
 
-function deleteLibraryArticle(index) {
+function htmlToPlainText(html) {
 
-    const libraryArticles =
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.innerHTML =
+        html;
+
+
+    return div.innerText;
+
+}
+
+
+/* ==================================================
+   DELETE ARTICLE
+================================================== */
+
+const originalDelete =
+    window.deleteLibraryArticle;
+
+
+window.deleteLibraryArticle =
+async function(index) {
+
+    if (!window.isLibraryAdmin) {
+
+        alert(
+            "Admin login is required."
+        );
+
+        return;
+
+    }
+
+
+    const articles =
         getAllLibraryArticles();
 
 
     const article =
-        libraryArticles[index];
+        articles[index];
 
 
     if (!article) {
@@ -4164,10 +6740,6 @@ function deleteLibraryArticle(index) {
 
     }
 
-
-    /*
-       Protect the original Relay Note
-    */
 
     if (
         article.id ===
@@ -4198,69 +6770,59 @@ function deleteLibraryArticle(index) {
     }
 
 
-    const savedArticles =
-        getSavedLibraryArticles();
+    try {
 
-
-    const savedIndex =
-        savedArticles.findIndex(
-            function(item) {
-
-                return item.id ===
-                    article.id;
-
-            }
+        await window.deleteFirebaseArticle(
+            article.id
         );
 
 
-    if (savedIndex !== -1) {
+        await window.loadFirebaseLibrary();
 
-        savedArticles.splice(
-            savedIndex,
-            1
+
+        document.getElementById(
+            "libraryReader"
+        ).innerHTML = `
+
+            <div class="library-empty">
+
+                <h2>
+                    ARTICLE DELETED
+                </h2>
+
+                <p>
+                    The article has been removed from the library.
+                </p>
+
+                <p>
+                    Select another article from the ARTICLES list.
+                </p>
+
+            </div>
+
+        `;
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Article could not be deleted.\n\n" +
+            error.message
         );
 
     }
 
-
-    saveLibraryArticles(
-        savedArticles
-    );
-
-
-    renderLibraryArticles();
-
-
-    document.getElementById(
-        "libraryReader"
-    ).innerHTML = `
-
-        <div class="library-empty">
-
-            <h2>
-                ARTICLE DELETED
-            </h2>
-
-            <p>
-                The article has been removed from the library.
-            </p>
-
-            <p>
-                Select another article from the ARTICLES list.
-            </p>
-
-        </div>
-
-    `;
-
-}
+};
 
 
 /* ==================================================
    PAGE LOAD
 ================================================== */
 
-window.onload = function() {
+window.onload =
+function() {
 
     loadCustomer();
 
@@ -4274,5 +6836,6 @@ window.onload = function() {
 
 
 </body>
+
 </html>
 
