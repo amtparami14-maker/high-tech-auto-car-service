@@ -2918,8 +2918,397 @@ const trainingArticles = {
             can produce detailed three-dimensional information
             about the surrounding environment.
             </p>
-        `
+        <p>
+# Radar vs LiDAR
 
+## Introduction
+
+When a modern vehicle is driving, it needs to know what is happening around it.
+
+It needs to detect vehicles, pedestrians, obstacles, road boundaries, and other objects. It also needs to understand how far away those objects are and, in many situations, how they are moving.
+
+This is where **automotive sensors** become important.
+
+Two important sensing technologies used in automotive systems are **Radar** and **LiDAR**.
+
+At first, Radar and LiDAR may seem similar because both can detect objects and measure distance. However, they work in different ways and provide different types of information.
+
+**Radar uses radio waves.**
+
+**LiDAR uses laser light.**
+
+Understanding this basic difference is the first step toward understanding how modern vehicles perform **object detection, ADAS, sensor fusion, and autonomous driving**.
+
+In this article, we will learn how Radar and LiDAR work, what information they provide, where they are used in vehicles, their strengths and limitations, and why modern automotive systems may use multiple sensors together.
+
+</p>
+<p># Radar vs LiDAR
+
+Modern vehicles use different types of sensors to understand the surrounding environment. Two important technologies used for object detection and environmental perception are **Radar** and **LiDAR**.
+
+Although both technologies can measure the distance to objects, they use different physical principles and provide different types of information.
+
+---
+
+## 1. What is Radar?
+
+**Radar** stands for **Radio Detection and Ranging**.
+
+Radar uses **radio waves** to detect objects and measure their distance and relative motion.
+
+A radar sensor transmits radio waves into the surrounding environment. When the waves encounter an object, part of the signal is reflected back to the sensor.
+
+The system analyzes the returned signal to determine information such as:
+
+* Distance to the object
+* Relative speed
+* Direction or angle
+* Presence of objects
+
+Because Radar uses radio waves rather than visible light, it can continue operating in conditions where a camera may have difficulty seeing.
+
+### Basic Radar Process
+
+**Transmit → Reflection → Receive → Process → Detect**
+
+The radar sensor sends a signal, receives the reflected signal, and processes the information to determine the position and movement of an object.
+
+---
+
+## 2. What is LiDAR?
+
+**LiDAR** stands for **Light Detection and Ranging**.
+
+LiDAR uses **laser light** to measure distance.
+
+The sensor sends short pulses of laser light toward the surrounding environment. When the light reflects from an object, the sensor measures the time taken for the light to return.
+
+From this information, the system can calculate the distance to the object.
+
+LiDAR can collect a large number of measurements and create a detailed representation of the surrounding environment, commonly known as a **point cloud**.
+
+---
+
+## 3. What is a Point Cloud?
+
+A **point cloud** is a collection of individual measurement points representing objects and surfaces in three-dimensional space.
+
+For example, a LiDAR system can detect points representing:
+
+* Vehicles
+* Pedestrians
+* Road surfaces
+* Buildings
+* Barriers
+* Trees
+* Other objects
+
+When many points are collected together, they can form a detailed 3D representation of the environment.
+
+This makes LiDAR particularly useful for systems that need detailed spatial information.
+
+---
+
+## 4. Radar vs LiDAR: How Are They Different?
+
+The fundamental difference is the type of electromagnetic wave they use.
+
+**Radar → Radio waves**
+
+**LiDAR → Laser light**
+
+Because of this difference, the two sensors have different characteristics.
+
+Radar is particularly useful for detecting objects and measuring **distance and relative motion**.
+
+LiDAR is particularly useful for obtaining detailed **spatial and three-dimensional information** about the environment.
+
+---
+
+## 5. Measuring Distance
+
+Both Radar and LiDAR can measure the distance between the sensor and an object.
+
+Radar determines distance by analyzing the transmitted and reflected radio signal.
+
+LiDAR determines distance by measuring the travel time of laser light.
+
+The basic concept can be represented as:
+
+**Distance = Signal travel time × Signal speed ÷ 2**
+
+The division by two is necessary because the signal travels from the sensor to the object and then returns to the sensor.
+
+---
+
+## 6. Measuring Relative Speed
+
+One important capability of automotive Radar is measuring **relative velocity**.
+
+Radar can use the **Doppler effect** to determine how the frequency of the returned signal has changed.
+
+This allows the system to determine whether another vehicle or object is:
+
+* Moving toward the vehicle
+* Moving away from the vehicle
+* Moving at a different speed relative to the vehicle
+
+This information is especially useful for automotive safety systems.
+
+---
+
+## 7. Radar in Automotive Systems
+
+Radar is widely used in modern vehicles for sensing the surrounding environment.
+
+Typical applications include:
+
+### Adaptive Cruise Control (ACC)
+
+Radar can detect a vehicle ahead and measure its distance and relative speed.
+
+The vehicle can then adjust its speed to maintain a selected following distance.
+
+### Automatic Emergency Braking (AEB)
+
+Radar can help detect vehicles or other obstacles in front of the vehicle.
+
+When combined with other sensors, the system can determine whether a collision risk exists.
+
+### Blind Spot Detection
+
+Radar sensors can monitor areas beside and behind the vehicle that may not be easily visible to the driver.
+
+### Rear Cross-Traffic Alert
+
+Radar can detect vehicles or objects approaching from the side when a vehicle is reversing.
+
+### Parking Assistance
+
+Radar can also be used to detect nearby objects during parking and low-speed maneuvering.
+
+---
+
+## 8. LiDAR in Automotive Systems
+
+LiDAR can provide detailed information about the shape and location of objects around the vehicle.
+
+Potential automotive applications include:
+
+* Autonomous driving
+* Environmental mapping
+* Object detection
+* 3D perception
+* Road and obstacle detection
+* Localization and mapping
+
+LiDAR can be especially useful when a vehicle needs detailed information about the surrounding three-dimensional environment.
+
+---
+
+## 9. Radar Strengths
+
+Radar has several important advantages in automotive applications.
+
+### Works in Low Visibility
+
+Radar can operate in darkness and can generally continue sensing in conditions such as rain, fog, and dust better than optical sensors.
+
+### Measures Relative Motion
+
+Radar is particularly useful for determining the relative speed of moving objects.
+
+### Long Detection Range
+
+Automotive radar systems can provide useful detection over relatively long distances, depending on the radar type and application.
+
+### Compact Automotive Sensors
+
+Radar sensors can be integrated into vehicles without requiring a large visible sensor structure.
+
+---
+
+## 10. Radar Limitations
+
+Radar also has limitations.
+
+Compared with LiDAR, radar generally provides less detailed spatial information.
+
+Objects with similar radar characteristics can sometimes be difficult to distinguish from one another.
+
+The resulting information is therefore not normally as visually detailed as a LiDAR point cloud.
+
+For this reason, automotive systems often combine Radar with other sensors.
+
+---
+
+## 11. LiDAR Strengths
+
+LiDAR provides several important advantages.
+
+### Detailed 3D Information
+
+LiDAR can produce a dense collection of spatial measurements that describe the surrounding environment in three dimensions.
+
+### High Spatial Resolution
+
+LiDAR can provide detailed information about the position and shape of objects.
+
+### Useful for Mapping
+
+The 3D information produced by LiDAR can be used for mapping and localization systems.
+
+---
+
+## 12. LiDAR Limitations
+
+LiDAR also has limitations.
+
+Because it uses light, its performance can be affected by environmental conditions such as heavy rain, fog, snow, or airborne particles.
+
+LiDAR systems can also be more complex and expensive than some automotive radar systems.
+
+Therefore, LiDAR is not simply a replacement for Radar.
+
+Each technology has different strengths.
+
+---
+
+## 13. Why Do Modern Vehicles Use Multiple Sensors?
+
+A vehicle cannot rely on only one type of sensor for every situation.
+
+Radar, LiDAR, cameras, ultrasonic sensors, and other sensors can provide different types of information.
+
+For example:
+
+**Camera → Visual information and object appearance**
+
+**Radar → Distance and relative motion**
+
+**LiDAR → Detailed 3D spatial information**
+
+**Ultrasonic → Short-range object detection**
+
+Each sensor observes the environment from a different perspective.
+
+---
+
+## 14. Sensor Fusion
+
+When information from multiple sensors is combined, the process is commonly called **Sensor Fusion**.
+
+For example:
+
+A camera may identify an object as a vehicle.
+
+Radar may determine its distance and relative speed.
+
+LiDAR may provide detailed 3D position information.
+
+The vehicle's perception system can combine these measurements to build a more complete understanding of the surrounding environment.
+
+This is particularly important in **Advanced Driver Assistance Systems (ADAS)** and autonomous driving research.
+
+---
+
+## 15. Radar vs LiDAR — Basic Comparison
+
+| Feature               | Radar                          | LiDAR                                      |
+| --------------------- | ------------------------------ | ------------------------------------------ |
+| Full Name             | Radio Detection and Ranging    | Light Detection and Ranging                |
+| Signal                | Radio waves                    | Laser light                                |
+| Distance Measurement  | Yes                            | Yes                                        |
+| Relative Speed        | Very useful                    | Not its primary strength                   |
+| 3D Information        | Limited compared with LiDAR    | Detailed                                   |
+| Spatial Resolution    | Lower                          | Higher                                     |
+| Darkness              | Works                          | Works                                      |
+| Rain/Fog              | Generally more tolerant        | Can be affected                            |
+| Mapping               | Limited                        | Very useful                                |
+| Common Automotive Use | ACC, AEB, Blind Spot Detection | 3D perception, mapping, autonomous driving |
+
+---
+
+## 16. Radar and LiDAR Are Not Competitors in Every Situation
+
+It is easy to think that one technology must replace the other.
+
+In reality, they can serve different purposes.
+
+Radar is very useful when the system needs reliable detection of objects, distance, and relative motion.
+
+LiDAR is very useful when the system needs detailed three-dimensional information about the environment.
+
+Therefore, the important question is not simply:
+
+**"Which sensor is better?"**
+
+A more useful engineering question is:
+
+**"Which sensor provides the information required for this particular task?"**
+
+---
+
+## 17. Role in ADAS and Autonomous Vehicles
+
+Modern automotive perception systems can use multiple sensors to understand the environment.
+
+For example, during highway driving:
+
+**Camera**
+→ Detects lane markings and recognizes objects.
+
+**Radar**
+→ Measures the distance and relative speed of vehicles ahead.
+
+**LiDAR**
+→ Provides detailed 3D environmental information.
+
+The vehicle's computing system processes these sensor inputs and creates a representation of the surrounding environment.
+
+This information can then be used by higher-level systems for functions such as:
+
+* Object tracking
+* Collision warning
+* Adaptive cruise control
+* Lane-related functions
+* Path planning
+* Autonomous driving research
+
+---
+
+## 18. Important Training Point
+
+Radar and LiDAR should not be understood simply as "two sensors that measure distance."
+
+They represent two different approaches to environmental perception.
+
+**Radar asks:**
+
+> Where is the object, and how is it moving relative to me?
+
+**LiDAR asks:**
+
+> Where are the surrounding surfaces and objects in three-dimensional space?
+
+In real automotive engineering, the answer is often obtained by combining information from several sensors rather than depending on only one sensor.
+
+---
+
+## Conclusion
+
+Radar uses **radio waves** to detect objects and is particularly valuable for measuring distance and relative motion.
+
+LiDAR uses **laser light** to measure distance and can provide detailed three-dimensional information about the surrounding environment.
+
+Both technologies have strengths and limitations.
+
+Understanding how these sensors work is an important foundation for learning **ADAS, autonomous vehicles, robotics, computer vision, and sensor fusion**.
+
+
+     </p>
+    
+    
     },
 
 
