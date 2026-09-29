@@ -57,91 +57,233 @@ body {
 
 
 /* ==================================================
-   HEADER
+   HEADER / TIMELINE
 ================================================== */
 
 .header {
 
-    min-height: 220px;
+    width: 100%;
 
-    padding: 25px 40px;
+    min-height: 205px;
 
-    display: flex;
+    padding: 18px 35px 20px 35px;
+
+    display: grid;
+
+    grid-template-columns: 95px 1fr 95px;
+
+    grid-template-rows: auto 1fr;
+
+    column-gap: 20px;
 
     align-items: center;
 
-    justify-content: space-between;
+    position: relative;
 
-    gap: 25px;
+    background: rgba(255,255,255,0.97);
 
-    background-color: #0b2545;
+    border-top: 5px solid #0b2545;
 
-    background-image:
-        linear-gradient(
-            135deg,
-            rgba(0,220,255,0.10),
-            rgba(0,70,140,0.30)
-        );
+    border-bottom: 3px solid #00d9ff;
 
-    border-bottom: 4px solid #00d9ff;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.15);
 
-    box-shadow: 0 5px 20px rgba(0,0,0,0.30);
 }
 
 
-.logo {
+/* Timeline bottom line */
 
-    width: 90px;
+.header::after {
 
-    height: 90px;
+    content: "";
+
+    position: absolute;
+
+    left: 35px;
+
+    right: 35px;
+
+    bottom: -3px;
+
+    height: 3px;
+
+    background: linear-gradient(
+        90deg,
+        #0b2545,
+        #00a6e8,
+        #00d9ff,
+        #00a6e8,
+        #0b2545
+    );
+
+}
+
+
+/* ==================================================
+   HEADER LOGOS
+================================================== */
+
+.header .logo {
+
+    width: 82px;
+
+    height: 82px;
 
     object-fit: contain;
 
-    flex-shrink: 0;
+    padding: 4px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+
+    z-index: 2;
+
 }
 
 
+.header .logo:first-child {
+
+    justify-self: start;
+
+}
+
+
+.header .logo:last-child {
+
+    justify-self: end;
+
+}
+
+
+/* ==================================================
+   SHOP NAME
+================================================== */
+
 .header-center {
 
-    flex: 1;
+    grid-column: 2;
+
+    grid-row: 1;
 
     text-align: center;
+
+    align-self: center;
+
 }
 
 
 .header h1 {
 
-    margin: 0 0 15px 0;
+    margin: 0;
 
-    color: white;
+    color: #0b2545;
 
-    font-size: 39px;
+    font-size: 52px;
 
-    letter-spacing: 1px;
+    font-weight: 800;
 
-    text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+    letter-spacing: 1.5px;
+
+    line-height: 1.15;
+
+    white-space: nowrap;
+
+}
+
+
+/* ==================================================
+   ADDRESS + PHONE
+================================================== */
+
+.header-info {
+
+    grid-column: 1 / 3;
+
+    grid-row: 2;
+
+    align-self: end;
+
+    justify-self: start;
+
+    text-align: left;
+
+    padding-top: 10px;
+
 }
 
 
 .address {
 
-    color: white;
+    color: #40566b;
 
-    font-size: 16px;
+    font-size: 15px;
 
-    line-height: 1.6;
+    line-height: 1.55;
 
-    margin-bottom: 8px;
+    margin: 0 0 7px 0;
+
 }
 
 
 .phone {
 
-    color: white;
+    color: #0b2545;
 
-    font-size: 16px;
+    font-size: 15px;
 
-    line-height: 1.6;
+    font-weight: bold;
+
+    line-height: 1.5;
+
+    white-space: nowrap;
+
+}
+
+
+/* ==================================================
+   HEADER QR
+================================================== */
+
+.header-qr {
+
+    grid-column: 3;
+
+    grid-row: 2;
+
+    align-self: end;
+
+    justify-self: end;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.header-qr img {
+
+    width: 82px;
+
+    height: 82px;
+
+    object-fit: contain;
+
+    background: white;
+
+    padding: 4px;
+
+    border-radius: 8px;
+
+    border: 1px solid #c8dce8;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+
 }
 
 
@@ -1067,25 +1209,94 @@ button {
 
     .header {
 
-        padding: 20px;
+        min-height: 0;
 
-        flex-direction: column;
+        padding: 15px 15px 18px 15px;
 
-        text-align: center;
+        grid-template-columns: 65px 1fr 65px;
+
+        column-gap: 10px;
+
+    }
+
+
+    .header::after {
+
+        left: 15px;
+
+        right: 15px;
+
+    }
+
+
+    .header .logo {
+
+        width: 58px;
+
+        height: 58px;
+
     }
 
 
     .header h1 {
 
-        font-size: 29px;
+        font-size: 27px;
+
+        letter-spacing: 0.5px;
+
+        white-space: normal;
+
     }
 
 
-    .logo {
+    .header-info {
 
-        width: 75px;
+        grid-column: 1 / 4;
 
-        height: 75px;
+        grid-row: 2;
+
+        padding-top: 12px;
+
+        padding-right: 75px;
+
+    }
+
+
+    .address {
+
+        font-size: 12px;
+
+        line-height: 1.5;
+
+    }
+
+
+    .phone {
+
+        font-size: 12px;
+
+        line-height: 1.45;
+
+        white-space: normal;
+
+    }
+
+
+    .header-qr {
+
+        grid-column: 3;
+
+        grid-row: 2;
+
+    }
+
+
+    .header-qr img {
+
+        width: 62px;
+
+        height: 62px;
+
     }
 
 
@@ -1173,40 +1384,77 @@ button {
 
 
 <!-- ==================================================
-     HEADER
+     HEADER / TIMELINE
 ================================================== -->
 
 <header class="header">
 
-    <img src="11.png"
-         class="logo"
-         alt="High Tech Auto Logo">
+
+    <!-- LEFT LOGO -->
+
+    <img
+        src="11.png"
+        class="logo"
+        alt="High Tech Auto Logo"
+    >
+
+
+    <!-- SHOP NAME -->
 
     <div class="header-center">
 
-        <h1>High Tech Auto Car Service</h1>
+        <h1>
+            High Tech Auto Car Service
+        </h1>
+
+    </div>
+
+
+    <!-- RIGHT LOGO -->
+
+    <img
+        src="15.png"
+        class="logo"
+        alt="High Tech Auto Logo"
+    >
+
+
+    <!-- ADDRESS + PHONE -->
+
+    <div class="header-info">
 
         <div class="address">
 
-            No. A-40, Taw Win Residence, Taw Win Street,
-            U Wisara Road, (41) Block (Extend),
-            Dagon (North)
+            No. A-40, Taw Win Residence, Taw Win Street,<br>
+            U Wisara Road, (41) Block (Extend), Dagon (North)
 
         </div>
 
+
         <div class="phone">
 
-            📞 09941060------- &nbsp; | &nbsp;
-            09 459907---- &nbsp; | &nbsp;
-            09 794918----
+            📞 09 941060666
+            &nbsp;&nbsp; | &nbsp;&nbsp;
+            09 459907461
+            &nbsp;&nbsp; | &nbsp;&nbsp;
+            09 794918438
 
         </div>
 
     </div>
 
-    <img src="15.png"
-         class="logo"
-         alt="High Tech Auto Logo">
+
+    <!-- QR CODE -->
+
+    <div class="header-qr">
+
+        <img
+            src="qr.png"
+            alt="Location and Contact QR Code"
+        >
+
+    </div>
+
 
 </header>
 
@@ -1712,15 +1960,15 @@ button {
 
         <br><br>
 
-        📞 09941060-------
+        📞 09 941060666
 
         <br>
 
-        📞 09 459907----
+        📞 09 459907461
 
         <br>
 
-        📞 09 794918----
+        📞 09 794918438
 
     </div>
 
@@ -2167,12 +2415,6 @@ onAuthStateChanged(
                     "Admin login successful."
                 );
 
-                /*
-                   Create the full Relay article
-                   in Firestore the first time
-                   the administrator logs in.
-                */
-
                 await ensureRelayArticleInFirestore();
 
             } else {
@@ -2346,6 +2588,7 @@ async function() {
 
 /* ==================================================
    CUSTOMER
+   LOCAL + FIRESTORE ONLINE
 ================================================== */
 
 window.toggleCustomer =
@@ -2377,47 +2620,51 @@ function() {
 
 
 window.saveCustomer =
-function() {
+async function() {
 
     const customer = {
 
         customerName:
             document.getElementById(
                 "customerName"
-            ).value,
+            ).value.trim(),
 
         customerPhone:
             document.getElementById(
                 "customerPhone"
-            ).value,
+            ).value.trim(),
 
         carBrand:
             document.getElementById(
                 "carBrand"
-            ).value,
+            ).value.trim(),
 
         carModel:
             document.getElementById(
                 "carModel"
-            ).value,
+            ).value.trim(),
 
         carYear:
             document.getElementById(
                 "carYear"
-            ).value,
+            ).value.trim(),
 
         licenseNo:
             document.getElementById(
                 "licenseNo"
-            ).value,
+            ).value.trim(),
 
         mileage:
             document.getElementById(
                 "mileage"
-            ).value
+            ).value.trim()
 
     };
 
+
+    /* ==============================================
+       SAVE ON THIS DEVICE
+    ============================================== */
 
     localStorage.setItem(
         "highTechAutoCustomer",
@@ -2425,9 +2672,68 @@ function() {
     );
 
 
-    alert(
-        "Customer information saved on this device."
-    );
+    /* ==============================================
+       ONLINE SAVE
+    ============================================== */
+
+    if (!isAdmin()) {
+
+        alert(
+            "Customer information saved on this device.\n\n" +
+            "For online Firebase saving, please login as Admin first."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        await addDoc(
+
+            collection(
+                db,
+                "customers"
+            ),
+
+            {
+
+                ...customer,
+
+                savedBy:
+                    currentUser.email,
+
+                createdAt:
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+        alert(
+            "Customer information saved successfully.\n\n" +
+            "✓ Saved on this device\n" +
+            "✓ Saved online in Firebase"
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Customer Firestore Save Error:",
+            error
+        );
+
+
+        alert(
+            "Customer information was saved on this device,\n" +
+            "but online Firebase saving failed.\n\n" +
+            error.message
+        );
+
+    }
 
 };
 
@@ -2902,7 +3208,7 @@ const trainingArticles = {
     },
 
 
-       13: {
+    13: {
 
         title:
             "Radar vs LiDAR",
@@ -3327,51 +3633,119 @@ const trainingArticles = {
             <h4>15. Radar vs LiDAR — Basic Comparison</h4>
 
             <table style="width:100%; border-collapse:collapse; margin:15px 0; background:white;">
+
                 <tr>
-                    <th style="border:1px solid #c8dce8; padding:10px; text-align:left;">Feature</th>
-                    <th style="border:1px solid #c8dce8; padding:10px; text-align:left;">Radar</th>
-                    <th style="border:1px solid #c8dce8; padding:10px; text-align:left;">LiDAR</th>
+
+                    <th style="border:1px solid #c8dce8; padding:10px; text-align:left;">
+                        Feature
+                    </th>
+
+                    <th style="border:1px solid #c8dce8; padding:10px; text-align:left;">
+                        Radar
+                    </th>
+
+                    <th style="border:1px solid #c8dce8; padding:10px; text-align:left;">
+                        LiDAR
+                    </th>
+
                 </tr>
 
                 <tr>
-                    <td style="border:1px solid #c8dce8; padding:10px;">Signal</td>
-                    <td style="border:1px solid #c8dce8; padding:10px;">Radio waves</td>
-                    <td style="border:1px solid #c8dce8; padding:10px;">Laser light</td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        Signal
+                    </td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        Radio waves
+                    </td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        Laser light
+                    </td>
+
                 </tr>
 
                 <tr>
-                    <td style="border:1px solid #c8dce8; padding:10px;">Distance Measurement</td>
-                    <td style="border:1px solid #c8dce8; padding:10px;">Yes</td>
-                    <td style="border:1px solid #c8dce8; padding:10px;">Yes</td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        Distance Measurement
+                    </td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        Yes
+                    </td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        Yes
+                    </td>
+
                 </tr>
 
                 <tr>
-                    <td style="border:1px solid #c8dce8; padding:10px;">Relative Speed</td>
-                    <td style="border:1px solid #c8dce8; padding:10px;">Very useful</td>
-                    <td style="border:1px solid #c8dce8; padding:10px;">Not its primary strength</td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        Relative Speed
+                    </td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        Very useful
+                    </td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        Not its primary strength
+                    </td>
+
                 </tr>
 
                 <tr>
-                    <td style="border:1px solid #c8dce8; padding:10px;">3D Information</td>
-                    <td style="border:1px solid #c8dce8; padding:10px;">More limited</td>
-                    <td style="border:1px solid #c8dce8; padding:10px;">Detailed</td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        3D Information
+                    </td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        More limited
+                    </td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        Detailed
+                    </td>
+
                 </tr>
 
                 <tr>
-                    <td style="border:1px solid #c8dce8; padding:10px;">Mapping</td>
-                    <td style="border:1px solid #c8dce8; padding:10px;">Limited</td>
-                    <td style="border:1px solid #c8dce8; padding:10px;">Very useful</td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        Mapping
+                    </td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        Limited
+                    </td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        Very useful
+                    </td>
+
                 </tr>
 
                 <tr>
-                    <td style="border:1px solid #c8dce8; padding:10px;">Common Automotive Use</td>
+
+                    <td style="border:1px solid #c8dce8; padding:10px;">
+                        Common Automotive Use
+                    </td>
+
                     <td style="border:1px solid #c8dce8; padding:10px;">
                         ACC, AEB, Blind Spot Detection
                     </td>
+
                     <td style="border:1px solid #c8dce8; padding:10px;">
                         3D perception, mapping, autonomous driving
                     </td>
+
                 </tr>
+
             </table>
 
 
@@ -3495,6 +3869,7 @@ const trainingArticles = {
             </p>
 
         `
+
     },
 
 
@@ -3680,7 +4055,7 @@ async function ensureRelayArticleInFirestore() {
 
 
 /* ==================================================
-   FIRESTORE
+   FIRESTORE LIBRARY
 ================================================== */
 
 async function loadFirestoreArticles() {
@@ -3854,10 +4229,6 @@ function renderLibraryArticles(
         relayArticle.isDeleted === true;
 
 
-    /*
-       RELAY ARTICLE
-    */
-
     if (activeRelay) {
 
         const relayButton =
@@ -3891,11 +4262,6 @@ function renderLibraryArticles(
 
     } else if (!deletedRelay) {
 
-        /*
-           Fallback before the first
-           Admin initialization.
-        */
-
         const relayButton =
             document.createElement(
                 "button"
@@ -3923,10 +4289,6 @@ function renderLibraryArticles(
     }
 
 
-
-    /*
-       FIRESTORE ARTICLES
-    */
 
     articles.forEach(
         (article) => {
@@ -4013,10 +4375,6 @@ function renderLibraryArticles(
 
     }
 
-
-    /*
-       RESTORE BUTTON
-    */
 
     if (isAdmin()) {
 
@@ -4145,22 +4503,19 @@ function readFirestoreArticle(
         );
 
 
-    const date =
-        article.id === RELAY_ARTICLE_ID
-        ?
-        formatArticleDate(
-            article.createdAt
-        ) === "Date not available"
-        ?
-        "19/09/2026"
-        :
-        formatArticleDate(
-            article.createdAt
-        )
-        :
+    const formattedDate =
         formatArticleDate(
             article.createdAt
         );
+
+
+    const date =
+        article.id === RELAY_ARTICLE_ID &&
+        formattedDate === "Date not available"
+        ?
+        "19/09/2026"
+        :
+        formattedDate;
 
 
     const content =
@@ -4233,7 +4588,6 @@ function readFirestoreArticle(
         actions.appendChild(
             editButton
         );
-
 
 
         const deleteButton =
@@ -4527,11 +4881,6 @@ async function() {
             };
 
 
-            /*
-               If editing the Relay article,
-               make sure it remains active.
-            */
-
             if (
                 editingArticleId ===
                 RELAY_ARTICLE_ID
@@ -4660,13 +5009,6 @@ async function deleteLibraryArticle(
 
 
     try {
-
-        /*
-           Relay article uses a fixed Firestore
-           document so we mark it deleted rather
-           than allowing the built-in fallback
-           to immediately come back.
-        */
 
         if (
             isRelayArticle ||
@@ -4955,10 +5297,6 @@ function convertArticleContentToHtml(
             originalLine.trim();
 
 
-        /*
-           Blank line
-        */
-
         if (!line) {
 
             closeAll();
@@ -4967,10 +5305,6 @@ function convertArticleContentToHtml(
 
         }
 
-
-        /*
-           Image
-        */
 
         const imageMatch =
             line.match(
@@ -5022,10 +5356,6 @@ function convertArticleContentToHtml(
         }
 
 
-        /*
-           Reference link
-        */
-
         const referenceMatch =
             line.match(
                 /^\[REFERENCE:(.+?)\|(.+?)\]$/
@@ -5073,10 +5403,6 @@ function convertArticleContentToHtml(
         }
 
 
-        /*
-           H2
-        */
-
         if (
             line.startsWith("## ")
         ) {
@@ -5096,10 +5422,6 @@ function convertArticleContentToHtml(
         }
 
 
-        /*
-           H3
-        */
-
         if (
             line.startsWith("### ")
         ) {
@@ -5118,10 +5440,6 @@ function convertArticleContentToHtml(
 
         }
 
-
-        /*
-           Unordered list
-        */
 
         if (
             line.startsWith("- ")
@@ -5157,10 +5475,6 @@ function convertArticleContentToHtml(
 
         }
 
-
-        /*
-           Ordered list
-        */
 
         const orderedMatch =
             line.match(
@@ -5201,10 +5515,6 @@ function convertArticleContentToHtml(
         }
 
 
-        /*
-           Horizontal separator
-        */
-
         if (
             line === "---"
         ) {
@@ -5217,10 +5527,6 @@ function convertArticleContentToHtml(
 
         }
 
-
-        /*
-           Normal paragraph line
-        */
 
         closeList();
 
@@ -5253,10 +5559,6 @@ function formatInlineText(
             text
         );
 
-
-    /*
-       Bold **text**
-    */
 
     output =
         output.replace(
@@ -5458,4 +5760,3 @@ window.addEventListener(
 </body>
 
 </html>
-
