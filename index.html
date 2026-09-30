@@ -89,180 +89,68 @@ body {
 
 
 
-/* LEFT LOGO */
-.header .logo.left-logo {
+/* FINAL HEADER POSITION FIX */
 
-    position: absolute;
-
-    left: 35px;
-    top: 18px;
-
-    width: 84px;
-    height: 84px;
-
-    object-fit: contain;
-
-    padding: 4px;
-    background: white;
-
-    border-radius: 10px;
-
-    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
-
-    z-index: 5;
+.header {
+    position: relative !important;
+    overflow: hidden !important;
 }
 
+/* LEFT LOGO */
+.header .left-logo {
+    position: absolute !important;
+    left: 35px !important;
+    top: 18px !important;
+    width: 84px !important;
+    height: 84px !important;
+    z-index: 10 !important;
+}
 
 /* RIGHT LOGO */
-.header .logo.right-logo {
-
-    position: absolute;
-
-    right: 35px;
-    top: 18px;
-
-    width: 84px;
-    height: 84px;
-
-    object-fit: contain;
-
-    padding: 4px;
-    background: white;
-
-    border-radius: 10px;
-
-    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
-
-    z-index: 5;
+.header .right-logo {
+    position: absolute !important;
+    right: 35px !important;
+    top: 18px !important;
+    width: 84px !important;
+    height: 84px !important;
+    z-index: 10 !important;
 }
-
 
 /* SHOP NAME */
 .header-center {
-    position: absolute;
-
-    left: 130px;
-    right: 130px;
-    top: 25px;
-
-    text-align: center;
-
-    z-index: 4;
+    position: absolute !important;
+    left: 130px !important;
+    right: 130px !important;
+    top: 25px !important;
+    z-index: 5 !important;
 }
-
-
-.header h1 {
-    margin: 0;
-
-    color: white;
-
-    font-size: 52px;
-    font-weight: 800;
-
-    letter-spacing: 1.5px;
-
-    line-height: 1.15;
-
-    white-space: nowrap;
-}
-
 
 /* ADDRESS + PHONE */
 .header-info {
-    position: absolute;
-
-    left: 35px;
-    right: 140px;
-    bottom: 18px;
-
-    padding: 0;
-
-    text-align: left;
-
-    z-index: 5;
+    position: absolute !important;
+    left: 35px !important;
+    right: 145px !important;
+    bottom: 18px !important;
+    z-index: 6 !important;
 }
 
-
-/* ADDRESS */
-.header-info .address {
-    color: #dff6ff;
-
-    font-size: 15px;
-
-    line-height: 1.55;
-
-    margin: 0 0 7px 0;
-
-    display: block;
-
-    writing-mode: horizontal-tb !important;
-    text-orientation: mixed !important;
-
-    white-space: nowrap !important;
-
-    transform: none !important;
-
-    cursor: pointer;
-}
-
-
-/* PHONE */
-.header-info .phone {
-    color: white;
-
-    font-size: 15px;
-
-    font-weight: bold;
-
-    line-height: 1.5;
-
-    white-space: nowrap;
-
-    display: block;
-
-    writing-mode: horizontal-tb !important;
-    text-orientation: mixed !important;
-
-    transform: none !important;
-}
-
-
-/* QR */
+/* QR CODE */
 .header-qr {
-    position: absolute;
-
-    right: 35px;
-    bottom: 18px;
-
-    width: 84px;
-    height: 84px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    z-index: 5;
+    position: absolute !important;
+    right: 35px !important;
+    bottom: 18px !important;
+    width: 70px !important;
+    height: 70px !important;
+    z-index: 6 !important;
 }
-
 
 .header-qr img {
-    width: 84px;
-    height: 84px;
-
-    object-fit: contain;
-
-    background: white;
-
-    padding: 4px;
-
-    border-radius: 8px;
-
-    border: 1px solid #c8dce8;
-
-    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    width: 70px !important;
+    height: 70px !important;
+    max-width: 70px !important;
+    max-height: 70px !important;
+    object-fit: contain !important;
 }
-
 
 /* ==================================================
    MOBILE HEADER
