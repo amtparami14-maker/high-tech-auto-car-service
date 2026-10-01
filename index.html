@@ -1968,7 +1968,189 @@ button {
     High Tech Auto Car Service © 2026
 
 </footer>
+<!-- ==================================================
+     HIGH TECH AUTO AI ASSISTANT
+================================================== -->
 
+<div
+    id="htaAiGreeting"
+    class="hta-ai-greeting"
+>
+
+    <strong>🤖 High Tech Auto Assistant</strong>
+    <br>
+
+    မေးချင်တာရှိရင် ဒီမှာနှိပ်ပြီး မေးနိုင်ပါတယ်။
+
+</div>
+
+
+<button
+    id="htaAiLauncher"
+    class="hta-ai-launcher"
+    type="button"
+    aria-label="Open High Tech Auto AI Assistant"
+    onclick="toggleHTAAssistant()"
+>
+
+    <img
+        src="ai-assistant.png"
+        alt="High Tech Auto AI Assistant"
+    >
+
+    <span class="hta-ai-online"></span>
+
+</button>
+
+
+<div
+    id="htaAiChat"
+    class="hta-ai-chat"
+    aria-label="High Tech Auto Assistant Chat"
+>
+
+    <!-- CHAT HEADER -->
+
+    <div class="hta-ai-header">
+
+        <img
+            class="hta-ai-header-avatar"
+            src="ai-assistant.png"
+            alt="AI Assistant"
+        >
+
+        <div class="hta-ai-header-info">
+
+            <div class="hta-ai-header-title">
+                High Tech Auto Assistant
+            </div>
+
+            <div class="hta-ai-header-status">
+                ● Ready to help
+            </div>
+
+        </div>
+
+        <button
+            class="hta-ai-close"
+            type="button"
+            onclick="closeHTAAssistant()"
+            aria-label="Close chat"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <!-- MESSAGES -->
+
+    <div
+        id="htaAiMessages"
+        class="hta-ai-messages"
+    >
+
+        <div class="hta-ai-message hta-ai-bot">
+
+            မင်္ဂလာပါ 👋
+
+            ကျွန်တော်က <strong>High Tech Auto Assistant</strong> ပါ။
+
+            ကား Diagnostic, Repair, OBD-II, P0171,
+            Check Engine, ADAS, Radar/LiDAR စတာတွေနဲ့
+            ပတ်သက်ပြီး မေးနိုင်ပါတယ်။
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="htaAiTyping"
+        class="hta-ai-typing"
+    >
+        Assistant is typing...
+    </div>
+
+
+    <!-- QUICK QUESTIONS -->
+
+    <div class="hta-ai-quick">
+
+        <button
+            type="button"
+            onclick="htaAiQuickQuestion('P0171 ဆိုတာဘာလဲ?')"
+        >
+            P0171
+        </button>
+
+        <button
+            type="button"
+            onclick="htaAiQuickQuestion('Check Engine မီးလင်းရင် ဘာလုပ်ရမလဲ?')"
+        >
+            Check Engine
+        </button>
+
+        <button
+            type="button"
+            onclick="htaAiQuickQuestion('Toyota Vitz အတွက် ဘာတွေစစ်သင့်လဲ?')"
+        >
+            Toyota Vitz
+        </button>
+
+        <button
+            type="button"
+            onclick="htaAiQuickQuestion('Computer Diagnostic ရှိလား?')"
+        >
+            Diagnostic
+        </button>
+
+        <button
+            type="button"
+            onclick="htaAiQuickQuestion('Radar နဲ့ LiDAR ဘာကွာလဲ?')"
+        >
+            Radar / LiDAR
+        </button>
+
+        <button
+            type="button"
+            onclick="htaAiQuickQuestion('ဆိုင်ဘယ်မှာလဲ?')"
+        >
+            Location
+        </button>
+
+    </div>
+
+
+    <!-- INPUT -->
+
+    <div class="hta-ai-input-area">
+
+        <input
+            id="htaAiInput"
+            class="hta-ai-input"
+            type="text"
+            placeholder="မေးချင်တာ ရိုက်ပါ..."
+            autocomplete="off"
+        >
+
+        <button
+            class="hta-ai-send"
+            type="button"
+            onclick="sendHTAAssistantMessage()"
+            aria-label="Send message"
+        >
+            ➤
+        </button>
+
+    </div>
+
+
+    <div class="hta-ai-note">
+        Phase 1 Assistant — AI engine will be connected in the next stage.
+    </div>
+
+</div>
 
 
 <!-- ==================================================
