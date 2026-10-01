@@ -1329,6 +1329,462 @@ button {
     }
 
 }
+ /* ==================================================
+   HIGH TECH AUTO AI ASSISTANT
+================================================== */
+
+.hta-ai-launcher {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+
+    width: 82px;
+    height: 82px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background: white;
+
+    border: 4px solid #00a6e8;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.28),
+        0 0 0 5px rgba(0,166,232,0.14);
+
+    cursor: pointer;
+
+    z-index: 10000;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s,
+        box-shadow 0.25s;
+}
+
+.hta-ai-launcher:hover {
+    transform: scale(1.07);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.32),
+        0 0 0 7px rgba(0,166,232,0.18);
+}
+
+.hta-ai-launcher img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* Small ONLINE indicator */
+
+.hta-ai-online {
+    position: absolute;
+
+    right: 2px;
+    bottom: 3px;
+
+    width: 17px;
+    height: 17px;
+
+    background: #16b364;
+
+    border: 3px solid white;
+
+    border-radius: 50%;
+}
+
+
+/* Greeting bubble */
+
+.hta-ai-greeting {
+    position: fixed;
+
+    right: 26px;
+    bottom: 116px;
+
+    max-width: 280px;
+
+    background: white;
+
+    color: #102a43;
+
+    padding: 12px 16px;
+
+    border-radius: 14px;
+
+    box-shadow: 0 7px 22px rgba(0,0,0,0.20);
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    z-index: 9999;
+
+    animation: htaAiFloat 2.5s ease-in-out infinite;
+}
+
+.hta-ai-greeting strong {
+    color: #075985;
+}
+
+@keyframes htaAiFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+
+}
+
+
+/* Chat Window */
+
+.hta-ai-chat {
+    position: fixed;
+
+    right: 24px;
+    bottom: 118px;
+
+    width: 360px;
+    max-width: calc(100vw - 30px);
+
+    height: 540px;
+    max-height: calc(100vh - 150px);
+
+    background: white;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,0.30);
+
+    border: 1px solid #c7e9f7;
+
+    display: none;
+
+    flex-direction: column;
+
+    z-index: 10001;
+}
+
+
+/* Chat Header */
+
+.hta-ai-header {
+    background:
+        linear-gradient(
+            135deg,
+            #061a2f,
+            #075985,
+            #00a6e8
+        );
+
+    color: white;
+
+    padding: 13px 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+}
+
+.hta-ai-header-avatar {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    border: 2px solid #7ae3ff;
+
+    object-fit: cover;
+
+    flex-shrink: 0;
+}
+
+.hta-ai-header-info {
+    flex: 1;
+}
+
+.hta-ai-header-title {
+    font-size: 15px;
+    font-weight: bold;
+
+    margin-bottom: 3px;
+}
+
+.hta-ai-header-status {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.hta-ai-close {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.14);
+
+    color: white;
+
+    border: 1px solid rgba(255,255,255,0.25);
+
+    padding: 0;
+
+    font-size: 21px;
+
+    line-height: 1;
+
+    flex-shrink: 0;
+}
+
+.hta-ai-close:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+
+/* Messages */
+
+.hta-ai-messages {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 14px;
+
+    background:
+        linear-gradient(
+            rgba(245,251,255,0.94),
+            rgba(245,251,255,0.94)
+        );
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+/* Bubble */
+
+.hta-ai-message {
+    max-width: 87%;
+
+    padding: 10px 13px;
+
+    border-radius: 14px;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+    white-space: pre-line;
+
+    word-break: break-word;
+}
+
+.hta-ai-bot {
+    align-self: flex-start;
+
+    background: white;
+
+    color: #18334d;
+
+    border: 1px solid #d8e8f1;
+
+    border-bottom-left-radius: 5px;
+}
+
+.hta-ai-user {
+    align-self: flex-end;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0066cc,
+            #00a6e8
+        );
+
+    color: white;
+
+    border-bottom-right-radius: 5px;
+}
+
+
+/* Quick Questions */
+
+.hta-ai-quick {
+    padding: 8px 10px;
+
+    background: white;
+
+    border-top: 1px solid #e1edf3;
+
+    display: flex;
+
+    gap: 7px;
+
+    overflow-x: auto;
+}
+
+.hta-ai-quick button {
+    white-space: nowrap;
+
+    background: #e8f8ff;
+
+    color: #075985;
+
+    border: 1px solid #bfe6f5;
+
+    border-radius: 20px;
+
+    padding: 7px 10px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+/* Input */
+
+.hta-ai-input-area {
+    padding: 10px;
+
+    background: white;
+
+    border-top: 1px solid #dceaf2;
+
+    display: flex;
+
+    gap: 8px;
+}
+
+.hta-ai-input {
+    flex: 1;
+
+    min-width: 0;
+
+    border: 1px solid #bdd6e3;
+
+    border-radius: 22px;
+
+    padding: 11px 14px;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+.hta-ai-input:focus {
+    border-color: #00a6e8;
+
+    box-shadow:
+        0 0 0 2px rgba(0,166,232,0.10);
+}
+
+.hta-ai-send {
+    width: 46px;
+    height: 46px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background: #00a6e8;
+
+    color: white;
+
+    font-size: 18px;
+}
+
+.hta-ai-send:hover {
+    background: #078bc2;
+}
+
+
+/* AI note */
+
+.hta-ai-note {
+    text-align: center;
+
+    padding: 5px 10px 9px;
+
+    color: #71808c;
+
+    background: white;
+
+    font-size: 10px;
+}
+
+
+/* Typing */
+
+.hta-ai-typing {
+    display: none;
+
+    align-self: flex-start;
+
+    color: #617585;
+
+    font-size: 12px;
+
+    padding-left: 5px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 800px) {
+
+    .hta-ai-launcher {
+        right: 15px;
+        bottom: 15px;
+
+        width: 70px;
+        height: 70px;
+    }
+
+    .hta-ai-greeting {
+        right: 15px;
+        bottom: 96px;
+
+        max-width: 230px;
+
+        font-size: 13px;
+    }
+
+    .hta-ai-chat {
+        right: 15px;
+        bottom: 95px;
+
+        width: calc(100vw - 30px);
+
+        height: 520px;
+        max-height: calc(100vh - 120px);
+
+        border-radius: 16px;
+    }
+
+}    
 
 </style>
 
